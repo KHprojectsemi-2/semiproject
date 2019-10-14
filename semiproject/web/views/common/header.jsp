@@ -81,7 +81,7 @@
                                             	펫 시터 예약
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="elements.html">방문 펫 시터 예약</a>
+                                            <a class="dropdown-item" href="views/petsitterreservation/petSitterSearch.jsp">방문 펫 시터 예약</a>
                                             <a class="dropdown-item" href="single-blog.html">가정집 펫시터 예약</a>
                                         </div>
                                     </li>
