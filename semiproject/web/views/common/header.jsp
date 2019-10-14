@@ -89,7 +89,7 @@
                                         <a href="blog.html" class="nav-link">커뮤니티</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="views/serviceCenter/" class="nav-link">고객센터</a>
+                                        <a href="views/serviceCenter/FAQ.jsp" class="nav-link">고객센터</a>
                                     </li>
                                 </ul>
                             </div>
