@@ -27,7 +27,7 @@
             <div class="col-md-7">
                 <div class="card-body">
                     <h5 class="card-title">Alice Liddel</h5>
-                    <p class="card-text">Alice is a freelance web designer and developer based in London. She is specialized in HTML5, CSS3, JavaScript, Bootstrap, etc.</p>
+                    <p class="card-text">브랜치 어케 합치냐고 아아아아아아아ㅏ.</p>
                     <a href="#" class="btn btn-primary stretched-link">View Profile</a>
                 </div>
             </div>
