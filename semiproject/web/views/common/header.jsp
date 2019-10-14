@@ -40,7 +40,7 @@
                 <div class="row align-items-center">
                   <div class="col-4 col-md-4 col-xl-6">
                       <div id="logo">
-                          <a href="index.html"><img src="img/pett.png"  width = "400px" height = "125px" alt="" title="" /></a>
+                          <a href="index.jsp"><img src="img/pett.png"  width = "400px" height = "125px" alt="" title="" /></a>
                       </div>
                   </div>
                   <div class="col-8 col-md-8 col-xl-6 ">
@@ -68,7 +68,7 @@
                                         <a class="nav-link active" href="index.html"></a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="about.html" class="nav-link">소개</a>
+                                        <a href="index.jsp" class="nav-link">소개</a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="services.html" class="nav-link">돌봄일지</a>

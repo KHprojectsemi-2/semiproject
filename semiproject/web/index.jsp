@@ -11,9 +11,9 @@
 
 </head>
 <body>
-	<%@include file = "header.jsp" %>
+	<%@include file = "views/common/header.jsp" %>
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	<%@include file = "footer.jsp" %>
+	<%@include file = "views/common/footer.jsp" %>
 </body>
 </html>
