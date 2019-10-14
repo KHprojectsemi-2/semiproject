@@ -89,7 +89,7 @@
                                         <a href="blog.html" class="nav-link">커뮤니티</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="contact.html" class="nav-link">고객센터</a>
+                                        <a href="#" class="nav-link" id = "serviceCenter">고객센터</a>
                                     </li>
                                 </ul>
                             </div>
@@ -99,5 +99,13 @@
             </div>
         </div>
     </header>
+    
+    <script>
+    $("#serviceCenter").click(function(){
+    	alert("되나??");
+    });
+    
+    </script>
+    
    </body>
  </html>
