@@ -21,6 +21,12 @@ public final class petSitterSearch_jsp extends org.apache.jasper.runtime.HttpJsp
 
   private static java.util.Map<java.lang.String,java.lang.Long> _jspx_dependants;
 
+  static {
+    _jspx_dependants = new java.util.HashMap<java.lang.String,java.lang.Long>(2);
+    _jspx_dependants.put("/views/petsitterreservation/../common/footer.jsp", Long.valueOf(1571127688102L));
+    _jspx_dependants.put("/views/petsitterreservation/../common/header.jsp", Long.valueOf(1571127688143L));
+  }
+
   private static final java.util.Set<java.lang.String> _jspx_imports_packages;
 
   private static final java.util.Set<java.lang.String> _jspx_imports_classes;
