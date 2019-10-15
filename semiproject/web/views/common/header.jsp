@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+String root = request.getContextPath();
 
+%>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -10,19 +13,19 @@
     <title>leopet || Home</title>
     <link rel="icon" href="img/favicon.png">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%=root %>/css/bootstrap.min.css">
     <!-- animate CSS -->
-    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="<%=root %>/css/animate.css">
     <!-- owl carousel CSS -->
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="<%=root %>/css/owl.carousel.min.css">
     <!-- themify CSS -->
-    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href="<%=root %>/css/themify-icons.css">
     <!-- flaticon CSS -->
-    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="<%=root %>/css/flaticon.css">
     <!-- font awesome CSS -->
-    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="<%=root %>/css/magnific-popup.css">
     <!-- style CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="<%=root %>/css/style.css">
     <style>
     	footer{
     		width:cover;
@@ -40,14 +43,14 @@
                 <div class="row align-items-center">
                   <div class="col-4 col-md-4 col-xl-6">
                       <div id="logo">
-                          <a href="index.jsp"><img src="img/pett.png"  width = "400px" height = "125px" alt="" title="" /></a>
+                          <a href="<%=root %>/index.jsp"><img src="<%=root %>/img/pett.png"  width = "400px" height = "125px" alt="" title="" /></a>
                       </div>
                   </div>
                   <div class="col-8 col-md-8 col-xl-6 ">
                       <div class="sub_header_social_icon float-right">
                       
                         <!-- <a href="#"><i class="flaticon-phone"></i>+02 213 - 256 (365)</a> -->
-                        <a href="views/user/LoginPage.jsp" class="btn_1 d-none d-md-inline-block">로그인</a>
+                        <a href="<%=root %>/views/user/LoginPage.jsp" class="btn_1 d-none d-md-inline-block">로그인</a>
                       </div>
                     </div>
                 </div>
@@ -65,10 +68,10 @@
                             <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                                 <ul class="navbar-nav">
                                     <li class="nav-item active">
-                                        <a class="nav-link active" href="index.html"></a>
+                                        <a class="nav-link active" href="<%=root %>/index.html"></a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="index.jsp" class="nav-link">소개</a>
+                                        <a href="<%=root %>/index.jsp" class="nav-link">소개</a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="services.html" class="nav-link">돌봄일지</a>
