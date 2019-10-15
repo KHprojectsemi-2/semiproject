@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+String root = request.getContextPath();
 
+%>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -10,25 +13,25 @@
     <title>leopet || Home</title>
     <link rel="icon" href="img/favicon.png">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%=root %>/css/bootstrap.min.css">
     <!-- animate CSS -->
-    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="<%=root %>/css/animate.css">
     <!-- owl carousel CSS -->
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="<%=root %>/css/owl.carousel.min.css">
     <!-- themify CSS -->
-    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href="<%=root %>/css/themify-icons.css">
     <!-- flaticon CSS -->
-    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="<%=root %>/css/flaticon.css">
     <!-- font awesome CSS -->
-    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="<%=root %>/css/magnific-popup.css">
     <!-- style CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="<%=root %>/css/style.css">
     <style>
-    	footer{
-    		width:cover;
-    		height:900px;
-    		!important;
-    	}
+       footer{
+          width:cover;
+          height:900px;
+          !important;
+       }
     </style>
 </head>
 
@@ -40,7 +43,7 @@
                 <div class="row align-items-center">
                   <div class="col-4 col-md-4 col-xl-6">
                       <div id="logo">
-                          <a href="index.jsp"><img src="img/pett.png"  width = "400px" height = "125px" alt="" title="" /></a>
+                          <a href="index.jsp"><img src="<%=root %>/img/pett.png"  width = "400px" height = "125px" alt="" title="" /></a>
                       </div>
                   </div>
                   <div class="col-8 col-md-8 col-xl-6 ">
@@ -71,14 +74,14 @@
                                         <a href="index.jsp" class="nav-link">소개</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="services.html" class="nav-link">돌봄일지</a>
+                                        <a href="views/diary/insertDiary.jsp" class="nav-link">돌봄일지</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="gallery.html" class="nav-link">펫 시터 지원</a>
+                                        <a href="views/petSitter/petSitterApply.jsp" class="nav-link">펫 시터 지원</a>
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            	펫 시터 예약
+                                               펫 시터 예약
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                             <a class="dropdown-item" href="views/petsitterreservation/petSitterSearch.jsp">방문 펫 시터 예약</a>
