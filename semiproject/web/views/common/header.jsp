@@ -43,7 +43,9 @@ String root = request.getContextPath();
                 <div class="row align-items-center">
                   <div class="col-4 col-md-4 col-xl-6">
                       <div id="logo">
-                          <a href="index.jsp"><img src="<%=root %>/img/pett.png"  width = "400px" height = "125px" alt="" title="" /></a>
+<<<<<<< HEAD
+                          <a href="<%=root %>/index.jsp"><img src="<%=root %>/img/pett.png"  width = "400px" height = "125px" alt="" title="" /></a>
+
                       </div>
                   </div>
                   <div class="col-8 col-md-8 col-xl-6 ">
