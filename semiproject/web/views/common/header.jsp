@@ -50,7 +50,7 @@ String root = request.getContextPath();
                       <div class="sub_header_social_icon float-right">
                       
                         <!-- <a href="#"><i class="flaticon-phone"></i>+02 213 - 256 (365)</a> -->
-                        <a href="views/user/LoginPage.jsp" class="btn_1 d-none d-md-inline-block">로그인</a>
+                        <a href="<%=root %>/views/user/LoginPage.jsp" class="btn_1 d-none d-md-inline-block">로그인</a>
                       </div>
                     </div>
                 </div>
@@ -68,16 +68,16 @@ String root = request.getContextPath();
                             <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                                 <ul class="navbar-nav">
                                     <li class="nav-item active">
-                                        <a class="nav-link active" href="index.html"></a>
+                                        <a class="nav-link active" href="<%=root %>/index.html"></a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="index.jsp" class="nav-link">소개</a>
+                                        <a href="<%=root %>/index.jsp" class="nav-link">소개</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="views/diary/insertDiary.jsp" class="nav-link">돌봄일지</a>
+                                        <a href="services.html" class="nav-link">돌봄일지</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="views/petSitter/petSitterApply.jsp" class="nav-link">펫 시터 지원</a>
+                                        <a href="gallery.html" class="nav-link">펫 시터 지원</a>
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

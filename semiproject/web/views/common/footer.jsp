@@ -7,11 +7,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-       footer{
-          width:cover;
-          height:500px;
-          !important;
-       }
+    	footer{
+    		width:cover;
+    		height:500px;
+    		!important;
+    	}
 </style>
     <!-- jquery plugins here-->
     <!-- jquery -->
@@ -49,8 +49,8 @@
 <body>
     <!-- footer part start-->
     <footer class="footer_area padding_top">
-      
-      
+		
+		
     </footer>
     <!-- footer part end-->
 </body>
