@@ -1,4 +1,4 @@
-package petSitter.dao;
+package petSitter.model.dao;
 
 public class PetSitterDao {
 
