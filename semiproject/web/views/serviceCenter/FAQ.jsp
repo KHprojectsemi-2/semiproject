@@ -4,14 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-    <title>FAQ</title>
+<title>FAQ</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <style>
 	#FAQ_Outer{
 		width : 900px;
 		height : 500px;
-		border : 1px solid black;		
+		/* border : 1px solid black; */	
 		margin-right : auto;
 		margin-left : auto;
 	}
@@ -24,7 +24,7 @@
 	
 	.sc_Menu{
     	display : inline-block;
-        border : 1px solid black; 
+        border : 1px solid black;
         width : 150px;
         height : 35px;
        	text-align : center;
@@ -43,36 +43,28 @@
 		text-align : center;
 		width : 900px;
 		border : 1px solid black;
-		align : "center"
 		
 	}
-	#sc_List th,td{
+	#sc_List th, td{
 		border : 1px solid black;		
 	}
+	
+	/* #content{
+		height : 35px;
+	} */
 	
 	tr#content:hover{
 		cursor : pointer;
 	}
 	
-	#content_Answer{
-		width : 900px;
-		height : 200px;
-		display : none;
-		background : green;
-		opacity : 0.3;
-		/* -moz-transition:height 0.5s ease-in;
-		-webkit-transition:height 0.5s ease-in;
-		-o-transition:hegith 0.5s ease-in;
-		transition:height 0.5s ease-in; */
-	}
-	#exit_btn{
-		position : relative;
-		top : -80px;
-		left : 480px;
-		
-	}	
+	.hide {
+		display:none;
+	}  
 
-
+    .show {
+   		width : 900px;
+		height : 150px;		 
+   	}  
 </style>
 
 </head>
@@ -85,7 +77,8 @@
 			<div id = "FAQ" class = "sc_Menu">FAQ</div>
 			<div id = "inquiry" class = "sc_Menu">문의하기</div>
 			<div id = "report" class = "sc_Menu">신고하기</div>
-		</div>	
+		</div>
+	
 		<br>
 		
 		 <table id = "sc_List">
@@ -95,24 +88,26 @@
 		 		<th width = "250px">등록날짜</th>
 			</tr>
 			<%for(int i=5; i>0; i--){ %>
-			<tr id= "content">
-				<td>
-					<input value = "<%=i %>">
-				</td>
-				<td>내용부분</td>
-				<td>2019/10/15</td>
-			</tr>
-			<tr id = "content_Answer">
-				<td colspan="3">
-					<div>					
-						<input type = "button" value = "X" id = "exit_btn" onclick = "exitAnswer();">
-						내용도들어갈꺼야
-					</div>
-				</td>								
-			</tr>
+				<tr id= "content">
+					<td>
+						<input type = "hidden" value = "<%=i%>">
+						<%=i %>
+					</td>
+					<td>내용부분</td>
+					<td>2019/10/15</td>
+				</tr>
+				<tr id = "content_Answer" class = "hide">
+					<td colspan="3">
+						<div>					
+							<p>내용 들어가는부분<%=i %></p>
+						</div>
+					</td>								
+				</tr>
 			<%} %>
+	
 		 </table>	
-	</div>
+	</div>	
+
 	<br><br><br><br><br>
 	<%@include file = "../common/footer.jsp" %>
 	
@@ -122,29 +117,28 @@
 		});
 		
 		$("#inquiry").click(function(){
-			location.href = '<%=request.getContextPath()%>/index.jsp';
+			location.href = '<%=request.getContextPath()%>/views/serviceCenter/inquiry.jsp';
 		});
 		
 		$("#report").click(function(){
-			location.href = '<%=request.getContextPath()%>/index.jsp';
-		});
-	
-		$("#content").click(function(){
-			var num = $(this).children().children().val();
-			alert(num);
-			<%-- 
-			<%for(int i=5 ; i>0 ; i--){%>
-				
-				<%if(i == num){%>
-					
-				<%}%>
-			<%}%> --%>
-			$("#content_Answer").css({"display" : ""});
+			location.href = '<%=request.getContextPath()%>/views/serviceCenter/report.jsp';
 		});
 		
-		function exitAnswer(){
-			$("#content_Answer").css({"display" : "none"});
-		}
+		$(function() {
+			var article = ("#sc_List .show");	//#sc_List중에 클래스가 show인 객체
+
+			$("#content td").click(function() {
+				
+				var myArticle = $(this).parents().next("tr");
+
+				if ($(myArticle).hasClass('hide')) {
+					$(article).removeClass('show').addClass('hide');
+					$(myArticle).removeClass('hide').addClass('show');
+				} else {
+					$(myArticle).addClass('hide').removeClass('show');
+				}
+			});
+		});
 	</script>
 	
 </body>

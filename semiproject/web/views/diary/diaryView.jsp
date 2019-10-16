@@ -4,16 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>신고하기</title>
+<title>Insert title here</title>
 </head>
+<!-- 돌봄일지 확인 -->
 <body>
 <%@include file = "../common/header.jsp" %>
-	<br><br>
 
-
-
-
-<br><br><br><br><br>
+<br>
 <%@include file = "../common/footer.jsp" %>
 </body>
 </html>
