@@ -1,0 +1,6 @@
+
+----------------- 계정 생성 ----------------
+
+CREATE USER SEMI IDENTIFIED BY semi;
+
+GRANT CONNECT, RESOURCE, DBA TO SEMI;

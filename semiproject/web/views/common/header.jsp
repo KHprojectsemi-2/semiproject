@@ -23,6 +23,9 @@
     <link rel="stylesheet" href="css/magnific-popup.css">
     <!-- style CSS -->
     <link rel="stylesheet" href="css/style.css">
+
+
+
     <style>
     	footer{
     		width:cover;
