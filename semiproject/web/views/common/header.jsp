@@ -75,10 +75,10 @@ String root = request.getContextPath();
                                         <a href="<%=root %>/index.jsp" class="nav-link">소개</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="<%=root %>/views/diary/insertDiary" class="nav-link">돌봄일지</a>
+                                        <a href="<%=root %>/views/diary/insertDiary.jsp" class="nav-link">돌봄일지</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="<%=root %>/views/petSitter/petSitterApply" class="nav-link">펫 시터 지원</a>
+                                        <a href="<%=root %>/views/petSitter/petSitterApply.jsp" class="nav-link">펫 시터 지원</a>
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

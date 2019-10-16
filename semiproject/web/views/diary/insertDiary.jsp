@@ -15,7 +15,7 @@
 	
 </style>
 </head>
-<!-- 돌봄일지 작성 -->
+<!-- 펫시터가 돌봄일지 작성하는 페이지 -->
 <body>
 <%@include file = "../common/header.jsp" %>
 <form>

@@ -6,11 +6,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<!-- 견주가 돌봄일지 확인하는 페이지 -->
+<!-- 돌봄일지 리스트 -->
 <body>
 <%@include file = "../common/header.jsp" %>
 
 <br>
 <%@include file = "../common/footer.jsp" %>
+
+
+
+
 </body>
 </html>
