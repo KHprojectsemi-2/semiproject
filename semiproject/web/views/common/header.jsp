@@ -11,9 +11,26 @@ String root = request.getContextPath();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>leopet || Home</title>
-    <link rel="icon" href="img/favicon.png">
+	<link rel="icon" href="<%=root %>/img/favicon.png">
+	<!-- jquery plugins here-->
+    <!-- jquery -->
+    <script src="<%=request.getContextPath() %>/js/jquery-1.12.1.min.js"></script>
+    <!-- popper js -->
+    <script src="<%=request.getContextPath() %>/js/popper.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="<%=request.getContextPath() %>/js/bootstrap.min.js"></script>
+    <!-- counterup js -->
+    <script src="<%=request.getContextPath() %>/js/jquery.counterup.min.js"></script>
+    <!-- waypoints js -->
+    <script src="<%=request.getContextPath() %>/js/waypoints.min.js"></script>
+    <!-- easing js -->
+    <script src="<%=request.getContextPath() %>/js/jquery.magnific-popup.js"></script>
+    <!-- particles js -->
+    <script src="<%=request.getContextPath() %>/js/owl.carousel.min.js"></script>
+    <!-- custom js -->
+    <script src="<%=request.getContextPath() %>/js/custom.js"></script>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="<%=root %>/css/bootstrap.min.css">
+<%--     <link rel="stylesheet" href="<%=root %>/css/bootstrap.min.css">
     <!-- animate CSS -->
     <link rel="stylesheet" href="<%=root %>/css/animate.css">
     <!-- owl carousel CSS -->
@@ -25,17 +42,31 @@ String root = request.getContextPath();
     <!-- font awesome CSS -->
     <link rel="stylesheet" href="<%=root %>/css/magnific-popup.css">
     <!-- style CSS -->
-    <link rel="stylesheet" href="<%=root %>/css/style.css">
+    <link rel="stylesheet" href="<%=root %>/css/style.css"> --%>
+    
     <style>
        footer{
           width:cover;
           height:900px;
           !important;
        }
+       
     </style>
 </head>
 
 <body>
+	<%@include file = "../../css/animate.jsp" %>
+	<%@include file = "../../css/aos.jsp" %>
+	<%@include file = "../../css/bootstrap.jsp" %>
+	<%@include file = "../../css/datetime.jsp" %>
+	<%@include file = "../../css/flaticon.jsp" %>
+	<%@include file = "../../css/font_awesome.jsp" %>
+	<%@include file = "../../css/magnific_popup.jsp" %>
+	<%@include file = "../../css/nice_select.jsp" %>
+	<%@include file = "../../css/owl_carousel.jsp" %>
+	<%@include file = "../../css/style.jsp" %>
+	<%@include file = "../../css/swiper.jsp" %>
+	<%@include file = "../../css/themify_icons.jsp" %>
     <!--::header part start::-->
     <header class="header_area">
         <div class="sub_header">
