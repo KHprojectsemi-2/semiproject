@@ -43,7 +43,6 @@ String root = request.getContextPath();
                 <div class="row align-items-center">
                   <div class="col-4 col-md-4 col-xl-6">
                       <div id="logo">
-<<<<<<< HEAD
                           <a href="<%=root %>/index.jsp"><img src="<%=root %>/img/pett.png"  width = "400px" height = "125px" alt="" title="" /></a>
 
                       </div>
@@ -76,17 +75,17 @@ String root = request.getContextPath();
                                         <a href="<%=root %>/index.jsp" class="nav-link">소개</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="services.html" class="nav-link">돌봄일지</a>
+                                        <a href="<%=root %>/views/diary/insertDiary" class="nav-link">돌봄일지</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="gallery.html" class="nav-link">펫 시터 지원</a>
+                                        <a href="<%=root %>/views/petSitter/petSitterApply" class="nav-link">펫 시터 지원</a>
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                펫 시터 예약
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="views/petsitterreservation/petSitterSearch.jsp">방문 펫 시터 예약</a>
+                                            <a class="dropdown-item" href="<%=root %>/views/petsitterreservation/petSitterSearch.jsp">방문 펫 시터 예약</a>
                                             <a class="dropdown-item" href="single-blog.html">가정집 펫시터 예약</a>
                                         </div>
                                     </li>
@@ -94,7 +93,7 @@ String root = request.getContextPath();
                                         <a href="blog.html" class="nav-link">커뮤니티</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="views/serviceCenter/" class="nav-link">고객센터</a>
+                                        <a href="<%=root %>/views/serviceCenter/FAQ.jsp" class="nav-link">고객센터</a>
                                     </li>
                                 </ul>
                             </div>
