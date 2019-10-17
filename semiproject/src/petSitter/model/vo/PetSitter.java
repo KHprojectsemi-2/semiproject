@@ -18,6 +18,21 @@ public class PetSitter {
 		
 	}
 	
+	public PetSitter(String userId, String residence, String job, String withFam, String withPet, String canLarge,
+			String canMedic, String canOld, String canSick, String isLicense) {
+		super();
+		this.userId = userId;
+		this.residence = residence;
+		this.job = job;
+		this.withFam = withFam;
+		this.withPet = withPet;
+		this.canLarge = canLarge;
+		this.canMedic = canMedic;
+		this.canOld = canOld;
+		this.canSick = canSick;
+		this.isLicense = isLicense;
+	}
+
 	public PetSitter(String userId, int grade, String residence, String job, String withFam, String withPet,
 			String canLarge, String canMedic, String canOld, String canSick, String isLicense, String chkResume) {
 		super();

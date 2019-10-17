@@ -47,6 +47,27 @@ public class PetSitterDao {
 			pstmt.setString(11, p.getIsLicense());
 			pstmt.setString(12, p.getChkResume());
 			
+//			pstmt.setString(1, p.getUserId());
+//			pstmt.setString(2, p.getResidence());
+//			pstmt.setString(3, p.getJob());
+//			pstmt.setString(4, p.getWithFam());
+//			pstmt.setString(5, p.getWithPet());
+//			pstmt.setString(6, p.getCanLarge());
+//			pstmt.setString(7, p.getCanMedic());
+//			pstmt.setString(8, p.getCanOld());
+//			pstmt.setString(9, p.getCanSick());
+//			pstmt.setString(10, p.getIsLicense());
+			
+//			pstmt.setString(1, p.getResidence());
+//			pstmt.setString(2, p.getJob());
+//			pstmt.setString(3, p.getWithFam());
+//			pstmt.setString(4, p.getWithPet());
+//			pstmt.setString(5, p.getCanLarge());
+//			pstmt.setString(6, p.getCanMedic());
+//			pstmt.setString(7, p.getCanOld());
+//			pstmt.setString(8, p.getCanSick());
+//			pstmt.setString(9, p.getIsLicense());
+			
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
