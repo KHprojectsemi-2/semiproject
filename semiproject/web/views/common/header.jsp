@@ -143,7 +143,8 @@ footer {
 												펫 시터 예약</a> <a class="dropdown-item" href="single-blog.html">가정집
 												펫시터 예약</a>
 										</div></li>
-									<li class="nav-item"><a href="blog.html" class="nav-link">커뮤니티</a>
+									<li class="nav-item"><a	href="<%=root%>/views/bbs/bbsList.jsp" class="nav-link">커뮤니티</a>
+									
 									</li>
 									<li class="nav-item"><a
 										href="<%=root%>/views/serviceCenter/FAQ.jsp" class="nav-link">고객센터</a>
@@ -159,7 +160,7 @@ footer {
 	<script>
     	function logout(){
 			location.href = '<%=request.getContextPath()%>
-		/logout.me';
+			/logout.me';
 		}
 	</script>
 </body>
