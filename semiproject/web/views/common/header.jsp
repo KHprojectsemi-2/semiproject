@@ -158,8 +158,7 @@ footer {
 	</header>
 	<script>
     	function logout(){
-			location.href = '<%=request.getContextPath()%>
-		/logout.me';
+			location.href = '<%=request.getContextPath()%>/logout.me';
 		}
 	</script>
 </body>

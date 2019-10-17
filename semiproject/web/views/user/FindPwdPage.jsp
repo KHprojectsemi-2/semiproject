@@ -1,15 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>LoginPage</title>
-</head>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<title>Insert title here</title>
 <style>
 body {
 	margin: 0;
@@ -35,12 +30,9 @@ body {
 	margin-top: -85px;
 }
 </style>
+</head>
 <body>
 	<%@include file="../common/header.jsp"%>
-
-	<br>
-	<br>
-	<br>
 	<div id="login">
 		<h3 class="text-center text-white pt-5">Login form</h3>
 		<div class="container">
@@ -48,8 +40,8 @@ body {
 				class="row justify-content-center align-items-center">
 				<div id="login-column" class="col-md-6">
 					<div id="login-box" class="col-md-12">
-						<form id="login-form" class="form" action="<%=request.getContextPath()%>/login.me" method="post">
-							<h3 class="text-center text-info">로그인</h3>
+						<form id="login-form" class="form" action="<%=request.getContextPath()%>/findId.me" method="post">
+							<h3 class="text-center text-info">비밀번호 찾기</h3>
 							<div class="form-group">
 								<label for="username" class="text-info">ID:</label><br>
 								<input type="text" name="userId" id="userId"
@@ -62,32 +54,21 @@ body {
 									
 							</div>
 							<div class="form-group">
-								<label for="remember-me" class="text-info"><span>아이디 기억
-								</span> <span><input id="remember-me" name="remember-me"
-										type="checkbox"></span></label><br><input type="submit"
-									name="submit" class="btn btn-info btn-md" value="로그인">
+							<input type="submit" name="submit" class="btn btn-info btn-md" value="아이디 찾기">
 							<div style="display:inline-block;width:82%;text-align:right">
-							<a href="<%=root %>/views/user/JoinFormPage.jsp" class="text-info" >회원가입</a>
+							<a href="<%=root %>/views/user/LoginPage.jsp" class="text-info" >로그인 화면으로</a>
 							</div>
 							</div>
 
 							<div id="register-link" class="text-right">
-								<a href="<%=root %>/views/user/FindIdPage.jsp" class="text-info" >아이디를 잊으셨나요?</a>
+								<a href="<%=root %>/views/user/FindPwdPage.jsp" class="text-info" >비밀번호를 잊으셨나요?</a>
 							</div>
-
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script>
-		$(function(){
-			var offset = $("#userId").offset();
-			$("#userId").focus();
-			$('html,body').animate({scrollTop : offset.top-300},400);
-		});
-	</script>
 
 	<br>
 	<br>
@@ -103,8 +84,9 @@ body {
 	<br>
 	<br>
 	<br>
-
+	<br>
+	<br>
+	<br>
 	<%@include file="../common/footer.jsp"%>
-
 </body>
 </html>
