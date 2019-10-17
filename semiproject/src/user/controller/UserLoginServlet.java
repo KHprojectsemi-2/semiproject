@@ -1,11 +1,17 @@
 package user.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import user.model.service.UserService;
+import user.model.vo.User;
 
 /**
  * Servlet implementation class UserLoginServlet
@@ -27,6 +33,9 @@ public class UserLoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+//		HttpSession sessions = request.getSession();
+//		
+//		sessions.invalidate();
 		// 1. 전송 값에 한글이 있을 경우 인코딩 처리 해야한다. (doPost에서는 무조건 해야됨 하지만 doGet에서는 안해도 됨)
 		request.setCharacterEncoding("UTF-8"); // 로그인에서는 필요없음(한글 쓸일 없으니까)
 		
@@ -40,7 +49,7 @@ public class UserLoginServlet extends HttpServlet {
 		//3. 서비스 클래스의 해당 메소드를 실행하고, 그 처리 결과를 받음
 		 User loginUser = new UserService().loginUser(user);
 		 
-		 System.out.println(loginUser);
+		 System.out.println("Servlet에서..." + loginUser);
 		 
 		//4. 보낼 값에 한글이 있을 경우 인코딩 처리를 해야한다.
     	//   지금 내보내는 내용을 html문으로 해석해라

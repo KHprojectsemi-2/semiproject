@@ -99,15 +99,15 @@ img:hover{
 	<%@include file="../common/header.jsp"%>
 
 	
-	<form id = "userJoin_Form">
+	<form id = "userJoin_Form" action="<%=request.getContextPath()%>/join.me" method="post">
 	<div class="joinForm">
 	<table style="margin-right:0px">
 		<tr>
 		<td>
 		<div id="d_join" >
-			<label  class="l_join">아이디:</label> <input type="text"
-				id="userId" required> <input type="button"
-				class="btn btn-info btn-md" value="중복 확인">
+			<label  class="l_join">아이디:</label>
+			 <input type="text" name="userId" required> 
+			 <input type="button" class="btn btn-info btn-md" value="중복 확인">
 		</div>
 		</td>
 		</tr>
@@ -115,7 +115,7 @@ img:hover{
 		<td>
 		<div id="d_join">
 			<label class="l_join">비밀번호: </label> <input
-				type="password"  id="userPwd" required>
+				type="password"  name="userPwd" required>
 		</div>
 		</td>
 		</tr>
@@ -134,11 +134,11 @@ img:hover{
 		<td>
 		<div id="d_join">
 			<label class="l_join">이름: </label>
-			<input type="text" id="userName" required>
+			<input type="text" name="userName" required>
 			<label>남 </label>
-			<input type="radio" id="" name ="chkGender" value="남" checked>&nbsp;&nbsp;
+			<input type="radio" name ="chkGender" value="남" checked>&nbsp;&nbsp;
 			<label>여 </label>
-			<input type="radio" id="" name ="chkGender" value="여">
+			<input type="radio" name ="chkGender" value="여">
 		</div>
 		</td>
 		</tr>
@@ -146,17 +146,17 @@ img:hover{
 		<td>
 		<div id="d_join">
 			<label class="l_join">생년월일: </label>
-			<select name="year" id ="birth_year" style="min-height=10px">
+			<select name="birth_year"  style="min-height=10px">
 				<% for(int i=2019;i>1920;i--) {%>
 				<option value="<%=i %>"><%=i %></option>
 				<%} %>
 			</select>
-			<select name="month" id ="birth_month" style="min-height=10px">
+			<select name="birth_month"  style="min-height=10px">
 				<% for(int i=12;i>0;i--) {%>
 				<option value="<%=i %>"><%=i %></option>
 				<%} %>
 			</select>
-			<select name="day" id ="birth_day" style="min-height=10px">
+			<select name="birth_day"  style="min-height=10px">
 				<% for(int i=31;i>0;i--) {%>
 				<option value="<%=i %>"><%=i %></option>
 				<%} %>
@@ -168,7 +168,7 @@ img:hover{
 		<td>
 		<div id="d_join">
 			<label class="l_join">이메일: </label>
-			<input type="email" id="userEmail" required>
+			<input type="email" name="userEmail" required>
 		</div>
 		</td>
 		</tr>
@@ -176,7 +176,7 @@ img:hover{
 		<td>
 		<div id="d_join">
 			<label class="l_join">연락처: </label>
-			<input type="number" id="userPhone" required>
+			<input type="text" name="userPhone" required>
 		</div>
 		</td>
 		</tr>
@@ -184,7 +184,7 @@ img:hover{
 		<td>
 		<div id="d_join">
 			<label class="l_join">주소: </label>
-			<input type="text" id="userAddress" required>
+			<input type="text" name="userAddress" required>
 		</div>
 		</td>
 		</tr>
@@ -192,12 +192,13 @@ img:hover{
 		<td>
 		<div id="d_join">
 			<label class="l_join"></label>
-			<input type="text" id="userAddress2" required>
+			<input type="text" name="userAddress2" required>
 		</div>
 		</td>
 		</tr>
 	</table>
 	</div>
+	<% for(int i=0;i<petcount;i++){ %>
 		<div class="petForm">
 			<table style="width:100%;">
 				<tr>
@@ -209,17 +210,17 @@ img:hover{
 					</td>
 					<td rowspan="3"><img src="#" width="150" height="150"
 						style="margin-top: 20px">
-						<button class="pet_button" style="margin-bottom:100px;margin-left:25px;background-color:red;">-</button>
+						<button type="button" class="pet_button" style="margin-bottom:100px;margin-left:25px;background-color:red;">-</button>
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<div class="petInfo_div">
 							<label class="petInfo_lab">중성화</label> <input type="checkbox"
-								id="" name="chkNeutral" value="중성화" checked>&nbsp;&nbsp;&nbsp;&nbsp;
-							<label>남 </label> <input type="radio" id="" name="chkGender"
+								id="isNeutral" name="chkNeutral" value="중성화" checked>&nbsp;&nbsp;&nbsp;&nbsp;
+							<label>남 </label> <input type="radio" id="genderM" name="chkGender"
 								value="남" checked>&nbsp;&nbsp; <label>여 </label> <input
-								type="radio" id="" name="chkGender" value="여">
+								type="radio" id="genderW" name="chkGender" value="여">
 						</div>
 					</td>
 				</tr>
@@ -240,19 +241,27 @@ img:hover{
 					</td>
 					<td>
 						<label>나이: </label> <input type="text" id="petKind" style="width: 120px;">
-						<button class="pet_button">+</button>
+						<%if(i==petcount-1){ %> 
+							<button type="button" class="pet_button" onclick="plusPet()">+</button>
+						<%} %>
 					</td>
 				</tr>
 			</table>
 			<br>
 		</div>
+		<%} %>
 		<hr style="width:50%">
 		<p align="center">
-			<input type="submit" class="btn btn-info btn-md" value="가입하기" style="width:150px;">
+			<input type="submit" class="btn btn-info btn-md" value="가입하기" style="width:150px;"></button>
 		</p>	
 		<br>
 	</form>
-	
+	<script>
+		function plusPet(){
+			 <%=petcount++%>
+			console.log(<%=petcount%>);
+		}
+	</script>
 
 
 	<br>

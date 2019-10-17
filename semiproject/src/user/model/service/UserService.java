@@ -1,8 +1,12 @@
 package user.model.service;
 
-import static common.JDBCTemplate.*;
+import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
+
+import user.model.dao.UserDao;
+import user.model.vo.User;
 
 public class UserService {
 	
@@ -12,15 +16,19 @@ public class UserService {
 	public static int ID_NOT_EXIST = -1;
 
 	//기본생성자
-	public UserService() {}
+	public UserService() {
+		
+		
+	}
 	
 	/*
 	 * 1. 로그인용 서비스 메소드
 	 */
-	public User loginMember(User user) {
+	public User loginUser(User user) {
 		Connection conn = getConnection();
 		User loginUser = new UserDao().loginUser(conn,user);
-			
+		System.out.println("서비스 거쳐감");	
+		
 		close(conn);
 		
 		return loginUser;
