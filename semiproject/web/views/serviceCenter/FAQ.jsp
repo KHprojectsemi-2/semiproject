@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="board.model.vo.*, java.util.ArrayList"%>
+
+<%
+	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,9 +20,8 @@
 
 <style>
 	#FAQ_Outer{
-		width : 900px;
+		width : 1000px;
 		height : 500px;
-		/* border : 1px solid black; */	
 		margin-right : auto;
 		margin-left : auto;
 	}
@@ -41,17 +51,17 @@
 		margin-right : auto;
 		margin-left : auto;
 		text-align : center;
-		width : 900px;
+		width : 1000px;
 		border : 1px solid black;
 		
 	}
 	#sc_List th, td{
-		border : 1px solid black;		
+		border : 1px solid black;	
 	}
 	
-	/* #content{
-		height : 35px;
-	} */
+	#content{
+		height : 30px;
+	}
 	
 	tr#content:hover{
 		cursor : pointer;
@@ -60,11 +70,11 @@
 	.hide {
 		display:none;
 	}  
-
-    .show {
-   		width : 900px;
-		height : 150px;		 
-   	}  
+/* 
+    #content_Answer {
+   		width : 1000px;
+		height : 250px;
+   	}   */
 </style>
 
 </head>
@@ -75,7 +85,7 @@
 	<div id = "FAQ_Outer">
 		<div id = "Menu_List">
 			<div id = "FAQ" class = "sc_Menu">FAQ</div>
-			<div id = "inquiry" class = "sc_Menu">문의하기</div>
+			<div id = "question" class = "sc_Menu">문의하기</div>
 			<div id = "report" class = "sc_Menu">신고하기</div>
 		</div>
 	
@@ -86,38 +96,81 @@
 		 		<th width = "100px">글번호</th>
 		 		<th width = "550px">내용</th>
 		 		<th width = "250px">등록날짜</th>
+		 		<th width = "100px">작성자</th>
+		 		
 			</tr>
-			<%for(int i=5; i>0; i--){ %>
+			<%for(Board b : list){ %>
 				<tr id= "content">
 					<td>
-						<input type = "hidden" value = "<%=i%>">
-						<%=i %>
+						<input type = "hidden" value = "<%=b.getBoardNo()%>">
+						<%=b.getBoardNo() %>
 					</td>
-					<td>내용부분</td>
-					<td>2019/10/15</td>
+					<td><%=b.getTitle() %></td>
+					<td><%=b.getCreateDate() %></td>
+					<td><%=b.getUserId() %></td>
 				</tr>
 				<tr id = "content_Answer" class = "hide">
-					<td colspan="3">
-						<div>					
-							<p>내용 들어가는부분<%=i %></p>
+					<td colspan="4">
+						<div>
+							<br><br><br><br>					
+							<p><%=b.getContent() %></p>
+							<br><br><br><br>
+							
 						</div>
 					</td>								
 				</tr>
 			<%} %>
 	
-		 </table>	
+		 </table> 
 	</div>	
+		<div class = "pagingArea" align = "center">
+			
+			
+			<%if(currentPage >= maxPage){ %>
+				<button disabled> << </button>
+			<%}else{ %>
+				<button onclick = "location.href = '<%=request.getContextPath()%>/blist.bo?currentPage=<%=currentPage+1 %>'"> << </button>
+			<%} %>
+			
+			<%if(currentPage >= maxPage){ %>
+				<button disabled> < </button>
+			<%}else{ %>
+				<button onclick = "location.href = '<%=request.getContextPath()%>/blist.bo?currentPage=<%=currentPage+1%>'"> < </button>
+			<%} %>
+			
+			<%for(int p = endPage ; p >= startPage ; p--){ %>
+				<%if(p == currentPage){ %>
+					<button disabled>ㅁ</button>
+				<%}else{ %>
+					<button onclick = "location.href = '<%=request.getContextPath()%>/blist.bo?currentPage=<%=p%>'">ㅁ</button>
+				<%} %>
+			<%} %>
+			
+			<%if(currentPage <= 1){ %>
+				<button disabled> > </button>
+			<%}else{ %>
+				<button onclick = "location.href = '<%=request.getContextPath()%>/blist.bo?currentPage=<%=currentPage-1 %>'"> > </button>
+			<%} %>
+			
+			<%if(currentPage <= 1){ %>
+				<button disabled> >> </button>
+			<%}else{ %>
+			<button onclick = "location.href = '<%=request.getContextPath()%>/blist.bo?currentPage=1'"> >> </button>
+			<%} %>
+		</div>
+		
 
 	<br><br><br><br><br>
 	<%@include file = "../common/footer.jsp" %>
 	
 	<script>
+	
 		$("#FAQ").click(function(){
 			location.href = '<%=request.getContextPath()%>/views/serviceCenter/FAQ.jsp';
 		});
 		
-		$("#inquiry").click(function(){
-			location.href = '<%=request.getContextPath()%>/views/serviceCenter/inquiry.jsp';
+		$("#question").click(function(){
+			location.href = '<%=request.getContextPath()%>/views/serviceCenter/question.jsp';
 		});
 		
 		$("#report").click(function(){
@@ -125,18 +178,20 @@
 		});
 		
 		$(function() {
-			var article = ("#sc_List .show");	//#sc_List중에 클래스가 show인 객체
+			var show = ("#sc_List .show");	//#sc_List중에 클래스가 show인 객체 (현재 보여지고있는 객체)
 
-			$("#content td").click(function() {
-				
-				var myArticle = $(this).parents().next("tr");
+			$("#content td").click(function() {		
+				var hide = $(this).parents().next("tr");	// 숨겨져있는 객체
 
-				if ($(myArticle).hasClass('hide')) {
-					$(article).removeClass('show').addClass('hide');
-					$(myArticle).removeClass('hide').addClass('show');
+				if ($(hide).hasClass('hide')) {
+					
+					$(show).removeClass('show').addClass('hide');	// 열려있는게 닫히고
+					$(hide).addClass('show').removeClass('hide');	// 클릭한게 열린다
+					 
 				} else {
-					$(myArticle).addClass('hide').removeClass('show');
+					$(hide).removeClass('show').addClass('hide');	//열려있는객체를 다시 누르면 닫힌다
 				}
+				
 			});
 		});
 	</script>

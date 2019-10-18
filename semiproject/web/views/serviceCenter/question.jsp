@@ -9,7 +9,23 @@
 <body>
 <%@include file = "../common/header.jsp" %>
 	<br><br>
-
+		
+	<div>
+		<select id = "sel">
+			<option>1</option>
+			<option>2</option>
+			<option>3</option>
+			<option>4</option>
+		</select>
+	<button onclick = "select();">???</button>
+	</div>
+	
+	
+	<script>
+	function select(){
+		console.log($("#sel").val());	
+	}
+	</script>
 
 
 

@@ -115,7 +115,7 @@ String root = request.getContextPath();
                                         <a href="blog.html" class="nav-link">커뮤니티</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="<%=root %>/views/serviceCenter/FAQ.jsp" class="nav-link">고객센터</a>
+                                        <a href="<%=root %>/blist.bo" class="nav-link">고객센터</a>
                                     </li>
                                 </ul>
                             </div>
