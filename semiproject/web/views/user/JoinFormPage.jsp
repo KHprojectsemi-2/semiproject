@@ -198,29 +198,28 @@ img:hover{
 		</tr>
 	</table>
 	</div>
-	<% for(int i=0;i<petcount;i++){ %>
-		<div class="petForm">
+		<div class="petForm" id="petForm">
 			<table style="width:100%;">
 				<tr>
 					<td>
 						<div class="petInfo_div">
 							<label class="petInfo_lab">강아지 이름: </label> <input type="text"
-								id="petName" style="width: 120px;">
+								name="petName" style="width: 120px;">
 						</div>
 					</td>
 					<td rowspan="3"><img src="#" width="150" height="150"
 						style="margin-top: 20px">
-						<button type="button" class="pet_button" style="margin-bottom:100px;margin-left:25px;background-color:red;">-</button>
+						<button type="button"  id="pet_minus" class="pet_button" style="margin-bottom:100px;margin-left:25px;background-color:red;">-</button>
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<div class="petInfo_div">
 							<label class="petInfo_lab">중성화</label> <input type="checkbox"
-								id="isNeutral" name="chkNeutral" value="중성화" checked>&nbsp;&nbsp;&nbsp;&nbsp;
-							<label>남 </label> <input type="radio" id="genderM" name="chkGender"
+								 name="chkNeutral" value="중성화" checked>&nbsp;&nbsp;&nbsp;&nbsp;
+							<label>남 </label> <input type="radio" name="chkGender"
 								value="남" checked>&nbsp;&nbsp; <label>여 </label> <input
-								type="radio" id="genderW" name="chkGender" value="여">
+								type="radio"  name="chkGender" value="여">
 						</div>
 					</td>
 				</tr>
@@ -228,7 +227,7 @@ img:hover{
 					<td>
 						<div class="petInfo_div">
 							<label class="petInfo_lab">무게: </label> <input type="number"
-								id="petSize" style="width: 120px;"><label>kg</label>
+								name="petSize" style="width: 120px;"><label>kg</label>
 						</div>
 					</td>
 				</tr>
@@ -236,20 +235,17 @@ img:hover{
 					<td>
 						<div class="petInfo_div" style="width: 200px">
 							<label class="petInfo_lab">종: </label> <input type="text"
-								id="petKind" style="width: 100px;">
+								name="petKind" style="width: 100px;">
 						</div>
 					</td>
 					<td>
-						<label>나이: </label> <input type="text" id="petKind" style="width: 120px;">
-						<%if(i==petcount-1){ %> 
-							<button type="button" class="pet_button" onclick="plusPet()">+</button>
-						<%} %>
+						<label>나이: </label> <input type="text" name="petAge" style="width: 120px;">
+							<button type="button" id="pet_plus" class="pet_button">+</button>
 					</td>
 				</tr>
 			</table>
 			<br>
 		</div>
-		<%} %>
 		<hr style="width:50%">
 		<p align="center">
 			<input type="submit" class="btn btn-info btn-md" value="가입하기" style="width:150px;"></button>
@@ -257,10 +253,30 @@ img:hover{
 		<br>
 	</form>
 	<script>
-		function plusPet(){
-			 <%=petcount++%>
-			console.log(<%=petcount%>);
+	var count=0;
+	var intro = $("<h2>").text("당신의 펫을 추가해보세요").css({"text-align":"center"});
+	$("#userJoin_Form").append(intro)
+	
+	$("#pet_plus").click(function(){
+		if(count<2){
+			var	joinForm = document.getElementById("userJoin_Form");
+			var petform = document.createElement("div");
+			petform.setAttribute("class", "petForm")
+			petform.innerHTML = document.getElementById("petForm").innerHTML;
+			count++;
+			console.log(count);
+			joinForm.append(petform);
+		}else{
+			alert("펫은 3마리까지만 등록 가능합니다.");
 		}
+	});
+
+	$("#pet_minus").click(function(){
+		count--;
+		$("#userJoin_Form").children("div:last").remove();
+
+	});
+
 	</script>
 
 
