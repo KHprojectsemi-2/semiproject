@@ -81,4 +81,59 @@ public class UserDao {
 		// 다시 Service로 가자!!
 	}
 
+	/*
+	 * 정보수정
+	 */
+	public int updateUser(Connection conn, User user) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		String query = prop.getProperty("updateUser");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, user.getUserName());
+			pstmt.setString(2, user.getUserPhone());
+			pstmt.setString(3, user.getUserEmail());
+			pstmt.setString(4, user.getUserAddress());
+			pstmt.setString(5, user.getUserImage());
+			pstmt.setString(6, user.getUserId());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		
+		
+		return result;
+		
+	}
+
+	//회원 탈퇴
+	public int deleteUser(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteUser");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, userId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 }

@@ -33,6 +33,19 @@ public class User implements Serializable{
 	
 	
 	
+	public User(String userId, String userName, String userEmail, String userPhone, String userAddress,
+			String userImage) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.userPhone = userPhone;
+		this.userEmail = userEmail;
+		this.userAddress = userAddress;
+		this.userImage = userImage;
+	}
+
+
+
 	public User(String userId, String userPwd) {
 		super();
 		this.userId = userId;
