@@ -1,8 +1,8 @@
 
 package user.model.vo;
 
-import java.sql.Date;
 import java.io.Serializable;
+import java.sql.Date;
 
 public class User implements Serializable{
 	
@@ -38,6 +38,7 @@ public class User implements Serializable{
 		this.userId = userId;
 		this.userPwd = userPwd;
 	}
+	
 
 	// 가입할 때 필요한 생성자
 	public User(String userId, String userPwd, String userName, String userGender, String userEmail, Date userBirth,

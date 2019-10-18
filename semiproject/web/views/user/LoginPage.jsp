@@ -74,7 +74,6 @@ body {
 							<div id="register-link" class="text-right">
 								<a href="<%=root %>/views/user/FindIdPage.jsp" class="text-info" >아이디를 잊으셨나요?</a>
 							</div>
-
 						</form>
 					</div>
 				</div>
