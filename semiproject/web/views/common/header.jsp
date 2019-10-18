@@ -128,7 +128,7 @@ footer {
                            <li class="nav-item"><a href="<%=root%>/index.jsp"
                               class="nav-link">소개</a></li>
                            <li class="nav-item"><a
-                              href="<%=root%>/views/diary/diaryView.jsp" class="nav-link">돌봄일지</a>
+                              href="<%=root%>/views/diary/insertDiary.jsp" class="nav-link">돌봄일지</a>
                            </li>
                            <li class="nav-item"><a
                               href="<%=root%>/views/petSitter/petSitterApply.jsp"

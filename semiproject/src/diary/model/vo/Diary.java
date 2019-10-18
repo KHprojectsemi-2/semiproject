@@ -1,6 +1,12 @@
 package diary.model.vo;
 
-public class Diary {
+import java.io.Serializable;
+
+public class Diary implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6367373431951022223L;
 	private int diaryNo;
 	private int matchNo;
 	private String diaryContent;

@@ -54,20 +54,6 @@ public class PetSitterApplyServlet extends HttpServlet {
 		String isLicense = request.getParameter("certificate");
 //		String chkResume = request.getParameter("chkResume");
 
-////		// jsp에서 선택한 값 잘 넘어옴!!!!!!!!!!!
-//		out.println("id : " + userId);
-////		out.println("grade : " + grade);
-//		out.println(residence);
-//		out.println(job);
-//		out.println(withFam);
-//		out.println(withPet);
-//		out.println(canLarge);
-//		out.println(canMedic);
-//		out.println(canOld);
-//		out.println(canSick);
-//		out.println(isLicense);
-////		out.println(chkResume);
-		
 //		// jsp에서 선택한 값 잘 넘어옴!!!!!!!!!!!
 		System.out.println("id : " + userId);
 //		out.println("grade : " + grade);
@@ -89,14 +75,13 @@ public class PetSitterApplyServlet extends HttpServlet {
 		
 		// insert이기 때문에 int 값으로 받아줌
 		int result = new PetSitterService().applyPetSitter(p);
-		System.out.println(result);
+		System.out.println("result : " + result);
 		
 		// 4. 받은 결과에 따라 성공/실패에 따른 페이지 내보내기
 		String page = "";	// 반환할 jsp의 경로(화면에 보여줄 view)를 저장할 String
 		
 		if(result > 0) {	// 성공했을 때
-			page = "views/common/successPage.jsp";
-			request.setAttribute("msg", "지원서 제출 성공!");
+			page = "/index.jsp";
 		}else {	// 실패했을 때
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "지원서 제출 실패!");

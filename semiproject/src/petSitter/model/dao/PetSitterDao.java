@@ -17,7 +17,7 @@ public class PetSitterDao {
 	Properties prop = new Properties();
 	
 	public PetSitterDao() {
-		String fileName = PetSitterDao.class.getResource("sql/petSitter/petSitter-query.properties").getPath();
+		String fileName = PetSitterDao.class.getResource("/sql/petSitter/petSitter-query.properties").getPath();
 		System.out.println(fileName);
 		try {
 			prop.load(new FileReader(fileName));
@@ -39,41 +39,36 @@ public class PetSitterDao {
 		System.out.println("petSitter dao()222");
 		String query = prop.getProperty("applyPetSitter");
 		
+		System.out.println("다오다오다오 id : " + p.getUserId());
+		System.out.println("다오다오다오 resume : " + p.getChkResume());
+		
 		try {
+//			pstmt = conn.prepareStatement(query);
+//			pstmt.setString(1, p.getUserId());
+//			pstmt.setInt(2, p.getGrade());
+//			pstmt.setString(3, p.getResidence());
+//			pstmt.setString(4, p.getJob());
+//			pstmt.setString(5, p.getWithFam());
+//			pstmt.setString(6, p.getWithPet());
+//			pstmt.setString(7, p.getCanLarge());
+//			pstmt.setString(8, p.getCanMedic());
+//			pstmt.setString(9, p.getCanOld());
+//			pstmt.setString(10, p.getCanSick());
+//			pstmt.setString(11, p.getIsLicense());
+//			pstmt.setString(12, p.getChkResume());
+			
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, p.getUserId());
-			pstmt.setInt(2, p.getGrade());
-			pstmt.setString(3, p.getResidence());
-			pstmt.setString(4, p.getJob());
-			pstmt.setString(5, p.getWithFam());
-			pstmt.setString(6, p.getWithPet());
-			pstmt.setString(7, p.getCanLarge());
-			pstmt.setString(8, p.getCanMedic());
-			pstmt.setString(9, p.getCanOld());
-			pstmt.setString(10, p.getCanSick());
-			pstmt.setString(11, p.getIsLicense());
-			pstmt.setString(12, p.getChkResume());
+			pstmt.setString(2, p.getResidence());
+			pstmt.setString(3, p.getJob());
+			pstmt.setString(4, p.getWithFam());
+			pstmt.setString(5, p.getWithPet());
+			pstmt.setString(6, p.getCanLarge());
+			pstmt.setString(7, p.getCanMedic());
+			pstmt.setString(8, p.getCanOld());
+			pstmt.setString(9, p.getCanSick());
+			pstmt.setString(10, p.getIsLicense());
 			
-//			pstmt.setString(1, p.getUserId());
-//			pstmt.setString(2, p.getResidence());
-//			pstmt.setString(3, p.getJob());
-//			pstmt.setString(4, p.getWithFam());
-//			pstmt.setString(5, p.getWithPet());
-//			pstmt.setString(6, p.getCanLarge());
-//			pstmt.setString(7, p.getCanMedic());
-//			pstmt.setString(8, p.getCanOld());
-//			pstmt.setString(9, p.getCanSick());
-//			pstmt.setString(10, p.getIsLicense());
-			
-//			pstmt.setString(1, p.getResidence());
-//			pstmt.setString(2, p.getJob());
-//			pstmt.setString(3, p.getWithFam());
-//			pstmt.setString(4, p.getWithPet());
-//			pstmt.setString(5, p.getCanLarge());
-//			pstmt.setString(6, p.getCanMedic());
-//			pstmt.setString(7, p.getCanOld());
-//			pstmt.setString(8, p.getCanSick());
-//			pstmt.setString(9, p.getIsLicense());
 			
 			result = pstmt.executeUpdate();
 			

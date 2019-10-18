@@ -4,6 +4,7 @@
     pageEncoding="UTF-8"%>
 <%
 	ArrayList<PetSitter> list = (ArrayList<PetSitter>)request.getAttribute("list");
+	/* PetSitter p = new PetSitter(); */
  %>    
 <!DOCTYPE html>
 <html>
@@ -51,9 +52,25 @@
 			<th>주거</th>
 			<th>자격증</th>
 		</tr>
-			
-		</table>
+		<% if(list.isEmpty()){ %>
+		<tr>
+			<td colspan="6">조회된 리스트가 없습니다.</td>
+		</tr>
+ 		<%}else{ %>
+			<%for(PetSitter p : list){ %>
+			<tr>
+				<input type="hidden">
+				<td><%=p.getCanLarge() %></td>
+				<td><%=p.getCanMedic() %>
+				<td><%=p.getCanSick() %>
+			</tr>
+			<%} %>
+		<%} %> 
 		
+		
+<%-- 		<%if(loginUser != null && loginUser.getUserId().equals("admin")){ %>
+			<button onclick="location.href='views/notice/noticeInsertForm.jsp'">작성하기</button>
+		<%} %> --%>
 		
 <%@include file = "../common/footer.jsp" %>
 </body>

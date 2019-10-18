@@ -1,29 +1,25 @@
-package petSitter.controller;
+package diary.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import petSitter.model.service.PetSitterService;
-import petSitter.model.vo.PetSitter;
-
 /**
- * Servlet implementation class PetSitterApplyListServlet
+ * Servlet implementation class InsertDiaryServlet
  */
-@WebServlet("/applyList.ps")
-public class PetSitterApplyListServlet extends HttpServlet {
+@WebServlet("/insertDiary.id")
+public class InsertDiaryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PetSitterApplyListServlet() {
+    public InsertDiaryServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,17 +28,29 @@ public class PetSitterApplyListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<PetSitter> pArr = new PetSitterService().selectList();
+		// 1. 요청시 한글이 있을 경우 인코딩 처리
+		request.setCharacterEncoding("UTF-8");
 		
-		RequestDispatcher view = null;
-		if(pArr != null) {	// 값이 제대로 넘어왔다면
-			view = request.getRequestDispatcher("views/petSitter/petSitterApplyList.jsp");
-			request.setAttribute("arr", pArr);
-		}else {
-			view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			request.setAttribute("msg", "조회 실패");
-		}
-		view.forward(request, response);
+		// 배변 확인
+		String[] irr1 = request.getParameterValues("list1");
+		String list1 = irr1[0];
+		System.out.println("배변 : " + list1);
+		
+		// 산책 확인
+		String[] irr2 = request.getParameterValues("list2");
+		String list2 = irr2[0];
+		System.out.println("산책 : " + list2);
+		
+		// 산책 확인
+		String[] irr3 = request.getParameterValues("list3");
+		String list3 = irr3[0];
+		System.out.println("투약 : " + list3);
+		
+		// 산책 확인
+		String[] irr4 = request.getParameterValues("list4");
+		String list4 = irr4[0];
+		System.out.println("요청사항 : " + list4);
+		
 		
 	}
 

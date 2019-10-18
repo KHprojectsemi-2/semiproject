@@ -7,10 +7,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-/* 	form{
-		 margin: 50px 50px 50px 500px;
-	} */
-	
 	#outer{
 		margin: 50px 50px 50px 500px;
 	}
