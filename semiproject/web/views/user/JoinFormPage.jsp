@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	int petcount = 1;
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,9 +55,39 @@ input {
 	margin-top: 10px;
 	margin-left: 10px;
 }
-
+.pet_button{
+	color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    display: inline-block;
+    font-weight: 400;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+	border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s;
+    align:right;
+    margin-left: 20px;
+}
+.pet_button:hover{
+	cursor: pointer;
+}
 .l_join {
 	width: 100px;
+	text-align: right;
+}
+.petInfo_div{
+	display:inline-block;
+	width: 350px;
+	margin-top: 10px;
+	margin-left: 80px;
+}
+.petInfo_lab{
+	width: 80px;
 	text-align: right;
 }
 img:hover{
@@ -66,15 +99,15 @@ img:hover{
 	<%@include file="../common/header.jsp"%>
 
 	
-	<form id = "userJoin_Form">
+	<form id = "userJoin_Form" action="<%=request.getContextPath()%>/join.me" method="post">
 	<div class="joinForm">
-	<table>
+	<table style="margin-right:0px">
 		<tr>
 		<td>
 		<div id="d_join" >
-			<label  class="l_join">아이디:</label> <input type="text"
-				id="userId" required> <input type="button"
-				class="btn btn-info btn-md" value="중복 확인">
+			<label  class="l_join">아이디:</label>
+			 <input type="text" name="userId" required> 
+			 <input type="button" class="btn btn-info btn-md" value="중복 확인">
 		</div>
 		</td>
 		</tr>
@@ -82,7 +115,7 @@ img:hover{
 		<td>
 		<div id="d_join">
 			<label class="l_join">비밀번호: </label> <input
-				type="password"  id="userPwd" required>
+				type="password"  name="userPwd" required>
 		</div>
 		</td>
 		</tr>
@@ -101,11 +134,11 @@ img:hover{
 		<td>
 		<div id="d_join">
 			<label class="l_join">이름: </label>
-			<input type="text" id="userName" required>
+			<input type="text" name="userName" required>
 			<label>남 </label>
-			<input type="radio" id="" name ="chkGender" value="남" checked>
+			<input type="radio" name ="chkGender" value="남" checked>&nbsp;&nbsp;
 			<label>여 </label>
-			<input type="radio" id="" name ="chkGender" value="여">
+			<input type="radio" name ="chkGender" value="여">
 		</div>
 		</td>
 		</tr>
@@ -113,6 +146,21 @@ img:hover{
 		<td>
 		<div id="d_join">
 			<label class="l_join">생년월일: </label>
+			<select name="birth_year"  style="min-height=10px">
+				<% for(int i=2019;i>1920;i--) {%>
+				<option value="<%=i %>"><%=i %></option>
+				<%} %>
+			</select>
+			<select name="birth_month"  style="min-height=10px">
+				<% for(int i=12;i>0;i--) {%>
+				<option value="<%=i %>"><%=i %></option>
+				<%} %>
+			</select>
+			<select name="birth_day"  style="min-height=10px">
+				<% for(int i=31;i>0;i--) {%>
+				<option value="<%=i %>"><%=i %></option>
+				<%} %>
+			</select>
 		</div>
 		</td>
 		</tr>
@@ -120,7 +168,7 @@ img:hover{
 		<td>
 		<div id="d_join">
 			<label class="l_join">이메일: </label>
-			<input type="email" id="userEmail" required>
+			<input type="email" name="userEmail" required>
 		</div>
 		</td>
 		</tr>
@@ -128,7 +176,7 @@ img:hover{
 		<td>
 		<div id="d_join">
 			<label class="l_join">연락처: </label>
-			<input type="number" id="userPhone" required>
+			<input type="text" name="userPhone" required>
 		</div>
 		</td>
 		</tr>
@@ -136,7 +184,7 @@ img:hover{
 		<td>
 		<div id="d_join">
 			<label class="l_join">주소: </label>
-			<input type="text" id="userAddress" required>
+			<input type="text" name="userAddress" required>
 		</div>
 		</td>
 		</tr>
@@ -144,16 +192,92 @@ img:hover{
 		<td>
 		<div id="d_join">
 			<label class="l_join"></label>
-			<input type="text" id="userAddress2" required>
+			<input type="text" name="userAddress2" required>
 		</div>
-
+		</td>
+		</tr>
 	</table>
 	</div>
-	<div class="petForm">
-		제작중
-	</div>
+		<div class="petForm" id="petForm">
+			<table style="width:100%;">
+				<tr>
+					<td>
+						<div class="petInfo_div">
+							<label class="petInfo_lab">강아지 이름: </label> <input type="text"
+								name="petName" style="width: 120px;">
+						</div>
+					</td>
+					<td rowspan="3"><img src="#" width="150" height="150"
+						style="margin-top: 20px">
+						<button type="button"  id="pet_minus" class="pet_button" style="margin-bottom:100px;margin-left:25px;background-color:red;">-</button>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="petInfo_div">
+							<label class="petInfo_lab">중성화</label> <input type="checkbox"
+								 name="chkNeutral" value="중성화" checked>&nbsp;&nbsp;&nbsp;&nbsp;
+							<label>남 </label> <input type="radio" name="chkGender"
+								value="남" checked>&nbsp;&nbsp; <label>여 </label> <input
+								type="radio"  name="chkGender" value="여">
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="petInfo_div">
+							<label class="petInfo_lab">무게: </label> <input type="number"
+								name="petSize" style="width: 120px;"><label>kg</label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="petInfo_div" style="width: 200px">
+							<label class="petInfo_lab">종: </label> <input type="text"
+								name="petKind" style="width: 100px;">
+						</div>
+					</td>
+					<td>
+						<label>나이: </label> <input type="text" name="petAge" style="width: 120px;">
+							<button type="button" id="pet_plus" class="pet_button">+</button>
+					</td>
+				</tr>
+			</table>
+			<br>
+		</div>
+		<hr style="width:50%">
+		<p align="center">
+			<input type="submit" class="btn btn-info btn-md" value="가입하기" style="width:150px;"></button>
+		</p>	
+		<br>
 	</form>
+	<script>
+	var count=0;
+	var intro = $("<h2>").text("당신의 펫을 추가해보세요").css({"text-align":"center"});
+	$("#userJoin_Form").append(intro)
 	
+	$("#pet_plus").click(function(){
+		if(count<2){
+			var	joinForm = document.getElementById("userJoin_Form");
+			var petform = document.createElement("div");
+			petform.setAttribute("class", "petForm")
+			petform.innerHTML = document.getElementById("petForm").innerHTML;
+			count++;
+			console.log(count);
+			joinForm.append(petform);
+		}else{
+			alert("펫은 3마리까지만 등록 가능합니다.");
+		}
+	});
+
+	$("#pet_minus").click(function(){
+		count--;
+		$("#userJoin_Form").children("div:last").remove();
+
+	});
+
+	</script>
 
 
 	<br>

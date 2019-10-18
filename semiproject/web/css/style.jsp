@@ -2134,9 +2134,9 @@ ul {
 /* line 232, /Applications/MAMP/htdocs/palash/cl/august 2019/198 Animal adoption/198 Animal adoption html/sass/_menu.scss */
 .dropdown .dropdown-menu .dropdown-item {
   font-size: 14px;
-  padding: 12px 20px !important;
+  padding: 12px 20px;
   color: #53C9BB !important;
-}
+}	
 
 /* line 237, /Applications/MAMP/htdocs/palash/cl/august 2019/198 Animal adoption/198 Animal adoption html/sass/_menu.scss */
 .dropdown .dropdown-menu .dropdown-item:hover {

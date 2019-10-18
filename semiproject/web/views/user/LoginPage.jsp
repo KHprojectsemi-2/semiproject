@@ -21,9 +21,9 @@ body {
 #login .container #login-row #login-column #login-box {
 	margin-top: 120px;
 	max-width: 600px;
-	height: 320px;
+	height: 400px;
 	border: 1px solid #9C9C9C;
-	background-color: #EAEAEA;
+	background-color: white;
 }
 
 #login .container #login-row #login-column #login-box #login-form {
@@ -48,7 +48,7 @@ body {
 				class="row justify-content-center align-items-center">
 				<div id="login-column" class="col-md-6">
 					<div id="login-box" class="col-md-12">
-						<form id="login-form" class="form" action="" method="post">
+						<form id="login-form" class="form" action="<%=request.getContextPath()%>/login.me" method="post">
 							<h3 class="text-center text-info">로그인</h3>
 							<div class="form-group">
 								<label for="username" class="text-info">ID:</label><br>
@@ -57,7 +57,7 @@ body {
 							</div>
 							<div class="form-group">
 								<label for="password" class="text-info">PASSWORD:</label><br>
-								<input type="text" name="password" id="password"
+								<input type="text" name="userPwd" id="userPwd"
 									class="form-control">
 									
 							</div>
@@ -66,11 +66,15 @@ body {
 								</span> <span><input id="remember-me" name="remember-me"
 										type="checkbox"></span></label><br><input type="submit"
 									name="submit" class="btn btn-info btn-md" value="로그인">
+							<div style="display:inline-block;width:82%;text-align:right">
+							<a href="<%=root %>/views/user/JoinFormPage.jsp" class="text-info" >회원가입</a>
+							</div>
 							</div>
 
 							<div id="register-link" class="text-right">
-								<a href="<%=root %>/views/user/JoinFormPage.jsp" class="text-info">회원가입 하기</a>
+								<a href="<%=root %>/views/user/FindIdPage.jsp" class="text-info" >아이디를 잊으셨나요?</a>
 							</div>
+
 						</form>
 					</div>
 				</div>
@@ -81,7 +85,7 @@ body {
 		$(function(){
 			var offset = $("#userId").offset();
 			$("#userId").focus();
-			$('html,body').animate({scrollTop : offset.top-400},100);
+			$('html,body').animate({scrollTop : offset.top-300},400);
 		});
 	</script>
 
