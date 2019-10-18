@@ -4,12 +4,14 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.GregorianCalendar;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import user.model.service.UserService;
 import user.model.vo.User;
 
 /**
@@ -39,25 +41,29 @@ public class UserJoinServlet extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
 		String userName = request.getParameter("userName");
-		String chkGender = request.getParameter("chkGender");
+		String userGender = request.getParameter("chkGender");
 		int year = Integer.valueOf(request.getParameter("birth_year"));
-		int month = Integer.valueOf(request.getParameter("birth_month"));
+		int month = (Integer.valueOf(request.getParameter("birth_month"))) - 1;
 		int day = Integer.valueOf(request.getParameter("birth_day"));
 		GregorianCalendar date = new GregorianCalendar(year,month,day);
-		Date birth = new Date(date.getTimeInMillis());
+		Date userbirth = new Date(date.getTimeInMillis());
 		String userEmail = request.getParameter("userEmail");
 		String userPhone = request.getParameter("userPhone");
-		String userAddress = request.getParameter("userAddress") + request.getParameter("userAddress2");
+		String userAddress = request.getParameter("userAddress") +" "+request.getParameter("userAddress2");
 		
-		System.out.println(userId+ userPwd +userName +chkGender +userEmail+birth +userPhone +userAddress);
-		User user = new User();
+		System.out.println(userId+ userPwd +userName +userGender +userEmail+userbirth +userPhone +userAddress);
+		User user = new User(userId,userPwd,userName,userGender,userEmail,userbirth,userPhone,userAddress);
+
+		int result = new UserService().insertUser(user);
 		
-		
-		
-		
-		
-		
-		
+		if(result>0) {
+			response.sendRedirect("index.jsp"); 
+			
+		}else {
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			request.setAttribute("msg", "공지사항 등록 실패!");
+			view.forward(request, response);
+		}
 	}
 
 	/**

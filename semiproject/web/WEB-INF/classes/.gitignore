@@ -1,6 +1,16 @@
+<<<<<<< HEAD
 /common/
 /diary/
 /filter/
 /petSitter/
 /sql/
 /user/
+=======
+<<<<<<< HEAD
+/petSitter/
+/user/
+/sql/
+=======
+/bbs/
+>>>>>>> refs/remotes/origin/master
+>>>>>>> refs/remotes/origin/master

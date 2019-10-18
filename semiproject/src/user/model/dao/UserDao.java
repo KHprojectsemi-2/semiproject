@@ -54,10 +54,11 @@ public class UserDao {
 			while(rs.next()) {
 			loginUser = new User(rs.getString("USERID"),
 									rs.getInt("USERNO"),
-									rs.getString("USERNAME"),
 									rs.getString("USERPWD"),
-									rs.getDate("USERBIRTH"),
+									rs.getString("USERNAME"),
+									rs.getString("USERGENDER"),
 									rs.getString("USEREMAIL"),
+									rs.getDate("USERBIRTH"),
 									rs.getString("USERPHONE"),
 									rs.getString("USERADDRESS"),
 									rs.getString("USERIMAGE"),
@@ -66,7 +67,6 @@ public class UserDao {
 									rs.getDate("LATESTDATE"),
 									rs.getString("USERSTATUS")
 						);	
-			System.out.println("dao에서의 유저 : "+loginUser);
 			}
 
 		} catch (SQLException e) {
@@ -79,6 +79,113 @@ public class UserDao {
 		return loginUser;
 		
 		// 다시 Service로 가자!!
+	}
+
+	/*
+	 * 정보수정
+	 */
+	public int updateUser(Connection conn, User user) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		String query = prop.getProperty("updateUser");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, user.getUserName());
+			pstmt.setString(2, user.getUserPhone());
+			pstmt.setString(3, user.getUserEmail());
+			pstmt.setString(4, user.getUserAddress());
+			pstmt.setString(5, user.getUserImage());
+			pstmt.setString(6, user.getUserId());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		
+		
+		return result;
+		
+	}
+
+	//회원 탈퇴
+	public int deleteUser(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteUser");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, userId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int insertMember(Connection conn, User user) {
+
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertUser");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, user.getUserId());
+			pstmt.setString(2, user.getUserPwd());
+			pstmt.setString(3, user.getUserName());
+			pstmt.setString(4, user.getUserGender());
+			pstmt.setString(5, user.getUserEmail());
+			pstmt.setDate(6, user.getUserBirth());
+			pstmt.setString(7, user.getUserPhone());
+			pstmt.setString(8, user.getUserAddress());
+			
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+
+
+	public int updateLoginDate(Connection conn, User user) {
+
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateLoginDate");
+		
+		try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, user.getUserId());
+				
+				result = pstmt.executeUpdate();
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }

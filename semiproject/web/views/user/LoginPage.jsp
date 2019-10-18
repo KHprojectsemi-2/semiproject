@@ -21,9 +21,9 @@ body {
 #login .container #login-row #login-column #login-box {
 	margin-top: 120px;
 	max-width: 600px;
-	height: 320px;
+	height: 400px;
 	border: 1px solid #9C9C9C;
-	background-color: #EAEAEA;
+	background-color: white;
 }
 
 #login .container #login-row #login-column #login-box #login-form {
@@ -66,11 +66,15 @@ body {
 								</span> <span><input id="remember-me" name="remember-me"
 										type="checkbox"></span></label><br><input type="submit"
 									name="submit" class="btn btn-info btn-md" value="로그인">
+							<div style="display:inline-block;width:82%;text-align:right">
+							<a href="<%=root %>/views/user/JoinFormPage.jsp" class="text-info" >회원가입</a>
+							</div>
 							</div>
 
 							<div id="register-link" class="text-right">
-								<a href="<%=root %>/views/user/JoinFormPage.jsp" class="text-info">회원가입 하기</a>
+								<a href="<%=root %>/views/user/FindIdPage.jsp" class="text-info" >아이디를 잊으셨나요?</a>
 							</div>
+
 						</form>
 					</div>
 				</div>
@@ -81,7 +85,7 @@ body {
 		$(function(){
 			var offset = $("#userId").offset();
 			$("#userId").focus();
-			$('html,body').animate({scrollTop : offset.top-400},100);
+			$('html,body').animate({scrollTop : offset.top-300},400);
 		});
 	</script>
 

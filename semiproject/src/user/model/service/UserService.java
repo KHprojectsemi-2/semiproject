@@ -1,7 +1,6 @@
 package user.model.service;
 
-import static common.JDBCTemplate.close;
-import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
 
@@ -25,14 +24,69 @@ public class UserService {
 	 * 1. 로그인용 서비스 메소드
 	 */
 	public User loginUser(User user) {
+		UserDao dao = new UserDao();
 		Connection conn = getConnection();
-		User loginUser = new UserDao().loginUser(conn,user);
-		System.out.println("서비스 거쳐감");	
+		User loginUser = dao.loginUser(conn,user);
+		int result = dao.updateLoginDate(conn,user);
+		if(result>0)
+		{
+			System.out.println("로그인 확인, 최근 접속 날짜 업데이트");	
+			commit(conn);
+		}
+		else {
+			rollback(conn);
+		}
+		close(conn);
+		return loginUser;
+
+	}
+
+	public int insertUser(User user) {
+
+		Connection conn = getConnection();
+		int result = new UserDao().insertMember(conn,user);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+
+	}
+	
+	
+	  //회원 정보수정 메소드
+		
+	public int updateUser(User user) {
+		Connection conn = getConnection();
+		int result = new UserDao().updateUser(conn, user);
+		
+		if (result>0)
+			commit(conn);
+		else
+			rollback(conn);
 		
 		close(conn);
 		
-		return loginUser;
-		
-		// 다시 Servlet으로 가자!
+		return result;
 	}
+	//회원 탈퇴
+	public int deleteUser(String userId) {
+		Connection conn = getConnection();
+		
+		int result = new UserDao().deleteUser(conn,userId);
+		
+		if(result>0) 
+			commit(conn);
+		else
+			rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+	
 }
