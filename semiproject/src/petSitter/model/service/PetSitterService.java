@@ -22,8 +22,11 @@ public class PetSitterService {
 	 */
 	public int applyPetSitter(PetSitter p) {
 		Connection conn = getConnection();
-		
-		int result = new PetSitterDao().applyPetSitter(conn, p);
+		System.out.println("sevice 받음");
+		System.out.println(p);
+		PetSitterDao dao = new PetSitterDao();
+		int result = dao.applyPetSitter(conn, p);
+		System.out.println("petSitter service()");
 		
 		if(result > 0) {
 			commit(conn);

@@ -15,13 +15,13 @@
 <body>
 <%@include file = "../common/header.jsp" %>
 
-	<div class="outer">
+<%-- 	<div class="outer">
 		<br>
 		<h2 align="center">게시판</h2>
 		<div class="tableArea">
 			<table align="center" id="listArea">
 				<tr>
-					<th width="100px">이름</th>
+					<!-- <th width="100px">이름</th> -->
 					<th width="300px">아이디</th>
 					<th width="100px">신청 날짜</th>
 					<th width="100px">승인 유무</th>
@@ -34,15 +34,27 @@
 					<% for(PetSitter p : list){ %>
 						<tr>
 							<input type="hidden">
-							<%-- <td><%=p.() %></td><!-- 유저에서 불러와 --> --%>
+							<td><%=p.get() %></td>
 							<td><%=p.getUserId() %></td>
-							<td><%=p.getCanSick() %></td>
+							<td><%=p.getResidence() %></td>
 							<td><%=p.getChkResume() %></td>
 						</tr>
 					<%} %>
 				<%} %>
 			</table>
-		</div>
+		</div> --%>
+		
+		지원서 뽑아
+		<table>
+		<tr>
+			<th>아이디</th>
+			<th>주거</th>
+			<th>자격증</th>
+		</tr>
+			
+		</table>
+		
+		
 <%@include file = "../common/footer.jsp" %>
 </body>
 </html>

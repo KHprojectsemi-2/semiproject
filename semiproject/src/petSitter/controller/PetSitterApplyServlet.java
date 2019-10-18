@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import petSitter.model.service.PetSitterService;
 import petSitter.model.vo.PetSitter;
+import user.model.vo.User;
 
 /**
  * Servlet implementation class PetSitterApplyServlet
@@ -37,8 +38,10 @@ public class PetSitterApplyServlet extends HttpServlet {
 		
 		PrintWriter out = response.getWriter();
 		
+		User user = new User();
+		
 		// 선택된 radio value 값 변수에 저장시켜줘
-//		String userId = ;
+		String userId = request.getParameter("id");
 //		int grade = Integer.valueOf(request.getParameter("grade"));
 		String residence = request.getParameter("residence");
 		String job = request.getParameter("job");
@@ -51,7 +54,7 @@ public class PetSitterApplyServlet extends HttpServlet {
 		String isLicense = request.getParameter("certificate");
 //		String chkResume = request.getParameter("chkResume");
 
-//		// jsp에서 선택한 값 잘 넘어옴
+////		// jsp에서 선택한 값 잘 넘어옴!!!!!!!!!!!
 //		out.println("id : " + userId);
 ////		out.println("grade : " + grade);
 //		out.println(residence);
@@ -64,16 +67,29 @@ public class PetSitterApplyServlet extends HttpServlet {
 //		out.println(canSick);
 //		out.println(isLicense);
 ////		out.println(chkResume);
-//		
+		
+//		// jsp에서 선택한 값 잘 넘어옴!!!!!!!!!!!
+		System.out.println("id : " + userId);
+//		out.println("grade : " + grade);
+		System.out.println(residence);
+		System.out.println(job);
+		System.out.println(withFam);
+		System.out.println(withPet);
+		System.out.println(canLarge);
+		System.out.println(canMedic);
+		System.out.println(canOld);
+		System.out.println(canSick);
+		System.out.println(isLicense);
+//		out.println(chkResume);
+		
 		
 		HttpSession session = request.getSession(); // request객체가 session 객체를 만드는 메소드를 지니고 있다.
 		
-//		PetSitter p = new PetSitter(userId, residence, job, withFam, withPet, canLarge, canMedic, canOld, canSick, isLicense);
-		
-		PetSitter p = new PetSitter();
+		PetSitter p = new PetSitter(userId, residence, job, withFam, withPet, canLarge, canMedic, canOld, canSick, isLicense);
 		
 		// insert이기 때문에 int 값으로 받아줌
 		int result = new PetSitterService().applyPetSitter(p);
+		System.out.println(result);
 		
 		// 4. 받은 결과에 따라 성공/실패에 따른 페이지 내보내기
 		String page = "";	// 반환할 jsp의 경로(화면에 보여줄 view)를 저장할 String

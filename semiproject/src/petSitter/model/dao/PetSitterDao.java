@@ -5,7 +5,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 import static common.JDBCTemplate.*;
@@ -16,7 +18,7 @@ public class PetSitterDao {
 	
 	public PetSitterDao() {
 		String fileName = PetSitterDao.class.getResource("sql/petSitter/petSitter-query.properties").getPath();
-		
+		System.out.println(fileName);
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {
@@ -26,10 +28,15 @@ public class PetSitterDao {
 		}
 	}
 
+	/*
+	 *  펫시터 지원서 작성 dao
+	 */
 	public int applyPetSitter(Connection conn, PetSitter p) {
+		System.out.println("petSitter dao()1");
+
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+		System.out.println("petSitter dao()222");
 		String query = prop.getProperty("applyPetSitter");
 		
 		try {
@@ -80,8 +87,35 @@ public class PetSitterDao {
 	}
 
 	public ArrayList<PetSitter> selectList(Connection conn) {
+		// Statement로 한 번 해보기!
+		Statement stmt = null;
+		ResultSet rs = null;
 		
-		return null;
+		ArrayList<PetSitter> arr = null;
+		
+		String query = prop.getProperty("selectList");
+		
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(query);
+			
+			arr = new ArrayList<PetSitter>();	// ArrayList는 기본 생성자로 항상 객체 만들어서 초기화하자
+			
+			while(rs.next()) {
+				PetSitter p = new PetSitter(rs.getString("userId"),
+											rs.getString("residence"),
+											rs.getString("isLicense")
+										
+						);
+				arr.add(p);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(stmt);
+		}
+		return arr;
 	}
 
 }

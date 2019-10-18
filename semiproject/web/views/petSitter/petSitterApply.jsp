@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" session="true" 
+	import="user.model.vo.User"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,6 +24,7 @@
 	<div id="outer">
 		<form id="apply" action="<%=request.getContextPath()%>/petSitterApply.ap" method="post">
 		<h1>펫시터 지원서</h1><br><br>
+		<input type="hidden" name="id" value="<%=loginUser.getUserId()%>">
 		<textarea cols="80" rows="6" style="resize:none" name="textarea">본인은 아래의 [개인정보 수집 및 이용에 관한 동의]를 잘 읽어 보았으며, 최종적으로 지원서를 작성하는 경우 위 내용에 동의하는 것으로 인정합니다. *
 	1. 목적 : 지원자 개인 식별, 지원의사 확인 2. 항목 : 지원자 성명, 휴대폰번호 및 해당 신청서에서 수집된 정보 3. 보유기간 : 해당 지원자 모집 종료 후 1년간 보유, 이용됩니다. 4. 동의를 거부할 권리 및 동의 거부에 따른 불이익 : 지원자는 위 내용에 대해서 동의를 하지 않을 권리가 있으며 지원자가 개인정보의 삭제를 요청하는 경우 지체없이 이를 삭제합니다.
 	    </textarea><br>

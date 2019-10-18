@@ -1,6 +1,12 @@
 package petSitter.model.vo;
 
-public class PetSitter {
+import java.io.Serializable;
+
+public class PetSitter implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8781128373138778399L;
 	private String userId;
 	private int grade;
 	private String residence;
@@ -73,6 +79,13 @@ public class PetSitter {
 	public int getGrade() {
 		return grade;
 	}
+	public PetSitter(String userId, String residence, String isLicense) {
+		super();
+		this.userId = userId;
+		this.residence = residence;
+		this.isLicense = isLicense;
+	}
+
 	public void setGrade(int grade) {
 		this.grade = grade;
 	}

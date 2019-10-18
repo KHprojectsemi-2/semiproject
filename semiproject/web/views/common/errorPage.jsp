@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-ㄴㄴㄴ
+실패 페이지
 </body>
 </html>
