@@ -43,16 +43,16 @@ public class BoardListServlet extends HttpServlet {
 				int startPage;		
 		 		int endPage;			
 				
+		 		currentPage = 1;
+		 		
+		 		if(request.getParameter("currentPage") != null) {
+		 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		 		}
 		 		
 		 		limit = 5;
 	
 		 		maxPage = (int)((double)listCount/limit + 0.8);
 		 		
-		 		currentPage = maxPage;
-		 		
-		 		if(request.getParameter("currentPage") != null) {
-		 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		 		}
 		 		
 				startPage = (((int)((double)currentPage/limit + 0.8)) - 1) * limit + 1;
 		 		endPage = startPage + limit - 1;

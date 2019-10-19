@@ -56,4 +56,37 @@ public class UserService {
 		return result;
 
 	}
+	
+	
+	  //회원 정보수정 메소드
+		
+	public int updateUser(User user) {
+		Connection conn = getConnection();
+		int result = new UserDao().updateUser(conn, user);
+		
+		if (result>0)
+			commit(conn);
+		else
+			rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+	//회원 탈퇴
+	public int deleteUser(String userId) {
+		Connection conn = getConnection();
+		
+		int result = new UserDao().deleteUser(conn,userId);
+		
+		if(result>0) 
+			commit(conn);
+		else
+			rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+	
 }
