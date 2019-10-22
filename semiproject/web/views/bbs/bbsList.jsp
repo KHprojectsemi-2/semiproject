@@ -11,7 +11,7 @@
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
-%>      
+%> 
     
 <!DOCTYPE html>
 <html>
@@ -46,8 +46,7 @@
 </style>
 </head>
 <body>
-	<%@include file="../common/header.jsp" %>
-		<h2 align="center">게시판</h2>
+	<%@include file="../common/header.jsp" %>	<br><br>
 			<table align="center" id="listArea">
 				<tr>
 					<th width="100px">글번호</th>
@@ -56,7 +55,7 @@
 					<th width="100px">조회수</th>
 					<th width="150px">작성일</th>
 				</tr>
-				<% if(list.isEmpty()){ %>
+	<% if(list.isEmpty()){ %>
 				<tr>
 					<td colspan="6">조회된 리스트가 없습니다.</td>
 				</tr>
@@ -71,12 +70,12 @@
 							<td><%=b.getPoster_date() %></td>
 						</tr>
 					<%} %>
-				<%} %>
+				<%} %> --%>
 			</table>
-		</div>
+		</div> 
 		
-		<!-- 페이징 처리 시작 -->
-		<div class="pagingArea" align="center">
+<!-- 페이징 처리 시작 -->
+ 		<div class="pagingArea" align="center">
 			<!-- 맨 처음으로(<<) -->
 			<button onclick="location.href='<%=request.getContextPath() %>/list.bo?currentPage=1'"> << </button>
 			
@@ -106,7 +105,7 @@
 			<!-- 맨 끝으로(>>) -->
 			<button onclick="location.href='<%=request.getContextPath() %>/list.bo?currentPage=<%=maxPage %>'"> >> </button>
 			
-		</div>
+		</div>  
 		
 		<!-- 공지사항 때와 마찬가지로 검색 부분이 있다. 기능 구현은 생략 -->
 		<div class="searchArea" align="center">
@@ -122,7 +121,7 @@
 			
 			<!-- 공지사항 때와는 다르게 여기선 로그인을 한 사람만 게시글을 작성하게 하자 -->
 			<% if(loginUser != null){%>
-				<button onclick="location.href='views/bbs/Insertbbs.jsp'">글작성하기</button>
+				<button onclick="location.href='<%=root%>/views/bbs/Insertbbs.jsp'">글작성하기</button>
 			<%} %>
 			<!-- Insertbbs.jsp 만들기-->
 		</div>

@@ -48,10 +48,10 @@ public class bbsDtailServlet extends HttpServlet {
 			
 			
 			
-			request.getRequestDispatcher("views/bbs/bbsDetailView.jsp").forward(request, response);
+			request.getRequestDispatcher("<%=root%>/views/bbs/bbsDetailView.jsp").forward(request, response);
 		}else {
 			request.setAttribute("msg", "게사판 상세조회 실패!");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			request.getRequestDispatcher("<%=root%>/views/common/errorPage.jsp").forward(request, response);
 		}
 		
 	}

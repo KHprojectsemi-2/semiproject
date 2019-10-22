@@ -18,7 +18,7 @@ public class BbsService {
 		
 		Connection conn = getConnection();
 		
-		int listCount = new BbsDao().getListCount(conn);	
+		int listCnt = new BbsDao().getListCnt(conn);	
 		
 		close(conn);
 		

@@ -34,20 +34,20 @@ public class BbsDao {
 		}
 	}
 
-	public int getListCount(Connection conn) {
+	public int getListCnt(Connection conn) {
 		Statement stmt = null;
 		ResultSet rs = null;
 		
-		int listCount = 0;
+		int listCnt = 0;
 		
-		String query = prop.getProperty("getListCount");
+		String query = prop.getProperty("getListCnt");
 		
 		try {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(query);
 			
 			if(rs.next()) {
-				listCount=rs.getInt(1);	// 쿼리에서의 resultSet 컬럼 값(count(*))을 뽑아내서 int listCount에 담음
+				listCnt=rs.getInt(1);	// 쿼리에서의 resultSet 컬럼 값(count(*))을 뽑아내서 int listCount에 담음
 			}
 
 		} catch (SQLException e) {
@@ -56,7 +56,7 @@ public class BbsDao {
 			close(stmt);
 			close(rs);
 		}
-		return listCount;
+		return listCnt;
 	}
 
 	public ArrayList<Bbs> selectList(Connection conn, int currentPage, int limit) {
