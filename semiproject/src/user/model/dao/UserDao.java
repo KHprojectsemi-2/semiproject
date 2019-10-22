@@ -1,14 +1,17 @@
 package user.model.dao;
 
-import static common.JDBCTemplate.*;
+import static common.JDBCTemplate.close;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import user.model.vo.User;
@@ -187,5 +190,71 @@ public class UserDao {
 		
 		return result;
 	}
+
+
+	public ArrayList<User> selectAllUser(Connection conn) {
+
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		ArrayList<User> list = new ArrayList<User>();
+		String query = prop.getProperty("selectAllUser");
+		
+		try {
+			stmt = conn.createStatement();
+			
+			rs = stmt.executeQuery(query);
+			while(rs.next()) {
+				list.add(new User(rs.getString("userId"),
+						rs.getInt("userNo"),
+						rs.getString("userPwd"),
+						rs.getString("userName"),
+						rs.getString("userGender"),
+						rs.getString("userEmail"),
+						rs.getDate("userBirth"),
+						rs.getString("userPhone"),
+						rs.getString("userAddress"),
+						rs.getString("userImage"),
+						rs.getInt("reported"),
+						rs.getDate("joinDate"),
+						rs.getDate("latestDate"),
+						rs.getString("userStatus")
+						));	
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+			close(rs);
+		}
+		
+		return list;
+	}
+
+
+	public int idCheck(Connection conn, String userId) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("selectUser");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
+		return result;
+		
+	}
+
+
 
 }

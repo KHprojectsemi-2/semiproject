@@ -84,11 +84,13 @@ footer {
                               aria-haspopup="true" aria-expanded="false">로그아웃</button>
                            <div class="dropdown-menu" aria-labelledby="navbarDropdown"
                               style="padding: 12px 1px; width: 100%">
-                              <a class="dropdown-item" href="#"
-                                 style="padding: 12px 1px; width: 100%" style="align:left">마이페이지</a>
-                              <a class="dropdown-item" href="#" style="padding: 12px 1px;">내
-                                 매칭 현황</a> <a class="dropdown-item" href="#"
-                                 style="padding: 12px 1px;">내 문의 내역</a>
+                              <a class="dropdown-item" href="#" style="padding: 12px 1px; width: 100%" style="align:left">마이페이지</a>
+                              <a class="dropdown-item" href="#" style="padding: 12px 1px;">내 매칭 현황</a> 
+                              <a class="dropdown-item" href="#" style="padding: 12px 1px;">내 문의 내역</a>
+                           <%if(loginUser.getUserId().equals("admin")){ %>
+                              <a class="dropdown-item" href="<%=root%>/userSearch.li" style="padding: 12px 1px;">회원 조회</a>
+                              <!-- UserSearchServlet ㄱㄱ -->
+                           <%}%>
                            </div>
 
                         </li>
