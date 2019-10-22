@@ -50,6 +50,20 @@ public class UserJoinServlet extends HttpServlet {
 		String userEmail = request.getParameter("userEmail");
 		String userPhone = request.getParameter("userPhone");
 		String userAddress = request.getParameter("userAddress") +" "+request.getParameter("userAddress2");
+		///////
+		String petName = request.getParameter("petName");
+		String chkNeutral = request.getParameter("chkNeutral");
+		String petGender = request.getParameter("petGender");
+		String petSize = request.getParameter("petSize");
+		String petKind = request.getParameter("petKind");
+		String petAge = request.getParameter("petAge");
+		
+		
+		System.out.println("펫이름 : "+petName);
+		
+		if(petName!=null) {
+			
+		}
 		
 		System.out.println(userId+ userPwd +userName +userGender +userEmail+userbirth +userPhone +userAddress);
 		User user = new User(userId,userPwd,userName,userGender,userEmail,userbirth,userPhone,userAddress);

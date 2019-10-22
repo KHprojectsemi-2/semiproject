@@ -218,7 +218,7 @@ img:hover{
 					<td>
 						<div class="petInfo_div">
 							<label class="petInfo_lab">중성화</label> <input type="checkbox"
-								 name="chkNeutral" value="중성화" checked>&nbsp;&nbsp;&nbsp;&nbsp;
+								 name="chkNeutral" value="Y" checked>&nbsp;&nbsp;&nbsp;&nbsp;
 							<label>남 </label> <input type="radio" name="petGender"
 								value="M" checked>&nbsp;&nbsp; <label>여 </label> <input
 								type="radio"  name="petGender" value="W">
