@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<!-- 돌봄일지 확인 -->
+<!-- 견주가 돌봄일지 확인하는 페이지 -->
 <body>
 <%@include file = "../common/header.jsp" %>
 

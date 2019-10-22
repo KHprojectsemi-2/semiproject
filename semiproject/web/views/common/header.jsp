@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="user.model.vo.User"%>
+   pageEncoding="UTF-8" import="user.model.vo.User"%>
 <%
-	String root = request.getContextPath();
-	User loginUser = (User) session.getAttribute("loginUser");
-	out.print(loginUser);
+   String root = request.getContextPath();
+   User loginUser = (User) session.getAttribute("loginUser");
+   out.print(loginUser);
 %>
 <!doctype html>
 <html lang="ko">
@@ -11,7 +11,7 @@
 <!-- Required meta tags -->
 <meta charset="UTF-8">
 <meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>leopet || Home</title>
 <link rel="icon" href="<%=root%>/img/favicon.png">
 <!-- jquery plugins here-->
@@ -36,89 +36,89 @@
 
 <style>
 footer {
-	width: cover;
-	height: 900px;
-	!
-	important;
+   width: cover;
+   height: 900px;
+   !
+   important;
 }
 </style>
 </head>
 
 <body>
-	<%@include file="../../css/animate.jsp"%>
-	<%@include file="../../css/aos.jsp"%>
-	<%@include file="../../css/bootstrap.jsp"%>
-	<%@include file="../../css/datetime.jsp"%>
-	<%@include file="../../css/flaticon.jsp"%>
-	<%@include file="../../css/font_awesome.jsp"%>
-	<%@include file="../../css/magnific_popup.jsp"%>
-	<%@include file="../../css/nice_select.jsp"%>
-	<%@include file="../../css/owl_carousel.jsp"%>
-	<%@include file="../../css/style.jsp"%>
-	<%@include file="../../css/swiper.jsp"%>
-	<%@include file="../../css/themify_icons.jsp"%>
-	<!--::header part start::-->
-	<header class="header_area">
-		<div class="sub_header">
-			<div class="container">
-				<div class="row align-items-center">
-					<div class="col-4 col-md-4 col-xl-6">
-						<div id="logo">
-							<a href="<%=root%>/index.jsp"><img
-								src="<%=root%>/img/pett.png" width="400px" height="125px"
-								alt="" title="" /></a>
+   <%@include file="../../css/animate.jsp"%>
+   <%@include file="../../css/aos.jsp"%>
+   <%@include file="../../css/bootstrap.jsp"%>
+   <%@include file="../../css/datetime.jsp"%>
+   <%@include file="../../css/flaticon.jsp"%>
+   <%@include file="../../css/font_awesome.jsp"%>
+   <%@include file="../../css/magnific_popup.jsp"%>
+   <%@include file="../../css/nice_select.jsp"%>
+   <%@include file="../../css/owl_carousel.jsp"%>
+   <%@include file="../../css/style.jsp"%>
+   <%@include file="../../css/swiper.jsp"%>
+   <%@include file="../../css/themify_icons.jsp"%>
+   <!--::header part start::-->
+   <header class="header_area">
+      <div class="sub_header">
+         <div class="container">
+            <div class="row align-items-center">
+               <div class="col-4 col-md-4 col-xl-6">
+                  <div id="logo">
+                     <a href="<%=root%>/index.jsp"><img
+                        src="<%=root%>/img/pett.png" width="400px" height="125px"
+                        alt="" title="" /></a>
 
-						</div>
-					</div>
-					<div class="col-8 col-md-8 col-xl-6">
-						<div class="sub_header_social_icon float-right">
+                  </div>
+               </div>
+               <div class="col-8 col-md-8 col-xl-6">
+                  <div class="sub_header_social_icon float-right">
 
-							<!-- <a href="#"><i class="flaticon-phone"></i>+02 213 - 256 (365)</a> -->
-							<%
-								if (loginUser != null) {
-							%>
-							<ul>
-								<li class="nav-item dropdown">
-									<button onclick="logout()"
-										class="btn_1 d-none d-md-inline-block" data-toggle="dropdown"
-										aria-haspopup="true" aria-expanded="false">로그아웃</button>
-									<div class="dropdown-menu" aria-labelledby="navbarDropdown"
-										style="padding: 12px 1px; width: 100%">
-										<a class="dropdown-item" href="#"
-											style="padding: 12px 1px; width: 100%" style="align:left">마이페이지</a>
-										<a class="dropdown-item" href="#" style="padding: 12px 1px;">내
-											매칭 현황</a> <a class="dropdown-item" href="#"
-											style="padding: 12px 1px;">내 문의 내역</a>
-									</div>
+                     <!-- <a href="#"><i class="flaticon-phone"></i>+02 213 - 256 (365)</a> -->
+                     <%
+                        if (loginUser != null) {
+                     %>
+                     <ul>
+                        <li class="nav-item dropdown">
+                           <button onclick="logout()"
+                              class="btn_1 d-none d-md-inline-block" data-toggle="dropdown"
+                              aria-haspopup="true" aria-expanded="false">로그아웃</button>
+                           <div class="dropdown-menu" aria-labelledby="navbarDropdown"
+                              style="padding: 12px 1px; width: 100%">
+                              <a class="dropdown-item" href="#"
+                                 style="padding: 12px 1px; width: 100%" style="align:left">마이페이지</a>
+                              <a class="dropdown-item" href="#" style="padding: 12px 1px;">내
+                                 매칭 현황</a> <a class="dropdown-item" href="#"
+                                 style="padding: 12px 1px;">내 문의 내역</a>
+                           </div>
 
-								</li>
-							</ul>
+                        </li>
+                     </ul>
 
 
-							<%
-								} else {
-							%>
-							<a href="<%=root%>/views/user/LoginPage.jsp"
-								class="btn_1 d-none d-md-inline-block">로그인</a>
-							<%
-								}
-							%>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="main_menu">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
-						<nav class="navbar navbar-expand-lg navbar-light">
-							<button class="navbar-toggler" type="button"
-								data-toggle="collapse" data-target="#navbarSupportedContent"
-								aria-controls="navbarSupportedContent" aria-expanded="false"
-								aria-label="Toggle navigation">
-								<i class="ti-menu"></i>
-							</button>
+                     <%
+                        } else {
+                     %>
+                     <a href="<%=root%>/views/user/LoginPage.jsp"
+                        class="btn_1 d-none d-md-inline-block">로그인</a>
+                     <%
+                        }
+                     %>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="main_menu">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-12">
+                  <nav class="navbar navbar-expand-lg navbar-light">
+                     <button class="navbar-toggler" type="button"
+                        data-toggle="collapse" data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <i class="ti-menu"></i>
+                     </button>
 
 							<div class="collapse navbar-collapse justify-content-center"
 								id="navbarSupportedContent">
@@ -128,7 +128,7 @@ footer {
 									<li class="nav-item"><a href="<%=root%>/index.jsp"
 										class="nav-link">소개</a></li>
 									<li class="nav-item"><a
-										href="<%=root%>/views/diary/diaryView.jsp" class="nav-link">돌봄일지</a>
+										href="<%=root%>/views/diary/insertDiary.jsp" class="nav-link">돌봄일지</a>
 									</li>
 									<li class="nav-item"><a
 										href="<%=root%>/views/petSitter/petSitterApply.jsp"
