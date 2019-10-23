@@ -1,11 +1,17 @@
 package user.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.util.GregorianCalendar;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import user.model.service.UserService;
+import user.model.vo.User;
 
 
 @WebServlet("/findId.me")
@@ -24,10 +30,19 @@ public class FindIdServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		request.setCharacterEncoding("UTF-8");
+		
 		String userName = request.getParameter("userName");
 		String userEmail = request.getParameter("userEmail");
+		int year = Integer.valueOf(request.getParameter("birth_year"));
+		int month = (Integer.valueOf(request.getParameter("birth_month"))) - 1;
+		int day = Integer.valueOf(request.getParameter("birth_day"));
+		GregorianCalendar date = new GregorianCalendar(year,month,day);
+		Date userBirth = new Date(date.getTimeInMillis());
 		
-		User user = new User(userName,userEmail);
+		User user = new User(userName,userEmail,userBirth);
+		
+		String id = new UserService().findUserId(user);
 	}
 
 	/**

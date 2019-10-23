@@ -10,7 +10,6 @@
 
 </head>
 <body>
-
 	<%@include file = "views/common/header.jsp" %>
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

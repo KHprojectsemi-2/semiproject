@@ -24,10 +24,9 @@ public class UserDao {
 	private Properties prop = new Properties();
 	
 	public UserDao() {
-		// 항상 member-query.properties 값을 불러 올 수 있도록
-		// 기본 생성자 안에서 properties 파일을 불러오는 작업을 하자
+
 		String fileName = UserDao.class.getResource("/sql/user/user-query.properties").getPath();
-		System.out.println(UserDao.class.getResource("/sql/user/user-query.properties").getPath());
+
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {
@@ -63,6 +62,7 @@ public class UserDao {
 									rs.getString("USEREMAIL"),
 									rs.getDate("USERBIRTH"),
 									rs.getString("USERPHONE"),
+									rs.getString("USERPOSTCODE"),
 									rs.getString("USERADDRESS"),
 									rs.getString("USERIMAGE"),
 									rs.getInt("REPORTED"),
@@ -155,7 +155,8 @@ public class UserDao {
 			pstmt.setString(5, user.getUserEmail());
 			pstmt.setDate(6, user.getUserBirth());
 			pstmt.setString(7, user.getUserPhone());
-			pstmt.setString(8, user.getUserAddress());
+			pstmt.setString(8, user.getUserPostcode());
+			pstmt.setString(9, user.getUserAddress());
 			
 			result = pstmt.executeUpdate();
 
@@ -213,6 +214,7 @@ public class UserDao {
 						rs.getString("userEmail"),
 						rs.getDate("userBirth"),
 						rs.getString("userPhone"),
+						rs.getString("userPostcode"),
 						rs.getString("userAddress"),
 						rs.getString("userImage"),
 						rs.getInt("reported"),
@@ -253,6 +255,53 @@ public class UserDao {
 
 		return result;
 		
+	}
+
+
+	public User selectUser(Connection conn, int userNo) {
+
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		User user = null;
+		
+		String query = prop.getProperty("selectUserNo");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, userNo);	
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {	
+				user = new User(rs.getString(1),
+								rs.getInt(2),
+								rs.getString(3),
+								rs.getString(4),
+								rs.getString(5),
+								rs.getString(6),
+								rs.getDate(7),
+								rs.getString(8),
+								rs.getString(9),
+								rs.getString(10),
+								rs.getString(11),
+								rs.getInt(12),
+								rs.getDate(13),
+								rs.getDate(14),
+								rs.getString(15));
+				
+				System.out.println("DAO에서 생성된 유저 :" +user);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+
+		return user;
+	
 	}
 
 

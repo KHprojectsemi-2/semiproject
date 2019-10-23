@@ -53,11 +53,12 @@ public class UserJoinServlet extends HttpServlet {
 		Date userbirth = new Date(date.getTimeInMillis());
 		String userEmail = request.getParameter("userEmail");
 		String userPhone = request.getParameter("userPhone");
-		String userAddress = request.getParameter("postcode") +" "+request.getParameter("userAddress");
+		String userPostcode = request.getParameter("postcode");
+		String userAddress = request.getParameter("userAddress");
 		
 		///////
 
-		User user = new User(userId,userPwd,userName,userGender,userEmail,userbirth,userPhone,userAddress);
+		User user = new User(userId,userPwd,userName,userGender,userEmail,userbirth,userPhone,userPostcode,userAddress);
 		System.out.println(user);
 		int result = new UserService().insertUser(user);
 		

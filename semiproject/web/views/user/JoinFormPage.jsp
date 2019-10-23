@@ -1,15 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	int petcount = 1;
+	
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>LoginForm</title>
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- 우편번호 관련 -->
+
+<!-- 이메일 인증 관련 EmailJs -->
+
+<script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init("user_ZRwz4I6lOX6VqMRLja9yl");
+   })();
+</script>
+
+<!-- ------------------ -->
 <style>
 body {
 	margin: 0;
@@ -36,7 +47,7 @@ input {
 	margin: auto;
 	margin-top: 120px;
 	max-width: 700px;
-	height: 500px;
+	height: 550px;
 	border: 1px solid #9C9C9C;
 }
 .petForm{
@@ -170,7 +181,14 @@ img:hover{
 		<div id="d_join">
 			<label class="l_join">이메일: </label>
 			<input type="email" name="userEmail" required  placeholder="example@co.kr">
+			<input type="button" id="emailCheck" class="btn btn-info btn-md" value="인증받기">
+				
 		</div>
+		</td>
+		</tr>
+		<tr>
+		<td id="codeInput">
+
 		</td>
 		</tr>
 		<tr>
@@ -264,7 +282,10 @@ img:hover{
 		<p align="center">
 		</p>	
 	<script>
-	var count=0;
+	var count=0; // 펫 추가 카운트
+	var sendCode=false; // 인증 번호 발송 확인용
+	var emailCode=0;		// 인증 번호
+	
 	var intro = $("<h2>").text("당신의 펫을 추가해보세요").css({"text-align":"center"});
 	var plusBtn = $("<button>").text("+").attr({"class":"pet_button plus","type":"button","onclick":"plus()"});
 	var minusBtn = $("<button>").text("-").attr({"class":"pet_button minus","type":"button","onclick":"minus()"})
@@ -377,20 +398,6 @@ img:hover{
 	    }
 
 	    
-		//여기 부분은 Ajax 예제를 다뤄본 이후 작성해보자!
-		// 중복체크라는 버튼을 Ajax로 구현
-		
-		// 아이디 중복시 false, 아이디 사용 가능시 true
-			var isUsable = false;
-			
-			// 혹시라도, 다른 jsp페이지를 include하고 있는
-			// jsp페이지에서 id를 만들어 접근하고자 할 때
-			// 중복이 예상된다면
-			// 선택자를 통해 해당 태그 객체를 선택하는 것이 편할 수 있다. (선택자를 활용할 수 있다는 가정하에..)
-			
-			// ex) 태그에 userid라는 id를 줄려고 했는데
-			//		include하고 있는 menubar.jsp페이지에서 이미 userId라는 id를 쓰는 태그가 있다.
-			//		그래서 선택자로 userId를 입력하는 input태그를 선택
 			$("#idCheck").click(function(){
 				
 				var userId = $("#userJoin_Form input[name='userId']");
@@ -420,15 +427,64 @@ img:hover{
 					// IdCheckServlet 만들러 ㄱㄱ씽
 				}
 			});
+			
+			// 인증번호 만들기
+			function makeRandom(){
+				var code="";
+				for(var i=0;i<6;i++)
+				{
+					code += Math.floor(Math.random() * 10)+"";
+				}
+				return code;
+			};
+			
+			// 이메일 인증번호 전송
+			$("#emailCheck").click(function(){
+				var userId = $("input[name=userId]").val();
+				var userEmail = $("input[name=userEmail]").val();
+				emailCode = makeRandom();
+		/* 		var template_params = {
+						   "userEmail": "rukanick@naver.com",
+						   "reply_to": "reply_to_value",
+						   "pettrase": "펫트라슈",
+						   "userName": "개똥이",
+						   "code": "194939"
+						}
 
-	</script>
+						var service_id = "Patrasche";
+						var template_id = "template_loLSxR35";
+						emailjs.send(service_id, template_id, template_params); */
+						
+						
+				alert(userId + "님에게 " +userEmail+"로 인증번호"+ emailCode + "가 발송되었습니다.");
+				
+				if(!sendCode)
+				{
+					var cDiv = $("<div>").attr({"id":"d_join"});
+					cDiv.append($("<label>").attr({"class":"l_join"}));
+					cDiv.append($("<input>").attr({"type":"text","id":"emailCode","required":true,"placeholder":"인증번호 입력"}));
+					cDiv.append($("<label>").attr({"class":"l_join","name":"chkCode"}));
+					$("#codeInput").append(cDiv)
+					sendCode=true;
+				}
+			});
+			
+			// 인증번호 입력. 동적으로 생성한 태그에 이벤트 적용
+			$(document).on("focusout","#emailCode",function(){ 
+				if(emailCode == ($("#emailCode").val())){
+					$("label[name=chkCode]").css({"color":"lightgreen","text-align":"center"}).text("일치!");
+					$("#emailCode").attr({"readonly":true});
+				}else{
+					$("label[name=chkCode]").css({"color":"red","text-align":"center"}).text("불일치!");
+				}
+			});
 
+
+		</script>
 
 	<br>
 	<br>
 	<br>
-
-
 	<br>
 	<br>
 	<br>

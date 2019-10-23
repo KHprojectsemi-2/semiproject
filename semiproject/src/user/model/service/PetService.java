@@ -6,6 +6,7 @@ import static common.JDBCTemplate.getConnection;
 import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import user.model.dao.PetDao;
 import user.model.vo.Pet;
@@ -32,6 +33,17 @@ public class PetService {
 		
 		return result;
 
+	}
+
+	public ArrayList<Pet> selectPet(String userId) {
+	      
+		Connection conn = getConnection();
+	    
+		ArrayList<Pet> pal = new PetDao().selectPet(conn,userId);
+	      
+		close(conn);
+	    
+		return pal;
 	}
 
 }

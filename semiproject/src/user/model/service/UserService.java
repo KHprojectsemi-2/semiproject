@@ -111,5 +111,21 @@ public class UserService {
 		
 		return result;
 	}
+
+	public User selectUser(int userNo) {
+
+		Connection conn = getConnection();
+		
+		User user = new UserDao().selectUser(conn,userNo);
+		
+		close(conn);
+		
+		return user;
+	}
+
+	public String findUserId(User user) {
+
+		return null;
+	}
 	
 }

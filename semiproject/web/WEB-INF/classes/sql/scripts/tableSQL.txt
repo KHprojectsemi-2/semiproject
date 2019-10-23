@@ -79,13 +79,8 @@ CREATE TABLE PET (
    petKind   VARCHAR2(20)      NULL,
    petGender   VARCHAR(1)      NOT NULL,
    isNeutral   VARCHAR(1)   DEFAULT 'N'   NULL,
-   petAge   NUMBER      NOT NULL,
-   petMatch VARCHAR2(1) DEFAULT 'N' NOT NULL
+   petAge   NUMBER      NOT NULL
 );
-
-insert into PET values(SEQ_PETNO.NEXTVAL, 'user1','미미','소형',null,'시츄','M','Y',2,'N');
-insert into pet values(SEQ_PETNO.NEXTVAL, 'user1','또또','소형',null,'말티즈','F','N',1,'N');
-
 
 CREATE TABLE DIARY (
    diaryNo   NUMBER      NOT NULL,
