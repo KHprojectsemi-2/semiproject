@@ -42,6 +42,18 @@ public class User implements Serializable{
 	}
 
 
+	public User(String userId, String userName, String userEmail, String userPhone, String userPostcode,
+			String userAddress, String userImage) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.userEmail = userEmail;
+		this.userPhone = userPhone;
+		this.userPostcode = userPostcode;
+		this.userAddress = userAddress;
+		this.userImage = userImage;
+	}
+
 	// 아이디 찾기할 때 필요한 생성자
 	public User(String userName, String userEmail, Date userBirth) {
 		super();

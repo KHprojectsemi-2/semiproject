@@ -1,27 +1,28 @@
 package user.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import user.model.service.UserService;
+import user.model.service.PetService;
+import user.model.vo.Pet;
 
 /**
- * Servlet implementation class DeleteUserServlet
+ * Servlet implementation class SelectPetServlet
  */
-@WebServlet("/deletee.me")
-public class DeleteUserServlet extends HttpServlet {
+@WebServlet("/select.me")
+public class SelectPetServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteUserServlet() {
+    public SelectPetServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,23 +31,15 @@ public class DeleteUserServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String userId = request.getParameter("userId");
 		
-		int result = new UserService().deleteUser(userId);
 		
-		String page="";
-		if(result > 0) {
-			request.getSession().invalidate();
-			page = "index.jsp";
-			request.setAttribute("msg", "회원 탈퇴 성공");
-		}else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "회원 탈퇴 실패");
-		}
-		System.out.println("되는거냐");
-		RequestDispatcher view = request.getRequestDispatcher(page);
-		view.forward(request,response);
-		
+		 ArrayList<Pet> pal = new PetService().selectPet(userId); 
+		 
+		 request.setAttribute("pal", pal);
+		 
+		 request.getRequestDispatcher("views/myPage/myPage.jsp").forward(request, response);
 	}
 
 	/**
