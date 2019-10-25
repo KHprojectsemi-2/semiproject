@@ -51,7 +51,7 @@ public class UserJoinServlet extends HttpServlet {
 		String userPhone = request.getParameter("userPhone");
 		String userAddress = request.getParameter("userAddress") +" "+request.getParameter("userAddress2");
 		
-		System.out.println(userId+ userPwd +userName +userGender +userEmail+userbirth +userPhone +userAddress);
+		//System.out.println(userId+ userPwd +userName +userGender +userEmail+userbirth +userPhone +userAddress);
 		User user = new User(userId,userPwd,userName,userGender,userEmail,userbirth,userPhone,userAddress);
 
 		int result = new UserService().insertUser(user);

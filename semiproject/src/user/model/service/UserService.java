@@ -30,7 +30,7 @@ public class UserService {
 		int result = dao.updateLoginDate(conn,user);
 		if(result>0)
 		{
-			System.out.println("로그인 확인, 최근 접속 날짜 업데이트");	
+			/* System.out.println("로그인 확인, 최근 접속 날짜 업데이트"); */
 			commit(conn);
 		}
 		else {

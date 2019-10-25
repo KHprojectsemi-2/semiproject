@@ -45,7 +45,7 @@ public class UserLoginServlet extends HttpServlet {
 		
 		User user = new User(userId,userPwd);
 		
-		System.out.println(user);
+		/* System.out.println(user); */
 		 User loginUser = new UserService().loginUser(user);
 
 		 response.setContentType("text/html;charset=utf-8");

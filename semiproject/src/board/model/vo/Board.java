@@ -11,7 +11,7 @@ public class Board implements Serializable{
 	
 	private int boardNo;
 	private String userId;
-	private String boardType;
+	private String boardType;	//1 : FAQ	2 : 문의하기	3: 신고하기
 	private String title;
 	private String content;
 	private Date createDate;

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="board.model.vo.*, java.util.ArrayList"%>
+    pageEncoding="UTF-8" import="board.model.vo.*, java.util.ArrayList, user.model.vo.*"%>
 
 <%
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
@@ -22,25 +22,27 @@
  -->
 <style>
 	#FAQ_Outer{
-		width : 1000px;
+		width : 1200px;
 		height : 500px;
 		margin-right : auto;
 		margin-left : auto;
 	}
 	
 	#Menu_List {
-		width: 1000px;
+		width: 1200px;
 		text-align: center;
+		
 	}
 	
 	.sc_Menu{
     	display : inline-block;
-    	border : 1px solid black;
+    	border: 1px solid #9C9C9C;
         width: 120px;
 		height: 30px;
        	text-align : center;
        	margin-right : 40px;
 		margin-left : 40px;
+		padding : 0 !important;
     }
    
     .sc_Menu:hover{
@@ -51,7 +53,7 @@
 		margin-right : auto;
 		margin-left : auto;
 		text-align : center;
-		width : 1000px;
+		width : 1200px;
 		border : 1px solid black;
 		
 	}
@@ -60,7 +62,7 @@
 	}
 	
 	#content{
-		height : 30px;
+		height : 50px;
 	}
 	
 	tr#content:hover{
@@ -76,11 +78,7 @@
 		height : 250px;
    	}   */
    	
-   	#tableArea{
-   		border : 1px solid red;
-   	}
 </style>
-
 </head>
 <body>
 	<%@include file = "../common/header.jsp" %>
@@ -88,20 +86,19 @@
 
 	<div id = "FAQ_Outer">
 		<div id="Menu_List" class = "text-center">
-			<div id="FAQ" class="sc_Menu btn btn-default">FAQ</div>
-			<div id="question" class="sc_Menu btn btn-default">문의하기</div>
-			<div id="report" class="sc_Menu btn btn-default">신고하기</div>
+			<div id="FAQ" class="sc_Menu btn btn-info btn-md">FAQ</div>
+			<div id="question" class="sc_Menu btn btn-info btn-md">문의하기</div>
+			<div id="report" class="sc_Menu btn btn-info btn-md">신고하기</div>
 		</div>
 		<br>
 		
 		<div id = "tableArea">
 			<table id = "sc_List">
 			 	<tr class = "list">
-			 		<th width = "100px">글번호</th>
+			 		<th width = "100px">No.</th>
 			 		<th width = "550px">내용</th>
 			 		<th width = "250px">등록날짜</th>
-			 		<th width = "100px">작성자</th>
-			 		
+			 		<th width = "200px">작성자</th>			 		
 				</tr>
 				<%for(Board b : list){ %>
 					<tr id= "content">
@@ -121,46 +118,50 @@
 								<br><br><br><br>
 								
 							</div>
-						</td>								
+						</td>
 					</tr>
 				<%} %>	
 			 </table>
 		 </div>
-	</div>	
+	</div>
+
+	<input type="hidden" id="login" value=<%=loginUser %>>
+	<br><br><br>
+	
 	
 	<div class = "pagingArea" align = "center">
 		<%if(currentPage <= 1){ %>
 			<button onclick = "firstPage();"> << </button>
 		<%}else{ %>
-			<button onclick = "location.href = '<%=request.getContextPath()%>/blist.bo?currentPage=1'"> << </button>
+			<button onclick = "location.href = '<%=request.getContextPath()%>/FAQList.bo?currentPage=1'"> << </button>
 		<%} %>	
 	
 		<%if(currentPage <= 1){ %>
 			<button disabled> < </button>
 		<%}else{ %>
-			<button onclick = "location.href = '<%=request.getContextPath()%>/blist.bo?currentPage=<%=currentPage-1%>'"> < </button>
+			<button onclick = "location.href = '<%=request.getContextPath()%>/FAQList.bo?currentPage=<%=currentPage-1%>'"> < </button>
 		<%} %>
 
 		<%for(int p = startPage ; p <= endPage ; p++){ %>
 			<%if(p == currentPage){ %>
 				<button disabled><%=p %></button>
 			<%}else{ %>
-				<button onclick = "location.href = '<%=request.getContextPath()%>/blist.bo?currentPage=<%=p%>'"><%=p %></button>
+				<button onclick = "location.href = '<%=request.getContextPath()%>/FAQList.bo?currentPage=<%=p%>'"><%=p %></button>
 			<%} %>
 		<%} %>
 
 		<%if(currentPage >= maxPage){ %>
 			<button disabled> > </button>
 		<%}else{ %>
-			<button onclick = "location.href = '<%=request.getContextPath()%>/blist.bo?currentPage=<%=currentPage+1 %>'"> > </button>
+			<button onclick = "location.href = '<%=request.getContextPath()%>/FAQList.bo?currentPage=<%=currentPage+1 %>'"> > </button>
 		<%} %>
 		
 		<%if(currentPage >= maxPage){ %>
 			<button onclick = "lastPage();"> >> </button>
 		<%}else{ %>
-			<button onclick = "location.href = '<%=request.getContextPath()%>/blist.bo?currentPage=<%=maxPage%>'"> >> </button>
+			<button onclick = "location.href = '<%=request.getContextPath()%>/FAQList.bo?currentPage=<%=maxPage%>'"> >> </button>
 		<%} %>	
-	
+		
 	</div>	
 
 	<br><br><br><br><br>
@@ -169,15 +170,29 @@
 	<script>
 	
 		$("#FAQ").click(function(){
-			location.href = '<%=request.getContextPath()%>/blist.bo';
+			location.href = '<%=request.getContextPath()%>/FAQList.bo';
 		});
 		
 		$("#question").click(function(){
-			location.href = '<%=request.getContextPath()%>/views/serviceCenter/question.jsp';
+			var loginUser = $("#login").val();
+			
+			if(loginUser == 'null'){			
+				alert("로그인이 필요합니다.");
+				location.href = '<%=request.getContextPath()%>/views/user/LoginPage.jsp';
+			}else{
+				location.href = '<%=request.getContextPath()%>/views/serviceCenter/question.jsp';
+			}
 		});
 		
 		$("#report").click(function(){
-			location.href = '<%=request.getContextPath()%>/views/serviceCenter/report.jsp';
+			var loginUser = $("#login").val();
+			
+			if(loginUser == 'null'){
+				alert("로그인이 필요합니다.");
+				location.href = '<%=request.getContextPath()%>/views/user/LoginPage.jsp';			
+			}else{
+				location.href = '<%=request.getContextPath()%>/views/serviceCenter/report.jsp';
+			}		
 		});
 		
 		$(function() {
@@ -187,7 +202,6 @@
 				var hide = $(this).parents().next("tr");	// 숨겨져있는 객체
 
 				if ($(hide).hasClass('hide')) {
-					
 					$(show).removeClass('show').addClass('hide');	// 열려있는게 닫히고
 					$(hide).addClass('show').removeClass('hide');	// 클릭한게 열린다
 					 

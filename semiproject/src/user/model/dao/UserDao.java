@@ -24,7 +24,7 @@ public class UserDao {
 		// 항상 member-query.properties 값을 불러 올 수 있도록
 		// 기본 생성자 안에서 properties 파일을 불러오는 작업을 하자
 		String fileName = UserDao.class.getResource("/sql/user/user-query.properties").getPath();
-		System.out.println(UserDao.class.getResource("/sql/user/user-query.properties").getPath());
+		//System.out.println(UserDao.class.getResource("/sql/user/user-query.properties").getPath());
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {

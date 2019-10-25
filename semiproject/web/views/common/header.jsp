@@ -70,7 +70,7 @@ footer {
 
                   </div>
                </div>
-               <div class="col-8 col-md-8 col-xl-6">
+               <div class="col-8 col-md-8 col-xl-6" >
                   <div class="sub_header_social_icon float-right">
 
                      <!-- <a href="#"><i class="flaticon-phone"></i>+02 213 - 256 (365)</a> -->
@@ -81,7 +81,7 @@ footer {
                         <li class="nav-item dropdown">
                            <button onclick="logout()"
                               class="btn_1 d-none d-md-inline-block" data-toggle="dropdown"
-                              aria-haspopup="true" aria-expanded="false">로그아웃</button>
+                              aria-haspopup="true" aria-expanded="false" style = "width : 122px; height : 50px; !important">로그아웃</button>
                            <div class="dropdown-menu" aria-labelledby="navbarDropdown"
                               style="padding: 12px 1px; width: 100%">
                               <a class="dropdown-item" href="#"
@@ -93,12 +93,11 @@ footer {
                         </li>
                      </ul>
 
-
                      <%
                         } else {
                      %>
                      <a href="<%=root%>/views/user/LoginPage.jsp"
-                        class="btn_1 d-none d-md-inline-block">로그인</a>
+                        class="btn_1 d-none d-md-inline-block" style = "width : 122px; height : 50px; text-align : center; !important">로그인</a>
                      <%
                         }
                      %>
@@ -144,8 +143,14 @@ footer {
                            <li class="nav-item"><a   href="<%=root%>/views/bbs/bbsList.jsp" class="nav-link">커뮤니티</a>
                            
                            </li>
-                           <li class="nav-item"><a
-                              href="<%=root%>/blist.bo" class="nav-link">고객센터</a>
+                           <li class="nav-item">
+                          	 <%if(loginUser == null){ %>
+                          		<a href="<%=root%>/FAQList.bo" class="nav-link">고객센터</a>
+                          	 <%}else if(loginUser.getUserId().equals("admin")){ %>
+                          		<a href="<%=root%>/AdminFAQList.bo" class="nav-link">고객센터 관리</a>
+                        	 <%}else{ %>
+                        	 	<a href="<%=root%>/FAQList.bo" class="nav-link">고객센터</a>
+                        	 <%} %>
                            </li>
                         </ul>
                      </div>
