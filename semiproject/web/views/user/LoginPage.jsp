@@ -8,8 +8,8 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>LoginPage</title>
 </head>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <style>
 body {
 	margin: 0;
@@ -53,12 +53,12 @@ body {
 							<div class="form-group">
 								<label for="username" class="text-info">ID:</label><br>
 								<input type="text" name="userId" id="userId"
-									class="form-control">
+									class="form-control" required>
 							</div>
 							<div class="form-group">
 								<label for="password" class="text-info">PASSWORD:</label><br>
-								<input type="text" name="userPwd" id="userPwd"
-									class="form-control">
+								<input type="password" name="userPwd" id="userPwd"
+									class="form-control" required>
 									
 							</div>
 							<div class="form-group">
@@ -74,7 +74,10 @@ body {
 							<div id="register-link" class="text-right">
 								<a href="<%=root %>/views/user/FindIdPage.jsp" class="text-info" >아이디를 잊으셨나요?</a>
 							</div>
-
+							<div class="form-group" style="margin-top:60px">
+							<a id="kakao-login-btn"></a>
+							<a href="http://developers.kakao.com/logout"></a>
+							</div>
 						</form>
 					</div>
 				</div>
@@ -87,6 +90,48 @@ body {
 			$("#userId").focus();
 			$('html,body').animate({scrollTop : offset.top-300},400);
 		});
+		 
+		// 계속 자동 로그인될 시 https://accounts.kakao.com/weblogin/account/info에서 로그아웃 하고 하자
+		
+	    // 사용할 앱의 JavaScript 키를 설정해 주세요.
+	    Kakao.init('f01271f22ed5c9e5cab931b076daa5ce');  //여기서 아까 발급받은 키 중 javascript키를 사용해준다.
+	    // 카카오 로그인 버튼을 생성합니다.
+	    Kakao.Auth.createLoginButton({
+	     container: '#kakao-login-btn',
+	     success: function(authObj) {
+	      
+	      // 로그인 성공시, API를 호출합니다.
+	      Kakao.API.request({
+	       url: '/v1/user/me',
+	       success: function(res) {
+	        console.log(res);
+
+	        var userID = res.id;      //유저의 카카오톡 고유 id
+	        var userEmail = res.kaccount_email;   //유저의 이메일
+	        var userName = res.properties.nickname; //유저가 등록한 별명
+	        
+	        console.log(userID);
+	        console.log(userEmail);
+	        console.log(userName);
+	 
+
+	       // User user= new User(userID,userName,userEmail);
+	       // request.setAttribute("kakaoUser",user);
+	       location.replace("JoinFormPage.jsp?&kakao_email="+userEmail+"&kakao_name="+userName);
+
+	       },
+	       fail: function(error) {
+	        alert(JSON.stringify(error));
+	       }
+	      });
+	     },
+	     fail: function(err) {
+	      alert(JSON.stringify(err));
+	     }
+	    });
+
+	  
+	    
 	</script>
 
 	<br>

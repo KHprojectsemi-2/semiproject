@@ -26,24 +26,39 @@
 	<form action="<%=request.getContextPath()%>/insertDiary.id" method="post">
 	<h1>돌봄일지</h1>
 	<hr>
-	<h4>방문 날짜</h4>
-	<h4>반려 동물 정보</h4>
+	<h4 class="text-info">방문 날짜</h4>
+	<h4 class="text-info">반려 동물 정보</h4>
 	<hr>
-	<h4>돌봄 리스트</h4>
-	<input type="checkbox" name="list1" id="isToilet" value="배변확인">
+	<h4 class="text-info">돌봄 리스트</h4>
+ 	<input type="checkbox" name="list1" id="isToilet" value="배변확인">
 	<label>배변 확인</label><br>
 	<input type="checkbox" name="list2" id="isWalk" value="산책확인">
 	<label>산책 확인</label><br>
 	<input type="checkbox" name="list3" id="isMedic" value="투약확인">
 	<label>투약 확인</label><br>
 	<input type="checkbox" name="list4" id="chkNeeds" value="요청사항확인">
-	<label>요청사항 확인</label><br>
+	<label>요청사항 확인</label><br> 
+	
+<!-- 	<label for="isToilet">배변 확인</label>
+	<input type="text" id="isToilet" name="isToilet"><br>
+	<label for="isWalk">산책 확인</label>
+	<input type="text" id="isToilet" name="isWalk"><br>
+	<label for="isMedic">투약 확인</label>
+	<input type="text" id="isToilet" name="isMedic"><br>
+	<label for="chkNeeds">요청사항 확인</label>
+	<input type="text" id="isToilet" name="chkNeeds"> -->
+	
 	<hr>
-	<h4>돌봄 후기</h4>
-	<textarea cols="45" rows="6" style="resize:none" name="textarea" id="review">
+	
+	
+	
+	
+	
+	<h4 class="text-info">돌봄 후기</h4>
+	<textarea cols="45" rows="6" style="resize:none" name="review" id="review">
     </textarea><br>
     <hr>
-    <h4>돌봄 사진</h4>
+    <h4 class="text-info">돌봄 사진</h4>
     <div id="contentImgArea">
     	<img id="contentImg" width="220" height="200">
     </div>
@@ -54,6 +69,18 @@
 	</div>
 	
 	<script>
+	
+/* 	function(){
+		$(document).ready(function() {
+	        $('#isToilet').val('원하는 값');
+	    });
+	} */
+	
+	$(document).ready(function(){
+		if($('#isToilet').prop('checked')){
+			$('#isToilet').val('test value');
+		}
+	});
 		// 각각의 영역에 파일을 첨부 했을 경우 미리 보기가 가능하도록 하는 부분(함수)
 		function LoadImg(value, num){
 			if(value.files[0] != undefined){	
@@ -71,10 +98,18 @@
 				reader.readAsDataURL(value.files[0]);
 			}
 		}
+		
+/* 		function(){
+			if($("input:checkbox[id='isToilet']").is(":checked") == true){
+				$("input:checkbox[id='isToilet']").value("안 쌈");
+			}
+		} */
+		
+
 	</script>
 	
     <br><br>
-    <input type="submit" id="submit" value="일지 등록">
+    <input type="submit" class="btn btn-info btn-md" id="submit" value="일지 등록">
 </form>
 <br><br><br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br><br><br>

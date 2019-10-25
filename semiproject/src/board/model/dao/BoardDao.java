@@ -175,13 +175,13 @@ public class BoardDao {
 									 rs.getString("USEREMAIL"),
 									 rs.getDate("USERBIRTH"),
 									 rs.getString("USERPHONE"),
+									 rs.getString("USERPOSTCODE"),
 									 rs.getString("USERADDRESS"),
 									 rs.getString("USERIMAGE"),
 									 rs.getInt("REPORTED"),
 									 rs.getDate("JOINDATE"),
 									 rs.getDate("LATESTDATE"),
 									 rs.getString("USERSTATUS"));
-				
 			}
 			
 			

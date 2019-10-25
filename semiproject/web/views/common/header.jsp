@@ -78,16 +78,18 @@ footer {
                         if (loginUser != null) {
                      %>
                      <ul>
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown" style="align:left">
                            <button onclick="logout()"
                               class="btn_1 d-none d-md-inline-block" data-toggle="dropdown"
                               aria-haspopup="true" aria-expanded="false" style = "width : 122px; height : 50px; !important">로그아웃</button>
-                           <div class="dropdown-menu" aria-labelledby="navbarDropdown"
-                              style="padding: 12px 1px; width: 100%">
-                              <a class="dropdown-item" href="#"
-                                 style="padding: 12px 1px; width: 100%" style="align:left">마이페이지</a>
-                              <a class="dropdown-item" href="#" style="padding: 12px 1px;">내 매칭 현황</a> <a class="dropdown-item" href="#"
-                                 style="padding: 12px 1px;">내 문의 내역</a>
+                           <div class="dropdown-menu" aria-labelledby="" style="text-align:center;min-width:3rem;" >
+                              <a class="dropdown-item" href="#" style="padding: 12px 1px; margin-left:0px;">마이페이지</a>
+                              <a class="dropdown-item" href="#" style="padding: 12px 1px; margin-left:0px;">내 매칭 현황</a> 
+                              <a class="dropdown-item" href="#" style="padding: 12px 1px; margin-left:0px;">내 문의 내역</a>
+                           <%if(loginUser.getUserId().equals("admin")){ %>
+                              <a class="dropdown-item" href="<%=root%>/userSearch.li" style="padding: 12px 1px;margin-left:0px;">회원 조회</a>
+                              <!-- UserSearchServlet ㄱㄱ -->
+                           <%}%>
                            </div>
 
                         </li>
