@@ -105,8 +105,6 @@ public class UserJoinServlet extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('회원가입 완료!'); location.href='views/user/LoginPage.jsp';</script>"); 
 			out.flush();
-
-			//response.sendRedirect("views/user/LoginPage.jsp"); 
 			
 		}else {
 			view = request.getRequestDispatcher("views/common/errorPage.jsp");

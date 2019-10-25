@@ -32,7 +32,7 @@
 	<br>
 	<br>
 	<div class="outer">
-		<table align="center" id="listArea">
+		<table id="listArea">
 			<tr class="head">
 				<th width="80px">번호</th>
 				<th width="100px">아이디</th>

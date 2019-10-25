@@ -51,12 +51,11 @@ public class User implements Serializable{
 	}
 
 	// 비밀번호 찾기할 때 필요한 생성자
-	public User(String userId, String userName, String userEmail, Date userBirth) {
+	public User(String userId, String userName, String userEmail) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
 		this.userEmail = userEmail;
-		this.userBirth = userBirth;
 	}
 
 

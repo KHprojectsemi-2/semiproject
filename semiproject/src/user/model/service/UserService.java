@@ -10,20 +10,12 @@ import user.model.vo.User;
 
 public class UserService {
 	
-	//로그인 처리를 위한 상수 선언
-	public static int LOGIN_OK = 1;
-	public static int WRONG_PASSWORD = 0;
-	public static int ID_NOT_EXIST = -1;
-
 	//기본생성자
 	public UserService() {
 		
 		
 	}
-	
-	/*
-	 * 1. 로그인용 서비스 메소드
-	 */
+
 	public User loginUser(User user) {
 		UserDao dao = new UserDao();
 		Connection conn = getConnection();
@@ -125,7 +117,29 @@ public class UserService {
 
 	public String findUserId(User user) {
 
-		return null;
+		Connection conn = getConnection();
+		String userId = new UserDao().findUserId(conn,user);
+		
+		close(conn);
+		
+		return userId;
+	}
+
+	public int findPassword(String password,User user) {
+		
+		Connection conn = getConnection();
+		System.out.println("서비스 접속");
+		
+		int result = new UserDao().findPassword(conn,password,user);
+		
+		if(result>0) 
+			commit(conn);
+		else
+			rollback(conn);
+		
+		close(conn);
+		
+		return result;
 	}
 	
 }

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	
+	String kakao_email = request.getParameter("kakao_email");
+	String kakao_name = request.getParameter("kakao_name");
 %>
 <!DOCTYPE html>
 <html>
@@ -110,7 +111,6 @@ img:hover{
 </head>
 <body>
 	<%@include file="../common/header.jsp"%>
-
 	<form id = "userJoin_Form" action="<%=request.getContextPath()%>/join.me" method="post">
 	<div class="joinForm">
 	<table style="margin-right:0px">
@@ -139,14 +139,19 @@ img:hover{
 		</div>
 		</td>
 		<td rowspan="4">
-			<img src="#" width ="200" height="200" >
+			<input id="userImgInput" type=file name='file1' style='display: none;'> 
+			<input type='text' name='file2' id='file2' style='display:none;'> 
+			<img id="userImage" src="#" width ="200" height="200" 
+			onclick='document.all.file1.click(); document.all.file2.value=document.all.file1.value'
+			style="border:1px solid black"> 
 		</td>
 		</tr>
 		<tr>
 		<td>
 		<div id="d_join">
 			<label class="l_join">이름: </label>
-			<input type="text" name="userName" required  placeholder="1~8자리 입력">
+			<input type="text" name="userName" required  placeholder="1~8자리 입력"
+					 <%if(kakao_name!=null){%>value=<%=kakao_name %><%} %>   >
 			<label>남 </label>
 			<input type="radio" name ="chkGender" value="M" checked>&nbsp;&nbsp;
 			<label>여 </label>
@@ -180,7 +185,8 @@ img:hover{
 		<td>
 		<div id="d_join">
 			<label class="l_join">이메일: </label>
-			<input type="email" name="userEmail" required  placeholder="example@co.kr">
+			<input type="email" name="userEmail" required  placeholder="example@co.kr"
+			 <%if(kakao_email!=null){%>value=<%=kakao_email %><%} %> >
 			<input type="button" id="emailCheck" class="btn btn-info btn-md" value="인증받기">
 				
 		</div>
@@ -282,6 +288,24 @@ img:hover{
 		<p align="center">
 		</p>	
 	<script>
+	
+	function readURL(input) {
+		 if (input.files && input.files[0]) {
+		  var reader = new FileReader();
+		  
+		  reader.onload = function (e) {
+		   $('#userImage').attr('src', e.target.result);  
+		  }
+		  
+		  reader.readAsDataURL(input.files[0]);
+		  }
+		}
+		  
+	$("#userImgInput").change(function(){
+		   readURL(this);
+	});
+	
+	
 	var count=0; // 펫 추가 카운트
 	var sendCode=false; // 인증 번호 발송 확인용
 	var emailCode=0;		// 인증 번호
@@ -442,22 +466,23 @@ img:hover{
 			$("#emailCheck").click(function(){
 				var userId = $("input[name=userId]").val();
 				var userEmail = $("input[name=userEmail]").val();
+				var userName = $("input[name=userName]").val();
 				emailCode = makeRandom();
-		/* 		var template_params = {
-						   "userEmail": "rukanick@naver.com",
+		 		var template_params = {
+						   "userEmail": userEmail,
 						   "reply_to": "reply_to_value",
 						   "pettrase": "펫트라슈",
-						   "userName": "개똥이",
-						   "code": "194939"
+						   "userName": userName,
+						   "code":emailCode
 						}
 
 						var service_id = "Patrasche";
 						var template_id = "template_loLSxR35";
-						emailjs.send(service_id, template_id, template_params); */
+					//	emailjs.send(service_id, template_id, template_params); 
 						
 						
 				alert(userId + "님에게 " +userEmail+"로 인증번호"+ emailCode + "가 발송되었습니다.");
-				
+				// alert(userId + "님에게 인증번호가 발송되었습니다."); 
 				if(!sendCode)
 				{
 					var cDiv = $("<div>").attr({"id":"d_join"});

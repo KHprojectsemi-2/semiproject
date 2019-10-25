@@ -95,10 +95,70 @@ img:hover{
 	cursor:pointer;
 }
 
+ <!-- 모달 부분 -->
+/* 마스크 뛰우기 */
+#mask {  
+    position:absolute;  
+    z-index:9000;
+	position: absolute; /* */
+	left: 50%;
+	top: 100%;
+	transform: translate(-50%, -50%);
+	width: 100%;
+	height: 100%;
+    display:none; 
+    background-color:black;
+    
+
+} 
+/* 팝업으로 뜨는 윈도우 css  */ 
+.window{
+    display: none;
+	position: absolute; /* */
+	left: 50%;
+	top: 100%;
+	transform: translate(-50%, -50%);
+	width: 48%;
+	height: 59%;
+    background-color:white;
+    z-index:10000;
+    border:1px solid black;
+   
+ }
+.msg{
+	position : absolute;
+	transform: translate(-50%, -50%);
+	left: 50%;
+	top: 40%;
+    border:1px solid black;
+	font-size:14px;
+	width:85%;
+	height:40%;
+	
+}
+.css_sel{
+	position : absolute;
+	transform: translate(-50%, -50%);
+	z-index:10000;
+	
+	left: 22.5%;
+	top: 70%;
+	min-height:40px;
+	min-width:150px;
+}
+.css_btn{
+	position : absolute;
+	transform: translate(-50%, -50%);
+	z-index:10000;
+	
+	left: 80%;
+	top: 70%;
+	min-height:40px;
+	min-width:120px;
+}
 </style>
 </head>
 <body>
-	<%= user %>
 	<%@include file="../common/header.jsp"%>
 
 	<form id = "userDetail_form" action="#" method="post">
@@ -218,7 +278,7 @@ img:hover{
 		<div id="d_join" >
 			<button type="button" class="btn btn-info btn-md" id="goBack">돌아가기</button>
 			<button type="button" class="btn btn-info btn-md" id="goMatch">매칭현황 보기</button>
-			<button type="button" class="btn btn-info btn-md" id="goReport">제재</button>
+			<button type="button" class="openMask btn btn-info btn-md" id="goReport">제재</button>
 		</div>
 		</td>
 
@@ -282,16 +342,91 @@ img:hover{
 	<%} %>
 	<%} %>
 	</form>
+	<!-- 팝업 될 레이어 --> 
+	<div id ="wrap"> 
+        <div id = "container">  
+           <div id="mask"></div>
+            <div class="window">
+            	<a href="#" class="close">X</a>
+                <p style="width:1000px;height:500px;text-align:center;font-size:20px;vertical-align:middle;">회원 제재</p>    	
+             <textarea name="msg" class="msg">보낼 메세지를 입력하세요</textarea>
+             	<select name="limitDate" class="css_sel">
+             		<option value=0>경고</option>
+             		<option value=7>7일</option>
+             		<option value=30>30일</option>
+             		<option value=9999>영구</option>
+				</select>
+				<button type="button" id="reportBtn" class="css_btn btn btn-info btn-md" >제재</button>
+            </div>
+        </div>
+    </div>
+
 	<script>
+	
+	function wrapWindowByMask(){
+		 
+        //화면의 높이와 너비를 구한다.
+        var maskHeight = $(document).height();  
+        var maskWidth = $(window).width();  
+ 
+        //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
+        $("#mask").css({"width":maskWidth,"height":maskHeight});  
+ 
+        //애니메이션 효과 - 일단 0초동안 까맣게 됐다가 60% 불투명도로 간다.
+ 
+        $("#mask").fadeIn(0);      
+        $("#mask").fadeTo("slow",0.6);    
+ 
+        //윈도우 같은 거 띄운다.
+        $(".window").show();
+ 
+    }
+ 
+    $(document).ready(function(){
+    	
+        //검은 막 띄우기
+        $(".openMask").click(function(e){
+        	if($("input[name=userStatus]").val()=='Y'){
+          	  e.preventDefault();
+          	  wrapWindowByMask();
+        	}
+        });
+ 
+        //닫기 버튼을 눌렀을 때
+        $(".window .close").click(function (e) {  
+            //링크 기본동작은 작동하지 않도록 한다.
+            e.preventDefault();  
+            $("#mask, .window").hide();  
+        });       
+ 
+        //검은 막을 눌렀을 때
+        $("#mask").click(function () {  
+            $(this).hide();  
+            $(".window").hide();  
+ 
+        });      
+ 
+    });
+
 		$("#goBack").click(function(){
 			location.href =  '<%=request.getContextPath()%>/userSearch.li';
 		});
 		$("#goMatch").click(function(){
 			// 해당 회원의 매칭 페이지로 갈 것
 		});
+
 		$("#goReport").click(function(){
-			
+			if($("input[name=userStatus]").val()!='Y'){
+				alert("정지 중이거나 탈퇴한 회원입니다.");
+			}else{
+				$("#modal_content").modal();
+			}
 		});
+		
+		$("#reportBtn").click(function(){
+			alert("야아");
+		})
+
 	</script>
 	<br>
 	<br>

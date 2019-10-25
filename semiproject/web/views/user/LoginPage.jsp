@@ -53,12 +53,12 @@ body {
 							<div class="form-group">
 								<label for="username" class="text-info">ID:</label><br>
 								<input type="text" name="userId" id="userId"
-									class="form-control">
+									class="form-control" required>
 							</div>
 							<div class="form-group">
 								<label for="password" class="text-info">PASSWORD:</label><br>
-								<input type="text" name="userPwd" id="userPwd"
-									class="form-control">
+								<input type="password" name="userPwd" id="userPwd"
+									class="form-control" required>
 									
 							</div>
 							<div class="form-group">
@@ -91,6 +91,8 @@ body {
 			$('html,body').animate({scrollTop : offset.top-300},400);
 		});
 		 
+		// 계속 자동 로그인될 시 https://accounts.kakao.com/weblogin/account/info에서 로그아웃 하고 하자
+		
 	    // 사용할 앱의 JavaScript 키를 설정해 주세요.
 	    Kakao.init('f01271f22ed5c9e5cab931b076daa5ce');  //여기서 아까 발급받은 키 중 javascript키를 사용해준다.
 	    // 카카오 로그인 버튼을 생성합니다.
@@ -104,17 +106,18 @@ body {
 	       success: function(res) {
 	        console.log(res);
 
-            //setCookie("kakao_login","done",1); // 쿠키생성 (로그인)
-       
 	        var userID = res.id;      //유저의 카카오톡 고유 id
 	        var userEmail = res.kaccount_email;   //유저의 이메일
-	        var userNickName = res.properties.nickname; //유저가 등록한 별명
+	        var userName = res.properties.nickname; //유저가 등록한 별명
 	        
 	        console.log(userID);
 	        console.log(userEmail);
-	        console.log(userNickName);
+	        console.log(userName);
+	 
 
-	        //setCookie("kakao_login","",-1);  // 쿠키삭제 (로그아웃)
+	       // User user= new User(userID,userName,userEmail);
+	       // request.setAttribute("kakaoUser",user);
+	       location.replace("JoinFormPage.jsp?&kakao_email="+userEmail+"&kakao_name="+userName);
 
 	       },
 	       fail: function(error) {
@@ -127,17 +130,7 @@ body {
 	     }
 	    });
 
-	    
-	    /* 로그인 관련 쿠키 생성 및 삭제 */
-	    function setCookie( name , value , expired ){
-	     
-	     var date = new Date();
-	     date.setHours(date.getHours() + expired);
-	     var expried_set = "expries="+date.toGMTString();
-	     document.cookie = name + "=" + value + "; path=/;" + expried_set + ";"
-	     
-	    }
-	     
+	  
 	    
 	</script>
 

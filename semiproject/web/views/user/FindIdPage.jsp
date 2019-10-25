@@ -29,6 +29,13 @@ body {
 	{
 	margin-top: -85px;
 }
+.result{
+	margin-top:80px;
+	width:100%;
+	height:50px;
+	border:1px solid #9C9C9C;
+	background-color : lightgray;
+}
 </style>
 </head>
 <body>
@@ -40,7 +47,7 @@ body {
 				class="row justify-content-center align-items-center">
 				<div id="login-column" class="col-md-6">
 					<div id="login-box" class="col-md-12">
-						<form id="login-form" class="form" action="<%=request.getContextPath()%>/findId.me" method="post">
+						<form id="login-form" class="form" method="post">
 							<h3 class="text-center text-info">아이디 찾기</h3>
 
 							<div class="form-group">
@@ -74,7 +81,7 @@ body {
 									class="form-control">
 							</div>
 							<div class="form-group" style="display:block; margin-top:40px">
-								<input type="submit" name="submit" class="btn btn-info btn-md" value="아이디 찾기">
+								<input type="button" name="submit" class="btn btn-info btn-md" value="아이디 찾기">
 								<div style="display:block; text-align:right; margin-top:10px" >
 									<a href="<%=root %>/views/user/LoginPage.jsp" class="text-info" >로그인 화면으로</a>
 								</div>
@@ -92,9 +99,35 @@ body {
 	<script>
 	$(function(){
 		var offset = $("#userEmail").offset();
-		$("#userEmail").focus();
+		$("#userName").focus();
 		$('html,body').animate({scrollTop : offset.top-300},400);
 		
+		$("input[name=submit]").click(function(){
+			var userName = $("input[name=userName]").val();
+			var userEmail = $("input[name=userEmail]").val();
+			var year = $("select[name=birth_year]").val();
+			var month =  $("select[name=birth_month]").val();
+			var day = $("select[name=birth_day]").val();
+			
+			$.ajax({
+				url:"<%=request.getContextPath()%>/findId.me",
+				type:"post",
+				data:{userName:userName,userEmail:userEmail,year:year,month:month,day:day},
+				success:function(data){
+					if(data != null){
+						var rdiv = $("<div>").attr({"class":"result"})
+						rdiv.append($("h3").attr({"align":"center"}).css({"margin-top":"10px"}).text(userName + "님의 아이디는 "+data+"입니다."))
+						$("#login-form").append(rdiv);
+					}else{
+						alert("해당되는 아이디가 없습니다.");
+					}
+				},
+				error:function(data){
+					alert("해당되는 아이디가 없습니다.");
+				}
+			});
+			
+		});
 	});
 	</script>
 	<br>

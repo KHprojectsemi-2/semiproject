@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -302,6 +301,58 @@ public class UserDao {
 
 		return user;
 	
+	}
+
+
+	public String findUserId(Connection conn, User user) {
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = prop.getProperty("findUserId");
+		String userId = null;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, user.getUserName());
+			pstmt.setString(2, user.getUserEmail());
+			pstmt.setDate(3, user.getUserBirth());
+
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				userId = rs.getString("userId");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		return userId;
+	}
+
+
+	public int findPassword(Connection conn, String password,User user) {
+
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("findPassword");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, password);
+			pstmt.setString(2, user.getUserId());
+			pstmt.setString(3, user.getUserName());
+			pstmt.setString(4, user.getUserEmail());
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
+		return result;
 	}
 
 

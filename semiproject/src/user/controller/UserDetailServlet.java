@@ -43,7 +43,6 @@ public class UserDetailServlet extends HttpServlet {
 		User user = new UserService().selectUser(userNo);
 		RequestDispatcher view;
 		
-
 		if(user!=null) {
 			view = request.getRequestDispatcher("views/user/UserDetailPage.jsp");
 			request.setAttribute("user", user);

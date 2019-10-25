@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import user.model.service.UserService;
 import user.model.vo.User;
 
@@ -34,15 +36,28 @@ public class FindIdServlet extends HttpServlet {
 		
 		String userName = request.getParameter("userName");
 		String userEmail = request.getParameter("userEmail");
-		int year = Integer.valueOf(request.getParameter("birth_year"));
-		int month = (Integer.valueOf(request.getParameter("birth_month"))) - 1;
-		int day = Integer.valueOf(request.getParameter("birth_day"));
+		int year = Integer.valueOf(request.getParameter("year"));
+		int month = (Integer.valueOf(request.getParameter("month"))) - 1;
+		int day = Integer.valueOf(request.getParameter("day"));
 		GregorianCalendar date = new GregorianCalendar(year,month,day);
 		Date userBirth = new Date(date.getTimeInMillis());
 		
 		User user = new User(userName,userEmail,userBirth);
 		
-		String id = new UserService().findUserId(user);
+		String userId = new UserService().findUserId(user);
+		
+		System.out.println("반환된 아이디 :"+userId);
+		String resultId="";
+		for(int i=0;i<userId.length();i++) {
+			if(i<userId.length()-3) {
+				resultId += userId.charAt(i);
+			}
+			else {
+				resultId += '*';
+			}
+		}
+		response.setContentType("application/json;");
+		new Gson().toJson(resultId,response.getWriter());
 	}
 
 	/**

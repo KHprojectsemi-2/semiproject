@@ -1,6 +1,7 @@
 package user.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -45,23 +46,35 @@ public class UserLoginServlet extends HttpServlet {
 		
 		User user = new User(userId,userPwd);
 		
-		System.out.println(user);
+		 System.out.println(user);
 		 User loginUser = new UserService().loginUser(user);
 
 		 response.setContentType("text/html;charset=utf-8");
 		 
-		// 5. 서비스 요청에 해당하는 결과를 가지고 성공/실패에 대한 뷰 페이지(파일)을 선택해서 내보냄
-		 if(loginUser != null) {	//성공일 경우
+
+		 if(loginUser != null&& loginUser.getUserStatus().equals("Y")) {	
+			 //성공일 경우
 			 HttpSession session = request.getSession();	
-			 
 			 session.setAttribute("loginUser", loginUser);		 
 			 response.sendRedirect("index.jsp");
-		 }else {	//실패할 경우
-			 request.setAttribute("msg", "로그인 실패");
 			 
-			 RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			 view.forward(request, response);
-			 
+		 }else if(loginUser !=null&& loginUser.getUserStatus().equals("S")){
+			 //제재 상태일 경우
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('회원님은 일시정지 상태입니다.'); location.href='index.jsp';</script>"); 
+			out.flush();
+			
+		 }else if(loginUser !=null&& loginUser.getUserStatus().equals("N")){	
+			 //탈퇴 상태일 경우
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('탈퇴한 회원입니다.'); location.href='index.jsp';</script>"); 
+			out.flush();
+			
+		 }else {
+			 //실패할 경우
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('아이디나 패스워드가 잘못되었습니다.'); location.href='views/user/LoginPage.jsp';</script>"); 
+			out.flush();
 		 }
 	
 	}
