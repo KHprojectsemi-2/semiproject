@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bbs.model.service.BbsService;
-import bbs.model.vo.Bbs;
+import bbs.model.service.BoardService;
+import bbs.model.vo.Board;
 import bbs.model.vo.PageInfo;
 
 /**
@@ -36,10 +36,10 @@ public class BoardListServlet extends HttpServlet {
 		// Servlet을 만들면 vo클래스가 필요하다는 생각을 하자!(vo클래스의 객체(request에 담긴 값으로 생성된)를 dao까지 넘길꺼니깐)
 		
 		// 두개의 서비스를 호출할꺼기 때문에 서비스 객체를 참조형 자료형 변수로 담아두자
-		BbsService bService = new BbsService();
+		BoardService bService = new BoardService();
 		
 		// 게시판 리스트 갯수 구하기
-		int listCnt = bService.getListCnt();
+		int listCount = bService.getListCount();
 		
 		//-------------페이징 처리 추가----------------
 		// 페이지 수 처리용 변수 선언
@@ -67,7 +67,7 @@ public class BoardListServlet extends HttpServlet {
 		// * maxPage - 총 페이지 수
 		// 목록 수가 123개이면 13페이지가 마지막 페이지다
 		// 짜투리 목록이 최소 1개일 때, 한 page로써 의미를 갖게 하기 위해서 0.9를 더해주자
-		maxPage=(int)((double)listCnt/limit + 0.9);
+		maxPage=(int)((double)listCount/limit + 0.9);
 		
 		// * startPage - 현재 페이지에 보여질 시작 페이지 수
 		// 아래쪽에 페이지 수가 10개씩 보여지게 할 경우
@@ -88,26 +88,24 @@ public class BoardListServlet extends HttpServlet {
 		
 		// 자 위에서 계산된 모든 페이지 관련 변수들을 request에 담아서 보내야 될텐데 너무 많다!
 		// 그래서 페이지 정보를 공유할 vo 객체 PageInfo를 만들러 가자!(page정보만 지닌 객체를 만들어서 넘기기 위해)
-		PageInfo pi = new PageInfo(currentPage, listCnt, limit, maxPage, startPage, endPage);
+		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
 		// 게시판 리스트 조회해오기
-		ArrayList<Bbs> list = bService.selectList(currentPage, limit);
+		ArrayList<Board> list = bService.selectList(currentPage, limit);
 		
 		RequestDispatcher view = null;
 		if(list !=null) {
-			view = request.getRequestDispatcher("<%=root%>/views/bbs/bbsList.jsp");
+			view = request.getRequestDispatcher("views/bbs/boardListView.jsp");
 			request.setAttribute("list", list);	// 현재 페이지에 화면에 뿌려질 게시글이 담긴 객체
 			request.setAttribute("pi", pi);		// 페이지에 관련된 정보가 담긴 객체
 		}else {
-			view = request.getRequestDispatcher("<%=root%>/views/common/errorPage.jsp");
+			view = request.getRequestDispatcher("/views/common/errorPage.jsp");
 			request.setAttribute("msg", "게시판 리스트 조회 실패!");
 		}
 		
 		view.forward(request, response);
 		
 		//boardListView.jsp 페이지 만들러 ㄱㄱ씽
-		
-		
 	}
 
 	/**

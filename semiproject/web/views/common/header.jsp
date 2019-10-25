@@ -144,7 +144,7 @@ footer {
 												펫시터 예약</a>
 										</div></li>
 									<li class="nav-item"><a	href="<%=root%>/list.bo" class="nav-link">커뮤니티</a>
-									
+							        <%-- <li class="nav-item"><a	href="<%=root%>/views/bbs/boardInsertForm.jsp" class="nav-link">커뮤니티</a> --%>
 									</li>
 									<li class="nav-item"><a
 										href="<%=root%>/views/serviceCenter/FAQ.jsp" class="nav-link">고객센터</a>
