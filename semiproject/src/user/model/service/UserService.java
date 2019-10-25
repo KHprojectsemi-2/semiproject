@@ -3,6 +3,7 @@ package user.model.service;
 import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import user.model.dao.UserDao;
 import user.model.vo.User;
@@ -83,6 +84,28 @@ public class UserService {
 			commit(conn);
 		else
 			rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public ArrayList<User> selectAllUser() {
+
+		Connection conn = getConnection();
+		
+		ArrayList<User> userList = new UserDao().selectAllUser(conn);
+		
+		close(conn);
+		
+		return userList;	
+		
+	}
+
+	public int idCheck(String userId) {
+
+		Connection conn = getConnection();
+		int result = new UserDao().idCheck(conn,userId);
 		
 		close(conn);
 		

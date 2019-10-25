@@ -8,8 +8,8 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>LoginPage</title>
 </head>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <style>
 body {
 	margin: 0;
@@ -74,7 +74,10 @@ body {
 							<div id="register-link" class="text-right">
 								<a href="<%=root %>/views/user/FindIdPage.jsp" class="text-info" >아이디를 잊으셨나요?</a>
 							</div>
-
+							<div class="form-group" style="margin-top:60px">
+							<a id="kakao-login-btn"></a>
+							<a href="http://developers.kakao.com/logout"></a>
+							</div>
 						</form>
 					</div>
 				</div>
@@ -87,6 +90,55 @@ body {
 			$("#userId").focus();
 			$('html,body').animate({scrollTop : offset.top-300},400);
 		});
+		 
+	    // 사용할 앱의 JavaScript 키를 설정해 주세요.
+	    Kakao.init('f01271f22ed5c9e5cab931b076daa5ce');  //여기서 아까 발급받은 키 중 javascript키를 사용해준다.
+	    // 카카오 로그인 버튼을 생성합니다.
+	    Kakao.Auth.createLoginButton({
+	     container: '#kakao-login-btn',
+	     success: function(authObj) {
+	      
+	      // 로그인 성공시, API를 호출합니다.
+	      Kakao.API.request({
+	       url: '/v1/user/me',
+	       success: function(res) {
+	        console.log(res);
+
+            //setCookie("kakao_login","done",1); // 쿠키생성 (로그인)
+       
+	        var userID = res.id;      //유저의 카카오톡 고유 id
+	        var userEmail = res.kaccount_email;   //유저의 이메일
+	        var userNickName = res.properties.nickname; //유저가 등록한 별명
+	        
+	        console.log(userID);
+	        console.log(userEmail);
+	        console.log(userNickName);
+
+	        //setCookie("kakao_login","",-1);  // 쿠키삭제 (로그아웃)
+
+	       },
+	       fail: function(error) {
+	        alert(JSON.stringify(error));
+	       }
+	      });
+	     },
+	     fail: function(err) {
+	      alert(JSON.stringify(err));
+	     }
+	    });
+
+	    
+	    /* 로그인 관련 쿠키 생성 및 삭제 */
+	    function setCookie( name , value , expired ){
+	     
+	     var date = new Date();
+	     date.setHours(date.getHours() + expired);
+	     var expried_set = "expries="+date.toGMTString();
+	     document.cookie = name + "=" + value + "; path=/;" + expried_set + ";"
+	     
+	    }
+	     
+	    
 	</script>
 
 	<br>

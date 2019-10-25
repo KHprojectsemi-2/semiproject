@@ -31,7 +31,8 @@ public class InsertDiaryServlet extends HttpServlet {
 		// 1. 요청시 한글이 있을 경우 인코딩 처리
 		request.setCharacterEncoding("UTF-8");
 		
-		// 배변 확인
+		// 배변 확인 체크박스를 리스트로 받아서 가져오기...
+		// 체크가 안되면 어떻게 하지??
 		String[] irr1 = request.getParameterValues("list1");
 		String list1 = irr1[0];
 		System.out.println("배변 : " + list1);
@@ -50,6 +51,20 @@ public class InsertDiaryServlet extends HttpServlet {
 		String[] irr4 = request.getParameterValues("list4");
 		String list4 = irr4[0];
 		System.out.println("요청사항 : " + list4);
+		
+		
+//		String isToilet = request.getParameter("isToilet");
+//		String isWalk = request.getParameter("isWalk");
+//		String isMedic = request.getParameter("isMedic");
+//		String chkNeeds = request.getParameter("chkNeeds");
+//		
+//		String textArea = request.getParameter("review");
+//		
+//		System.out.println(isToilet);
+//		System.out.println(isWalk);
+//		System.out.println(isMedic);
+//		System.out.println(chkNeeds);
+//		System.out.println(textArea);
 		
 		
 	}
