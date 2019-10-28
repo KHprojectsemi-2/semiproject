@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>User Detail Page</title>
+<title>leopet || UserDetail</title>
 <style>
 body {
 	margin: 0;
@@ -343,7 +343,7 @@ img:hover{
 	<%} %>
 	</form>
 	<!-- 팝업 될 레이어 --> 
-	<div id ="wrap"> 
+	<div id ="wrap" style="position:absolute"> 
         <div id = "container">  
            <div id="mask"></div>
             <div class="window">
@@ -424,7 +424,28 @@ img:hover{
 		});
 		
 		$("#reportBtn").click(function(){
-			alert("야아");
+			var reportId = $("input[name=userId]").val();
+			var msg = $("textarea[name=msg]").val();
+			var limitDate = $("select[name=limitDate]").val();
+			
+			$.ajax({
+				url:"<%=request.getContextPath()%>/report.me",
+				type:"post",
+				data:{reportId:reportId,msg:msg,limitDate:limitDate},
+				success:function(data){
+					if(data>0){
+						alert("회원 제재 성공");
+						location.href='index.jsp';
+					}
+					else{
+						alert("해당 정보가 없습니다!");
+					}
+				},
+				error:function(data){
+					console.log("서버 통신 안됨");
+				}
+			}); 
+
 		})
 
 	</script>

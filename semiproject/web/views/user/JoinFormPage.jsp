@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>LoginForm</title>
+<title>leopet || Login</title>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- 우편번호 관련 -->
 
@@ -111,7 +111,16 @@ img:hover{
 </head>
 <body>
 	<%@include file="../common/header.jsp"%>
-	<form id = "userJoin_Form" action="<%=request.getContextPath()%>/join.me" method="post">
+	<form id = "userJoin_Form" action="<%=request.getContextPath()%>/join.me" method="post" encType="multipart/form-data">
+	<div id="fileArea">
+				<input type="file" id="thumbnailImg1" multiple="multiple" name="thumbnailImag1" onchange="LoadImg(this,1)">
+				<input type="text" name="userImg">
+				<input type="file" id="thumbnailImg2" multiple="multiple" name="thumbnailImag2" onchange="LoadImg(this,2)">
+				<input type="text" name="petImg">
+				<input type="file" id="thumbnailImg3" multiple="multiple" name="thumbnailImag3" onchange="LoadImg(this,3)">
+				<input type="text" name="petImg2">
+					
+	</div>
 	<div class="joinForm">
 	<table style="margin-right:0px">
 		<tr>
@@ -139,11 +148,9 @@ img:hover{
 		</div>
 		</td>
 		<td rowspan="4">
-			<input id="userImgInput" type=file name='file1' style='display: none;'> 
-			<input type='text' name='file2' id='file2' style='display:none;'> 
-			<img id="userImage" src="#" width ="200" height="200" 
-			onclick='document.all.file1.click(); document.all.file2.value=document.all.file1.value'
-			style="border:1px solid black"> 
+			<div id="userImgArea">
+			<img id="userImg"  width ="200" height="200" style="border:1px solid black"> 
+			</div>
 		</td>
 		</tr>
 		<tr>
@@ -238,9 +245,14 @@ img:hover{
 								name="petName" style="width: 120px" disabled>
 						</div>
 					</td>
-					<td rowspan="3"><img src="#" width="150" height="150"
-						style="margin-top: 20px">
- 						<button type="button" class="pet_button minus" style="margin-bottom:100px;margin-left:25px;background-color:red;" onclick="minus()">-</button>
+					<td rowspan="3">
+					<div id="petImgArea" style="display:contents">
+						<img name="petImg" width="150" height="150" style="margin-top: 20px;border:1px solid black">
+					</div>
+						<button type="button" class="pet_button minus" style="margin-bottom:100px;margin-left:25px;background-color:red;" onclick="minus()">-</button>
+ 					</td>
+ 					<td>				
+ 					
  					</td>
 				</tr>
 				<tr>
@@ -283,155 +295,207 @@ img:hover{
 			<br>
 		</div>
 		<br>
+
 	</form>
 	<hr style="width:50%">
 		<p align="center">
 		</p>	
 	<script>
 	
-	function readURL(input) {
-		 if (input.files && input.files[0]) {
-		  var reader = new FileReader();
-		  
-		  reader.onload = function (e) {
-		   $('#userImage').attr('src', e.target.result);  
-		  }
-		  
-		  reader.readAsDataURL(input.files[0]);
-		  }
-		}
-		  
-	$("#userImgInput").change(function(){
-		   readURL(this);
+	
+	$(function(){
+		$("#fileArea").hide();
+		
+		$("#userImgArea").click(function(){
+			$("#thumbnailImg1").click();
+		});
+		$("#petImgArea").click(function(){
+			$("#thumbnailImg2").click();
+		});
 	});
+		// 동적으로 만들어진 버튼 클릭위해 따로 씀
+		$(document).on("click","#petImgArea2",function(){ 
+			$("#thumbnailImg3").click();
+		});
 	
-	
-	var count=0; // 펫 추가 카운트
-	var sendCode=false; // 인증 번호 발송 확인용
-	var emailCode=0;		// 인증 번호
-	
-	var intro = $("<h2>").text("당신의 펫을 추가해보세요").css({"text-align":"center"});
-	var plusBtn = $("<button>").text("+").attr({"class":"pet_button plus","type":"button","onclick":"plus()"});
-	var minusBtn = $("<button>").text("-").attr({"class":"pet_button minus","type":"button","onclick":"minus()"})
-	.css({"background-color":"orangered","margin-bottom":"100px","margin-left":"25px"});
-
-	var petform = document.createElement("div");
-	petform.setAttribute("class", "petForm")
-	petform.setAttribute("id","petform2");
-	
-
-	
-	intro.append(plusBtn);	
-	$("#userJoin_Form").append(intro);	// 펫을 추가해주세요 문구 붙이기
-	
-	function plus(){
-		if(count<2){		
-			count++;
-			petform.innerHTML = document.getElementById("petForm").innerHTML;
-			if(count==1){
-				$(".petForm input").attr("required",true);			// 펫 입력란을 필수로 만들기
-				$("#userJoin_Form").children("h2:last").remove();	// 펫추가 메세지 지우기
-				$("#petForm").css("display","block");
-				$("#petForm input").attr("disabled",false);
-				$("#petForm select").attr("disabled",false);
-
-			}else{
-				$(".plus:first").css("display","none");
-				$("#userJoin_Form").append(petform);
-				$("#petform2 input").attr("required",true);
-				$("#petform2 select").attr("name","petSize2");
-				for(var i=0;i<7;i++){	// servlet으로 넘길 내용들 이름 설정
-					$("#petform2 input").eq(i).attr("name",$("#petform2 input").eq(i).prop("name")+"2");
+		// 각각의 영역에 파일을 첨부 했을 경우 미리 보기가 가능하도록 하는 부분
+		function LoadImg(value, num) {
+			// value는 함수를 발동시킨 객체(file타입 input태그)
+			if (value.files[0] != undefined) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					switch (num) {
+					case 1:
+						$("#userImg").attr("src", e.target.result);
+						$("input[name=userImg]").val("true");
+						break;
+					case 2:
+						$("img[name=petImg]").attr("src", e.target.result);
+						$("input[name=petImg]").val("true");
+						break;
+					case 3:
+						$("img[name=petImg2]").attr("src", e.target.result);
+						$("input[name=petImg2]").val("true")
+						break;
+					}
 				}
-				$("#petform2 img").attr("name",$("#petform2 img").prop("name")+"2");		// 이미지는 input속성 아니기 때문에 따로 이름 지정
-				$(".minus:last").css("display","none");
+				reader.readAsDataURL(value.files[0]);
 			}
+			console.log("userImg"+$("input[name=userImg]").val());
+			console.log("petImg"+$("input[name=petImg]").val());
+			console.log("petImg"+$("input[name=petImg]").val());
 
-		}else{
-			alert("펫은 2마리까지만 등록 가능합니다.");
 		}
-	}
-	function minus(){
-		count--;
-		console.log(count);
-		if(count==0){
-			intro.append(plusBtn);
-			$("#userJoin_Form").append(intro);
-			$("#userJoin_Form").children("div:last").css("display","none");
-			$(".petForm input").attr("required",false);		
-		}else{
-			$("#userJoin_Form").children("div:last").remove();
-			$(".plus:first").show();
-		}
-	}
-
 	
-	    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
-	    function sample4_execDaumPostcode() {
-	        new daum.Postcode({
-	            oncomplete: function(data) {
-	                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+		var count = 0; // 펫 추가 카운트
+		var sendCode = false; // 인증 번호 발송 확인용
+		var emailCode = 0; // 인증 번호
 
-	                // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
-	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-	                var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
-	                var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+		var intro = $("<h2>").text("당신의 펫을 추가해보세요").css({
+			"text-align" : "center"
+		});
+		var plusBtn = $("<button>").text("+").attr({
+			"class" : "pet_button plus",
+			"type" : "button",
+			"onclick" : "plus()"
+		});
+		var minusBtn = $("<button>").text("-").attr({
+			"class" : "pet_button minus",
+			"type" : "button",
+			"onclick" : "minus()"
+		}).css({
+			"background-color" : "orangered",
+			"margin-bottom" : "100px",
+			"margin-left" : "25px"
+		});
 
-	                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-	                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-	                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-	                    extraRoadAddr += data.bname;
-	                }
-	                // 건물명이 있고, 공동주택일 경우 추가한다.
-	                if(data.buildingName !== '' && data.apartment === 'Y'){
-	                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-	                }
-	                // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-	                if(extraRoadAddr !== ''){
-	                    extraRoadAddr = ' (' + extraRoadAddr + ')';
-	                }
-	                // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
-	                if(fullRoadAddr !== ''){
-	                    fullRoadAddr += extraRoadAddr;
-	                }
+		var petform = document.createElement("div");
+		petform.setAttribute("class", "petForm")
+		petform.setAttribute("id", "petform2");
 
-	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-	                document.getElementById('postcode').value = data.zonecode; //5자리 새우편번호 사용
-	                document.getElementById('userAddress').value = fullRoadAddr;
-	                document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
+		intro.append(plusBtn);
+		$("#userJoin_Form").append(intro); // 펫을 추가해주세요 문구 붙이기
+
+		function plus() {
+			if (count < 2) {
+				count++;
+				petform.innerHTML = document.getElementById("petForm").innerHTML;
+				if (count == 1) {
+					$(".petForm input").attr("required", true); // 펫 입력란을 필수로 만들기
+					$("#userJoin_Form").children("h2:last").remove(); // 펫추가 메세지 지우기
+					$("#petForm").css("display", "block");
+					$("#petForm input").attr("disabled", false);
+					$("#petForm select").attr("disabled", false);
 					
-	                document.getElementById('postcode').setAttribute("readonly","true");
-	                document.getElementById('userAddress').setAttribute("readonly","true");
-	                document.getElementById('sample4_jibunAddress').setAttribute("readonly","true");
-	                
-	                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-	                if(data.autoRoadAddress) {
-	                    //예상되는 도로명 주소에 조합형 주소를 추가한다.
-	                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-	                    document.getElementById('guide').innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+				} else {
+					$(".plus:first").css("display", "none");
+					$("#userJoin_Form").append(petform);
+					$("#petform2 input").attr("required", true);
+					$("#petform2 select").attr("name", "petSize2");;
+					$("#petform2 #petImgArea").attr("id","petImgArea2");
+					for (var i = 0; i < 7; i++) { // servlet으로 넘길 내용들 이름 설정
+						$("#petform2 input").eq(i).attr("name",
+								$("#petform2 input").eq(i).prop("name") + "2");
+					}
+					$("#petform2 img").attr("name",
+							$("#petform2 img").prop("name") + "2"); // 이미지는 input속성 아니기 때문에 따로 이름 지정
+					$("#petform2 img").attr("src","#");
+					$(".minus:last").css("display", "none");
+				}
 
-	                } else if(data.autoJibunAddress) {
-	                    var expJibunAddr = data.autoJibunAddress;
-	                    document.getElementById('guide').innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+			} else {
+				alert("펫은 2마리까지만 등록 가능합니다.");
+			}
+		}
+		function minus() {
+			count--;
+			console.log(count);
+			if (count == 0) {
+				intro.append(plusBtn);
+				$("#userJoin_Form").append(intro);
+				$("#userJoin_Form").children("div:last").css("display", "none");
+				$(".petForm input").attr("required", false);
+			} else {
+				$("#userJoin_Form").children("div:last").remove();
+				$(".plus:first").show();
+			}
+		}
 
-	                } else {
-	                    document.getElementById('guide').innerHTML = '';
-	                }
-	            }
-	        }).open();
-	    }
+		//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+		function sample4_execDaumPostcode() {
+			new daum.Postcode(
+					{
+						oncomplete : function(data) {
+							// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
-	    
-			$("#idCheck").click(function(){
-				
-				var userId = $("#userJoin_Form input[name='userId']");
-				
-				if(!userId || userId.val().length <6){	// 중복 확인 버튼을 누를 상태가 아니라면..
-					alert("아이디는 최소 6자리 이상이어야 합니다.");
-					userId.focus();
-				}else{	// 중복 버튼 기능이 활성화 되야 된다면..
-					$.ajax({
-						url:"<%=request.getContextPath()%>/idCheck.me",
+							// 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+							// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+							var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+							var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+
+							// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+							// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+							if (data.bname !== ''
+									&& /[동|로|가]$/g.test(data.bname)) {
+								extraRoadAddr += data.bname;
+							}
+							// 건물명이 있고, 공동주택일 경우 추가한다.
+							if (data.buildingName !== ''
+									&& data.apartment === 'Y') {
+								extraRoadAddr += (extraRoadAddr !== '' ? ', '
+										+ data.buildingName : data.buildingName);
+							}
+							// 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+							if (extraRoadAddr !== '') {
+								extraRoadAddr = ' (' + extraRoadAddr + ')';
+							}
+							// 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+							if (fullRoadAddr !== '') {
+								fullRoadAddr += extraRoadAddr;
+							}
+
+							// 우편번호와 주소 정보를 해당 필드에 넣는다.
+							document.getElementById('postcode').value = data.zonecode; //5자리 새우편번호 사용
+							document.getElementById('userAddress').value = fullRoadAddr;
+							document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
+
+							document.getElementById('postcode').setAttribute(
+									"readonly", "true");
+							document.getElementById('userAddress')
+									.setAttribute("readonly", "true");
+							document.getElementById('sample4_jibunAddress')
+									.setAttribute("readonly", "true");
+
+							// 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+							if (data.autoRoadAddress) {
+								//예상되는 도로명 주소에 조합형 주소를 추가한다.
+								var expRoadAddr = data.autoRoadAddress
+										+ extraRoadAddr;
+								document.getElementById('guide').innerHTML = '(예상 도로명 주소 : '
+										+ expRoadAddr + ')';
+
+							} else if (data.autoJibunAddress) {
+								var expJibunAddr = data.autoJibunAddress;
+								document.getElementById('guide').innerHTML = '(예상 지번 주소 : '
+										+ expJibunAddr + ')';
+
+							} else {
+								document.getElementById('guide').innerHTML = '';
+							}
+						}
+					}).open();
+		}
+
+		$("#idCheck").click(function() {
+
+			var userId = $("#userJoin_Form input[name='userId']");
+
+			if (!userId || userId.val().length < 6) { // 중복 확인 버튼을 누를 상태가 아니라면..
+				alert("아이디는 최소 6자리 이상이어야 합니다.");
+				userId.focus();
+			} else { // 중복 버튼 기능이 활성화 되야 된다면..
+				$.ajax({
+						url : "<%=request.getContextPath()%>/idCheck.me",
 						type:"post",
 						data:{userId:userId.val()},
 						success:function(data){
@@ -448,7 +512,6 @@ img:hover{
 							console.log("서버 통신 안됨");
 						}
 					});
-					// IdCheckServlet 만들러 ㄱㄱ씽
 				}
 			});
 			
@@ -503,7 +566,6 @@ img:hover{
 					$("label[name=chkCode]").css({"color":"red","text-align":"center"}).text("불일치!");
 				}
 			});
-
 
 		</script>
 

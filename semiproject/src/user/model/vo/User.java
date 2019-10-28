@@ -24,6 +24,7 @@ public class User implements Serializable{
 	private Date joinDate;
 	private Date latestDate;
 	private String userStatus;
+	private Date stopDate;
 	
 	
 	public User() {
@@ -68,7 +69,7 @@ public class User implements Serializable{
 
 	// 가입할 때 필요한 생성자
 	public User(String userId, String userPwd, String userName, String userGender, String userEmail, Date userBirth,
-			String userPhone,String userPostcode ,String userAddress) {
+			String userPhone,String userPostcode ,String userAddress,String userImage) {
 		super();
 		this.userId = userId;
 		this.userPwd = userPwd;
@@ -79,12 +80,12 @@ public class User implements Serializable{
 		this.userPhone = userPhone;
 		this.userPostcode = userPostcode;
 		this.userAddress = userAddress;
+		this.userImage = userImage;
 	}
 	
-
 	public User(String userId, int userNo, String userPwd, String userName, String userGender, String userEmail,
 			Date userBirth, String userPhone, String userPostcode, String userAddress, String userImage, int reported,
-			Date joinDate, Date latestDate, String userStatus) {
+			Date joinDate, Date latestDate, String userStatus, Date stopDate) {
 		super();
 		this.userId = userId;
 		this.userNo = userNo;
@@ -101,6 +102,7 @@ public class User implements Serializable{
 		this.joinDate = joinDate;
 		this.latestDate = latestDate;
 		this.userStatus = userStatus;
+		this.stopDate = stopDate;
 	}
 
 	public String getUserId() {
@@ -224,9 +226,19 @@ public class User implements Serializable{
 		this.userStatus = userStatus;
 	}
 
+	public Date getStopDate() {
+		return stopDate;
+	}
+
+	public void setStopDate(Date stopDate) {
+		this.stopDate = stopDate;
+	}
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	
 
 
 	@Override

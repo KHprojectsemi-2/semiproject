@@ -13,7 +13,6 @@
 		<table>
 		<thead>
 			<tr>
-				
 				<td>유형</td>
 				<td>예약날짜</td>
 				<td>장소</td>
@@ -22,7 +21,6 @@
 			</tr>
 		</thead>
 		<tbody>
-		
 		</tbody>
 		</table>
 	</form>

@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +14,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import user.model.vo.JoinAttach;
+import user.model.vo.Report;
 import user.model.vo.User;
 
 public class UserDao {
@@ -67,7 +70,8 @@ public class UserDao {
 									rs.getInt("REPORTED"),
 									rs.getDate("JOINDATE"),
 									rs.getDate("LATESTDATE"),
-									rs.getString("USERSTATUS")
+									rs.getString("USERSTATUS"),
+									rs.getDate("STOPDATE")
 						);	
 			}
 
@@ -156,6 +160,7 @@ public class UserDao {
 			pstmt.setString(7, user.getUserPhone());
 			pstmt.setString(8, user.getUserPostcode());
 			pstmt.setString(9, user.getUserAddress());
+			pstmt.setString(10, user.getUserImage());
 			
 			result = pstmt.executeUpdate();
 
@@ -219,7 +224,8 @@ public class UserDao {
 						rs.getInt("reported"),
 						rs.getDate("joinDate"),
 						rs.getDate("latestDate"),
-						rs.getString("userStatus")
+						rs.getString("userStatus"),
+						rs.getDate("stopDate")
 						));	
 			}
 		} catch (SQLException e) {
@@ -272,21 +278,22 @@ public class UserDao {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {	
-				user = new User(rs.getString(1),
-								rs.getInt(2),
-								rs.getString(3),
-								rs.getString(4),
-								rs.getString(5),
-								rs.getString(6),
-								rs.getDate(7),
-								rs.getString(8),
-								rs.getString(9),
-								rs.getString(10),
-								rs.getString(11),
-								rs.getInt(12),
-								rs.getDate(13),
-								rs.getDate(14),
-								rs.getString(15));
+				user = new User(rs.getString("userId"),
+						rs.getInt("userNo"),
+						rs.getString("userPwd"),
+						rs.getString("userName"),
+						rs.getString("userGender"),
+						rs.getString("userEmail"),
+						rs.getDate("userBirth"),
+						rs.getString("userPhone"),
+						rs.getString("userPostcode"),
+						rs.getString("userAddress"),
+						rs.getString("userImage"),
+						rs.getInt("reported"),
+						rs.getDate("joinDate"),
+						rs.getDate("latestDate"),
+						rs.getString("userStatus"),
+						rs.getDate("stopDate"));
 				
 				System.out.println("DAO에서 생성된 유저 :" +user);
 			}
@@ -297,12 +304,9 @@ public class UserDao {
 			close(pstmt);
 			close(rs);
 		}
-		
-
 		return user;
 	
 	}
-
 
 	public String findUserId(Connection conn, User user) {
 
@@ -331,7 +335,6 @@ public class UserDao {
 		return userId;
 	}
 
-
 	public int findPassword(Connection conn, String password,User user) {
 
 		PreparedStatement pstmt = null;
@@ -344,6 +347,126 @@ public class UserDao {
 			pstmt.setString(2, user.getUserId());
 			pstmt.setString(3, user.getUserName());
 			pstmt.setString(4, user.getUserEmail());
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+
+
+	public int insertReport(Connection conn, Report report) {
+
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("insertReport");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, report.getUserId());
+			pstmt.setString(2, report.getReportMsg());
+			
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+	
+	public int updateStop(Connection conn, Report report,Date limitDate) {
+
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("updateStop");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setDate(1, limitDate);
+			pstmt.setString(2, report.getUserId());
+			
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+
+
+	public Report selectReport(Connection conn, User user) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = prop.getProperty("selectReport");
+		Report userReport = null;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, user.getUserId());
+
+
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				userReport = new Report(rs.getInt("reportNo"),
+										rs.getString("userId"),
+										rs.getString("reportMsg"),
+										rs.getString("status"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return userReport;
+	}
+
+
+	public int updateReport(Connection conn, int reportNo) {
+
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("updateReport");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, reportNo);
+			
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+
+
+	public int finishStop(Connection conn, String userId) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("finishStop");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			
 			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {

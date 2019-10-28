@@ -3,9 +3,12 @@ package user.model.service;
 import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.util.ArrayList;
 
 import user.model.dao.UserDao;
+import user.model.vo.JoinAttach;
+import user.model.vo.Report;
 import user.model.vo.User;
 
 public class UserService {
@@ -141,5 +144,62 @@ public class UserService {
 		
 		return result;
 	}
-	
+
+	public int insertReport(Report report,Date limitDate) {
+
+		Connection conn = getConnection();
+		
+		int result = new UserDao().insertReport(conn,report);
+		
+		if(result>0) {
+			commit(conn);
+			int res2= new UserDao().updateStop(conn,report,limitDate);
+
+			if(res2>0) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+		}
+		else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	public Report selectReport(User user) {
+		Connection conn = getConnection();
+		
+		Report userReport = new UserDao().selectReport(conn,user);
+		
+		close(conn);
+		
+		return userReport;
+	}
+
+	public int updateReport(int reportNo, String userId) {
+
+		Connection conn = getConnection();
+		UserDao dao = new UserDao();
+		int result = dao.updateReport(conn,reportNo);
+		int res2=0;
+		if(result>0) {
+			commit(conn);
+			res2 = dao.finishStop(conn,userId);
+			if(res2>0) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return res2;
+	}
+
+
 }
