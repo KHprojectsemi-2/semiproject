@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="user.model.vo.*, java.util.ArrayList, board.model.vo.*"%>
+	pageEncoding="UTF-8" import="user.model.vo.*, java.util.ArrayList"%>
 	
 <%
-	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
 %>
 <!DOCTYPE html>
 <html>
