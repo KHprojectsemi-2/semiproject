@@ -93,6 +93,7 @@ public class PetDao {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
+			close(rs);
 		}
 
 		return pal;

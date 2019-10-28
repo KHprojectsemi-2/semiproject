@@ -113,42 +113,35 @@ public class UserJoinServlet extends HttpServlet {
 			
 			if(!fileList.isEmpty()){
 				System.out.println("파일리스트" + fileList);
-				System.out.println(multiRequest.getParameter("userImg"));
-//				System.out.println(multiRequest.getParameter("petImg"));
-//				System.out.println(multiRequest.getParameter("petImg2"));
 
 				String userImg = multiRequest.getParameter("userImg");
-//				String petImg = multiRequest.getParameter("petImg");
-//				String petImg2 = multiRequest.getParameter("petImg2");
-
-				// 파일사이즈 1 트루 1 --- 3경우
-				// 파일사이즈 2 트루 2 --- 3경우
-				// 파일에 집어 넣는다.
+				String petImg = multiRequest.getParameter("petImg");
+				String petImg2 = multiRequest.getParameter("petImg2");
 
 				int fres = new JoinAttachService().insertImg(fileList);
 				System.out.println("userImg값 :"+userImg +"조건문 진입 전");
+				
 				if (userImg.equals("true")) {
-					System.out.println("userImg값 :"+userImg +"조건문 진입 후");
 					userImgName = fileList.get(0).getChangeName();
-//					if (petImg.equals("true")) {
-//						petImgName = fileList.get(1).getChangeName();
-//						if (petImg2.equals("true")) {
-//							petImgName2 = fileList.get(2).getChangeName();
-//						}
-//					} else {
-//						if (petImg2.equals("true")) {
-//							petImgName2 = fileList.get(1).getChangeName();
-//						}
-//					}
-//				} else {
-//					if (petImg.equals("true")) {
-//						petImgName = fileList.get(0).getChangeName();
-//					} else {
-//						if (petImg2.equals("true")) {
-//							petImgName2 = fileList.get(0).getChangeName();
-//						}
-//					}
-//				}
+					if (petImg.equals("true")) {
+						petImgName = fileList.get(1).getChangeName();
+						if (petImg2.equals("true")) {
+							petImgName2 = fileList.get(2).getChangeName();
+						}
+					} else {
+						if (petImg2.equals("true")) {
+							petImgName2 = fileList.get(1).getChangeName();
+						}
+					}
+				} else {
+					if (petImg.equals("true")) {
+						petImgName = fileList.get(0).getChangeName();
+					} else {
+						if (petImg2.equals("true")) {
+							petImgName2 = fileList.get(0).getChangeName();
+						}
+					}
+				}
 				}
 			}
 
@@ -219,10 +212,6 @@ public class UserJoinServlet extends HttpServlet {
 			System.out.println("첫번째 펫입력 : " + petRes);
 			System.out.println("두번째 펫입력 : " + petRes2);
 			
-
-			
-			
-
 			if (result > 0) {
 				PrintWriter out = response.getWriter();
 				out.println("<script>alert('회원가입 완료!'); location.href='views/user/LoginPage.jsp';</script>");

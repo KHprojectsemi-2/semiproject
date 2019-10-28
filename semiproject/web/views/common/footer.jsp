@@ -7,18 +7,20 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+
     	footer{
     		width:cover;
     		height:500px;
     		!important;
     	}
     	
+
 </style>
    	<!-- jquery plugins here-->
     <!-- jquery -->
     <script src="<%=request.getContextPath() %>/js/jquery-1.12.1.min.js"></script>
     <!-- popper js -->
-    <script src="<%=request.getContextPath() %>/js/popper.min.js"></script>
+   
     <!-- bootstrap js -->
     <script src="<%=request.getContextPath() %>/js/bootstrap.min.js"></script>
     <!-- counterup js -->
@@ -32,6 +34,7 @@
     <!-- custom js -->
     <script src="<%=request.getContextPath() %>/js/custom.js"></script>
 
+    
 </head>
 <body>
 	<%@include file = "../../css/animate.jsp" %>
@@ -47,9 +50,7 @@
 	<%@include file = "../../css/swiper.jsp" %>
 	<%@include file = "../../css/themify_icons.jsp" %>
     <!-- footer part start-->
-    <footer class="footer_area padding_top">
-		
-		
+    <footer class="footer_area padding_top">         
     </footer>
     <!-- footer part end-->
 </body>

@@ -24,6 +24,11 @@ public class PetSitter implements Serializable{
 		
 	}
 	
+	public PetSitter(String userId) {
+		super();
+		this.userId = userId;
+	}
+
 	public PetSitter(String userId, String residence, String job, String withFam, String withPet, String canLarge,
 			String canMedic, String canOld, String canSick, String isLicense) {
 		super();

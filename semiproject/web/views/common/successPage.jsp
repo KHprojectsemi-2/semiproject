@@ -1,15 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<<<<<<< HEAD
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-성공 페이지
-=======
 <%
 	String msg = (String)request.getAttribute("msg");
 %>
@@ -22,6 +12,5 @@
 <body>
 	<h1 align="center"><%= msg %></h1>
 	<a href="<%=request.getContextPath() %>/index.jsp" align="center"><h1>메인으로 돌아가기</h1></a>
->>>>>>> refs/remotes/origin/master
 </body>
 </html>

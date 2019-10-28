@@ -102,6 +102,7 @@ public class UserDao {
 			pstmt.setString(1, user.getUserName());
 			pstmt.setString(2, user.getUserPhone());
 			pstmt.setString(3, user.getUserEmail());
+			pstmt.setString(4, user.getUserPostcode());
 			pstmt.setString(4, user.getUserAddress());
 			pstmt.setString(5, user.getUserImage());
 			pstmt.setString(6, user.getUserId());
