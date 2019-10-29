@@ -2,6 +2,7 @@ package petSitter.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -36,10 +37,6 @@ public class PetSitterApplyServlet extends HttpServlet {
 		// 1. 요청시 한글이 있을 경우 인코딩 처리
 		request.setCharacterEncoding("UTF-8");
 		
-		PrintWriter out = response.getWriter();
-		
-		User user = new User();
-		
 		// 선택된 radio value 값 변수에 저장시켜줘
 		String userId = request.getParameter("id");
 //		int grade = Integer.valueOf(request.getParameter("grade"));
@@ -68,10 +65,25 @@ public class PetSitterApplyServlet extends HttpServlet {
 		System.out.println(isLicense);
 //		out.println(chkResume);
 		
-		
 		HttpSession session = request.getSession(); // request객체가 session 객체를 만드는 메소드를 지니고 있다.
 		
 		PetSitter p = new PetSitter(userId, residence, job, withFam, withPet, canLarge, canMedic, canOld, canSick, isLicense);
+		
+//		PetSitter p = new PetSitter(userId, petSitterNo, residence, job, withFam, withPet, canLarge, canMedic, canOld, canSick, isLicense);
+		
+//		PetSitter p = new PetSitter();
+//		p.setUserId(userId);
+//		p.setResidence(residence);
+//		p.setJob(job);
+//		p.setWithFam(withFam);
+//		p.setWithPet(withPet);
+//		p.setCanLarge(canLarge);
+//		p.setCanMedic(canMedic);
+//		p.setCanOld(canOld);
+//		p.setCanSick(canSick);
+//		p.setIsLicense(isLicense);
+		
+	
 		
 		// insert이기 때문에 int 값으로 받아줌
 		int result = new PetSitterService().applyPetSitter(p);
@@ -81,14 +93,15 @@ public class PetSitterApplyServlet extends HttpServlet {
 		String page = "";	// 반환할 jsp의 경로(화면에 보여줄 view)를 저장할 String
 		
 		if(result > 0) {	// 성공했을 때
-			page = "/index.jsp";
+//			page = "/index.jsp";
+			System.out.println("리스트 불러와");
+//			response.sendRedirect("applyList.ps");
+			response.sendRedirect("index.jsp");
 		}else {	// 실패했을 때
-			page = "views/common/errorPage.jsp";
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			request.setAttribute("msg", "지원서 제출 실패!");
+			view.forward(request, response);
 		}
-		// 넘어갈 view와 넘겨줄 request객체를 같이 보내려면 forwarding 처리를 해야 함
-		RequestDispatcher view = request.getRequestDispatcher(page);
-		view.forward(request, response);
 
 	}
 

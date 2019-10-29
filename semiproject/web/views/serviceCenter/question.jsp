@@ -89,7 +89,7 @@ button {
 					</div>
 					<div class="form-group">
 						<label>내용</label>
-						<textarea id = "content" name="content" class="form-control" rows="20" placeholder="내용을 입력하세요"></textarea>
+						<textarea id = "content" style = "resize: none;" name="content" class="form-control" rows="20" placeholder="내용을 입력하세요"></textarea>
 					</div>
 					<div id="btnArea" class = "text-right">
 						<input type="button" onclick="Previous();" class="btn btn-info btn-md" value="이전으로"/> 

@@ -3,12 +3,16 @@ package petSitter.model.vo;
 import java.io.Serializable;
 import java.sql.Date;
 
+/**
+ * @author mijin
+ *
+ */
 public class PetSitter implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 8781128373138778399L;
-	  private String userId;
+	   private String userId;
 	   private int petSitterNo;
 	   private int grade;
 	   private String residence;
@@ -224,6 +228,6 @@ public class PetSitter implements Serializable{
 	            + isLicense + ", applyDate=" + applyDate + ", chkResume=" + chkResume + "]";
 	   }
 
-
+	   
 
 }

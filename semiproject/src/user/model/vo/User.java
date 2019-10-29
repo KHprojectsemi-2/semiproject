@@ -26,7 +26,6 @@ public class User implements Serializable{
 	private String userStatus;
 	private Date stopDate;
 	
-	
 	public User() {
 		super();
 	}
@@ -41,7 +40,12 @@ public class User implements Serializable{
 		this.userAddress = userAddress;
 		this.userImage = userImage;
 	}
-
+	
+	// 로그인 유저가 펫시터인지 확인할때 필요한 생성자
+		public User(String userId) {
+			super();
+			this.userId = userId;
+		}
 
 	public User(String userId, String userName, String userEmail, String userPhone, String userPostcode,
 			String userAddress, String userImage) {
@@ -114,6 +118,16 @@ public class User implements Serializable{
 		this.joinDate = joinDate;
 		this.latestDate = latestDate;
 		this.userStatus = userStatus;
+		this.stopDate = stopDate;
+	}
+
+	
+	
+	public Date getStopDate() {
+		return stopDate;
+	}
+
+	public void setStopDate(Date stopDate) {
 		this.stopDate = stopDate;
 	}
 
@@ -238,20 +252,10 @@ public class User implements Serializable{
 		this.userStatus = userStatus;
 	}
 
-	public Date getStopDate() {
-		return stopDate;
-	}
-
-	public void setStopDate(Date stopDate) {
-		this.stopDate = stopDate;
-	}
 	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-	
-
 
 	@Override
 	public String toString() {
@@ -259,8 +263,10 @@ public class User implements Serializable{
 				+ ", userGender=" + userGender + ", userEmail=" + userEmail + ", userBirth=" + userBirth
 				+ ", userPhone=" + userPhone + ", userPostcode=" + userPostcode + ", userAddress=" + userAddress
 				+ ", userImage=" + userImage + ", reported=" + reported + ", joinDate=" + joinDate + ", latestDate="
-				+ latestDate + ", userStatus=" + userStatus + "]";
+				+ latestDate + ", userStatus=" + userStatus + ", stopDate=" + stopDate + "]";
 	}
+
+	
 
 
 	

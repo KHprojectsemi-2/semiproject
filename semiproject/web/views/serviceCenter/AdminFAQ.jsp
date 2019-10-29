@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="board.model.vo.*, java.util.ArrayList, user.model.vo.*"%>
+    pageEncoding="UTF-8" import="board.model.vo.*, java.util.ArrayList"%>
 
 <%
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
@@ -72,11 +72,13 @@
 	.hide {
 		display:none;
 	}  
-/* 
-    #content_Answer {
-   		width : 1000px;
-		height : 250px;
-   	}   */
+	
+	#con_answer{
+		resize: none;
+		text-align : center;
+		padding : 20px;
+		line-height: 200%;
+	}
    	
 </style>
 </head>
@@ -96,7 +98,7 @@
 			<table id = "sc_List">
 			 	<tr class = "list">
 			 		<th width = "100px">No.</th>
-			 		<th width = "550px">내용</th>
+			 		<th width = "500px">제목</th>
 			 		<th width = "250px">등록날짜</th>
 			 		<th width = "200px">작성자</th>			 		
 				</tr>
@@ -116,15 +118,14 @@
 					<tr id = "content_Answer" class = "hide">
 						<td colspan="3">
 							<div>
-								<br><br><br><br>					
-								<p><%=b.getContent() %></p>
-								<br><br><br><br>
+								<textarea id = "con_answer" name="content" rows="5" cols="150" readonly><%=b.getContent() %></textarea>
 							</div>
 						</td>
 						<td>
 							<input id= "btn_hidden" type = "hidden" value = "<%=b.getBoardNo()%>">
-							<button id = "modifyBoard<%=num1%>" class = modify_Btn>수정하기</button>&nbsp;&nbsp;
-							<button id = "deleteBoard<%=num1%>" class = "del_Btn">삭제하기</button>
+							<button id = "modifyBoard<%=num1%>" class = "modify_Btn btn btn-info btn-md" style = "width : width: 120px; height : 25px; padding : 0;">수정하기</button>
+							<br>
+							<button id = "deleteBoard<%=num1%>" class = "del_Btn btn btn-info btn-md" style = "margin-top : 10px; width : width: 120px; height : 25px; padding : 0">삭제하기</button>
 						</td>
 					</tr>
 				<%
@@ -188,11 +189,7 @@
 		});
 		
 		$("#report").click(function(){
-			location.href = '<%=request.getContextPath()%>/views/serviceCenter/AdminReport.jsp';
-		});
-		
-		$("#modifyBoard").click(function(){
-			location.href = '<%=request.getContextPath()%>/views/serviceCenter/modifyFAQ.jsp';
+			location.href = '<%=request.getContextPath()%>/adminRBoard.bo';
 		});
 		
 		$(function() {
@@ -219,7 +216,6 @@
 				var check = confirm("삭제하시겠습니까?");
 				var bNo = $(this).parent().parent().find('input[id="btn_hidden"]').val();
 				if(check == true){
-					<%-- location.href = '<%=request.getContextPath()%>/deleteFAQ.bo?bNo='+bNo; --%>
 					$.ajax({
 						url:"<%=request.getContextPath()%>/deleteFAQ.bo",
 						type:"post",

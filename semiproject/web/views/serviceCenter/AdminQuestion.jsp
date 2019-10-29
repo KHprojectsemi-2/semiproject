@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" import="board.model.vo.*, java.util.ArrayList, user.model.vo.*"%>
 
 <%
-	ArrayList<QuestionBoard> list = (ArrayList<QuestionBoard>)request.getAttribute("list");
+	ArrayList<QuestionBoard> qb = (ArrayList<QuestionBoard>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
 	int listCount = pi.getListCount();
@@ -59,12 +59,12 @@
 		border : 1px solid black;	
 	}
 	
-	#content{
+	.qlist{
 		height : 50px;
 		align : center;
 	}
 	
-	tr#content:hover{
+	tr.qlist:hover{
 		cursor : pointer;
 	}
 
@@ -92,14 +92,15 @@
 			<table id = "sc_List">
 			 	<tr align = "center">
 			 		<th width = "100px">답글상태</th>
-			 		<th width = "550px">내용</th>
-			 		<th width = "250px">등록날짜</th>
-			 		<th width = "200px">작성자</th>			 		
+			 		<th width = "500px">제목</th>
+			 		<th width = "150px">등록날짜</th>
+			 		<th width = "150px">작성자</th>			 		
 				</tr>
-				<%for(QuestionBoard b : list){ %>
-					<tr id= "content">
+				<%for(QuestionBoard b : qb){ %>
+					<tr class= "qlist">
 						<td>
-							<input type = "hidden" value = "<%=b.getBoardNo()%>">
+							<input id = "hideNo" type = "hidden" value = "<%=b.getBoardNo()%>">
+							<input id = "qbStatus" type = "hidden" value = "<%=b.getReBoardStatus() %>">
 							<%=b.getReBoardStatus() %>
 						</td>
 						<td><%=b.getTitle() %></td>
@@ -159,21 +160,22 @@
 		});
 		
 		$("#question").click(function(){
-			location.href = '<%=request.getContextPath()%>/views/serviceCenter/AdminQuestion.jsp';
+			location.href = '<%=request.getContextPath()%>/adminQBoard.bo';
 		});
 		
 		$("#report").click(function(){
-			location.href = '<%=request.getContextPath()%>/views/serviceCenter/AdminReport.jsp';
-		});
-		
-		$("#modifyBoard").click(function(){
-			location.href = '<%=request.getContextPath()%>/views/serviceCenter/modifyFAQ.jsp';
+			location.href = '<%=request.getContextPath()%>/adminRBoard.bo';
 		});
 		
 		$(function() {
-			var show = ("#sc_List");
-			$("#content td").click(function() {		
-				<%-- location.href = '<%=request.getContextPath()%>/views/serviceCenter/modifyFAQ.jsp'; --%>
+			$(".qlist td").click(function() {	
+				var status = $(this).parent().find('input[id="qbStatus"]').val();
+				if(status == 'Y'){
+					alert("답글작성이 완료된 목록입니다.");
+				}else{
+					var qbn = $(this).parent().find('input[id="hideNo"]').val();
+					location.href = '<%=request.getContextPath()%>/selectqb.bo?qbn='+qbn;
+				}
 			});
 		});
 		
