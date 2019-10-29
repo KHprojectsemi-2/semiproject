@@ -161,9 +161,6 @@ footer {
 									<li class="nav-item"><a	href="<%=root%>/views/bbs/bbsList.jsp" class="nav-link">커뮤니티</a>
 									
 									</li>
-                           <li class="nav-item"><a   href="<%=root%>/views/bbs/bbsList.jsp" class="nav-link">커뮤니티</a>
-                           
-                           </li>
                            <li class="nav-item">
                           	 <%if(loginUser == null){ %>
                           		<a href="<%=root%>/FAQList.bo" class="nav-link">고객센터</a>
