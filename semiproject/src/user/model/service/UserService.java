@@ -97,6 +97,18 @@ public class UserService {
 		
 	}
 
+	public ArrayList<User> selectUserList(int currentPage, int limit) {
+
+		Connection conn = getConnection();
+		
+		ArrayList<User> userList = new UserDao().selectUserList(conn, currentPage, limit);
+		
+		close(conn);
+		
+		return userList;	
+		
+	}
+	
 	public int idCheck(String userId) {
 
 		Connection conn = getConnection();
@@ -199,6 +211,18 @@ public class UserService {
 		close(conn);
 		
 		return res2;
+	}
+
+	// 회원 수 구하기
+	public int getUserCount() {
+
+		Connection conn = getConnection();
+		
+		int result = new UserDao().getUserCount(conn);
+		
+		close(conn);
+		
+		return result;
 	}
 
 

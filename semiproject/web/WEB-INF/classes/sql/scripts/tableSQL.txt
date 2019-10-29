@@ -45,6 +45,11 @@ CREATE SEQUENCE SEQ_MATCHNO;
 CREATE SEQUENCE SEQ_REPORTNO;
 CREATE SEQUENCE SEQ_FILENO;
 
+-- 관리자쪽에서 문의 내용 보여줄때 정렬관련 필요한 시퀀스
+create sequence SEQ_QBOARDNO;
+
+-- 관리자쪽에서 신고 목록 게시판 정렬에 필요한 시퀀스
+create sequence SEQ_RBOARDNO;
 
 CREATE TABLE SUSER (
    userId   VARCHAR2(20)      NOT NULL,
@@ -90,7 +95,6 @@ CREATE TABLE JOINATTACH(
     fileLevel	NUMBER  NULL,
     status	VARCHAR2(1) DEFAULT 'Y' NOT NULL
 );
-
 
 CREATE TABLE PETSITTER (
    userId   VARCHAR2(16)      NOT NULL,
@@ -138,17 +142,19 @@ CREATE TABLE DIARY (
 CREATE TABLE MATCHING (
    matchNo   NUMBER      NOT NULL,
    sitterId   VARCHAR2(12)      NULL,
-   userId   VARCHAR2(16)      NULL,
+   userId   VARCHAR2(12)      NULL,
    isHome   VARCHAR(1)      NOT NULL,
-   careDate   DATE      NOT NULL,
+   careDate   DATE      NULL,
    price   NUMBER(10)      NOT NULL,
-    wantToSay VARCHAR2(100),
-    Special_Note VARCHAR2(100),
-    Thumbnail VARCHAR2(1000)  NOT NULL,
-   regStatus   VARCHAR(1)   DEFAULT 'Y'   NULL,
+    wantToSay VARCHAR2(100)    NULL,
+    Special_Note VARCHAR2(100) NULL,
+    Thumbnail VARCHAR2(1000)  NULL,
+   regStatus   VARCHAR(1)   DEFAULT '1'   NULL,
     isrest VARCHAR(1) NOT NULL,
-   isIng   VARCHAR(1) NOT NULL
+    countPet number NULL
 );
+
+1 - 글만올린거 // 2 - 매칭중이지만 결제미완료 // 3- 매칭중이고, 결제완료 // 4 - 매칭종료 // 5 - 삭제
 
 CREATE TABLE BBS (
    bbsNo   NUMBER      NOT NULL,
@@ -180,28 +186,45 @@ CREATE TABLE RCOMMENT (
    comStatus   VARCHAR(1)      NULL
 );
 
+-- FAQ게시판
 CREATE TABLE BOARD (
    boardNo   NUMBER      NOT NULL,
-   userId   VARCHAR2(16)      NOT NULL,
+   userId   VARCHAR2(12)      NOT NULL,
    boardType   VARCHAR2(20)      NOT NULL,
    title   VARCHAR2(100)      NULL,
    content   VARCHAR2(4000)      NULL,
    create_date   DATE   DEFAULT SYSDATE   NULL,
-   boardStatus   VARCHAR(1)      NULL
+   boardStatus   VARCHAR(1) DEFAULT 'Y'     NULL
 );
 
+-- 문의하기 게시판 
 CREATE TABLE QUESTION_BOARD (
    boardNo   NUMBER      NOT NULL,
-   re_content   VARCHAR2(4000)      NULL,
-   category   VARCHAR2(30)      NULL
+   userId   VARCHAR2(12)      NOT NULL,
+   boardType   VARCHAR2(20)       NOT NULL,
+   title   VARCHAR2(100)      NULL,
+   content   VARCHAR2(4000)      NULL,
+   create_date   DATE   DEFAULT SYSDATE   NULL,
+   boardStatus   VARCHAR(1) DEFAULT 'Y'     NULL,
+   re_content   VARCHAR2(4000)     NULL,
+   category   VARCHAR2(100)     NULL,
+   re_boardStatus VARCHAR2(1)   DEFAULT 'N' NULL
 );
 
+-- 신고하기 게시판
 CREATE TABLE REPORT_BOARD (
-   boardNo   NUMBER      NOT NULL,
-   repUser   VARCHAR2(16)      NOT NULL,
-   repType   VARCHAR2(12)      NOT NULL,
-   repStatus   VARCHAR(1)      NULL
+    boardNo   NUMBER      NOT NULL,
+   userId   VARCHAR2(12)      NOT NULL,
+   boardType   VARCHAR2(20)      NOT NULL,
+   title   VARCHAR2(100)      NULL,
+   content   VARCHAR2(4000)      NULL,
+   create_date   DATE   DEFAULT SYSDATE   NULL,
+   boardStatus   VARCHAR(1) DEFAULT 'Y'     NULL,
+   repUser   VARCHAR2(12)      NOT NULL,
+   repType   VARCHAR2(12)    NOT NULL,
+   repStatus   VARCHAR(1)  DEFAULT 'N'    NULL
 );
+
 
 CREATE TABLE BBS_STATUS (
    bbsNo   NUMBER      NOT NULL,
@@ -280,3 +303,25 @@ ALTER TABLE REPORT_BOARD ADD CONSTRAINT FK_BOARD_TO_REPORT_BOARD_1 FOREIGN KEY (
 REFERENCES BOARD (
    boardNo
 );
+
+
+-- FAQ게시판 정렬관련 뷰
+CREATE OR REPLACE VIEW BOARD_LIST AS
+SELECT ROWNUM RNUM, A.* FROM( SELECT BOARDNO, USERID, BOARDTYPE, TITLE, CONTENT, CREATE_DATE, BOARDSTATUS
+FROM BOARD 
+WHERE BOARDSTATUS='Y'
+ORDER BY BOARDNO DESC) A;
+
+-- 문의하기 관련 뷰
+CREATE OR REPLACE VIEW QBOARD_LIST AS
+SELECT ROWNUM RNUM, A.* FROM( SELECT *
+FROM QUESTION_BOARD 
+WHERE BOARDSTATUS='Y'
+ORDER BY BOARDNO DESC) A;
+
+-- 신고하기 관련 뷰
+CREATE OR REPLACE VIEW RBOARD_LIST AS
+SELECT ROWNUM RNUM, A.* FROM( SELECT *
+FROM REPORT_BOARD 
+WHERE BOARDSTATUS='Y'
+ORDER BY CREATE_DATE DESC) A;

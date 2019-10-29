@@ -111,7 +111,7 @@ img:hover{
 </head>
 <body>
 	<%@include file="../common/header.jsp"%>
-	<form id = "userJoin_Form" action="<%=request.getContextPath()%>/join.me" method="post" encType="multipart/form-data">
+	<form id = "userJoin_Form" onsubmit="return validate()" action="<%=request.getContextPath()%>/join.me" method="post" encType="multipart/form-data">
 	<div id="fileArea">
 				<input type="file" id="thumbnailImg1" multiple="multiple" name="thumbnailImag1" onchange="LoadImg(this,1)">
 				<input type="text" name="userImg">
@@ -127,7 +127,7 @@ img:hover{
 		<td>
 		<div id="d_join" >
 			<label  class="l_join">아이디:</label>
-			 <input type="text" name="userId" required  placeholder="6~12자리 영문,숫자"> 
+			 <input type="text" id="userId" name="userId" required  placeholder="6~12자리 영문,숫자" > 
 			 <input type="button" id="idCheck" class="btn btn-info btn-md" value="중복 확인">
 		</div>
 		</td>
@@ -136,7 +136,7 @@ img:hover{
 		<td>
 		<div id="d_join">
 			<label class="l_join">비밀번호: </label> <input
-				type="password"  name="userPwd" required  placeholder="6~12자리 입력">
+				type="password" id="userPwd"  name="userPwd" required  placeholder="6~12자리 입력">
 		</div>
 		</td>
 		</tr>
@@ -145,6 +145,7 @@ img:hover{
 		<div id="d_join">
 			<label class="l_join">비밀번호 확인: </label> <input
 				type="password"  id="userPwdCheck" required  placeholder="비밀번호 확인">
+			<label class="l_join" name="pwdResult" style="padding-right:15px;"></label>
 		</div>
 		</td>
 		<td rowspan="4">
@@ -157,7 +158,7 @@ img:hover{
 		<td>
 		<div id="d_join">
 			<label class="l_join">이름: </label>
-			<input type="text" name="userName" required  placeholder="1~8자리 입력"
+			<input type="text" id = "userName" name="userName" required  placeholder="1~8자리 입력"
 					 <%if(kakao_name!=null){%>value=<%=kakao_name %><%} %>   >
 			<label>남 </label>
 			<input type="radio" name ="chkGender" value="M" checked>&nbsp;&nbsp;
@@ -192,7 +193,7 @@ img:hover{
 		<td>
 		<div id="d_join">
 			<label class="l_join">이메일: </label>
-			<input type="email" name="userEmail" required  placeholder="example@co.kr"
+			<input type="email" id="userEmail" name="userEmail" required  placeholder="example@co.kr"
 			 <%if(kakao_email!=null){%>value=<%=kakao_email %><%} %> >
 			<input type="button" id="emailCheck" class="btn btn-info btn-md" value="인증받기">
 				
@@ -207,8 +208,8 @@ img:hover{
 		<tr>
 		<td>
 		<div id="d_join">
-			<label class="l_join">연락처: </label>
-			<input type="text" name="userPhone" required placeholder="(-)없이 숫자만 입력">
+			<label class="l_join">휴대폰: </label>
+			<input type="text" id="userPhone" name="userPhone" required placeholder="(-)없이 숫자만 입력">
 		</div>
 		</td>
 		</tr>
@@ -216,9 +217,9 @@ img:hover{
 		<td>
 		<div id="d_join">
 			<label class="l_join">주소: </label>
-			<input type="text" id="postcode" name="postcode" placeholder="우편번호">
+			<input type="text" id="postcode" name="postcode" placeholder="우편번호" readonly>
 			<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-			<span id="guide" style="color:#999"></span>
+			<span id="guide" style="color:#999" ></span>
 		</div>
 		</td>
 		</tr>
@@ -226,7 +227,7 @@ img:hover{
 		<td>
 		<div id="d_join">
 			<label class="l_join"></label>
-			<input type="text" id="userAddress" name="userAddress" placeholder="도로명주소" size="40">
+			<input type="text" id="userAddress" name="userAddress" placeholder="도로명주소" size="40" readonly>
 		</div>
 			<input type="text" id="sample4_jibunAddress" placeholder="지번주소" hidden=true  disabled>
 		</td>
@@ -341,14 +342,10 @@ img:hover{
 				}
 				reader.readAsDataURL(value.files[0]);
 			}
-			console.log("userImg"+$("input[name=userImg]").val());
-			console.log("petImg"+$("input[name=petImg]").val());
-			console.log("petImg"+$("input[name=petImg]").val());
 
 		}
 	
 		var count = 0; // 펫 추가 카운트
-		var sendCode = false; // 인증 번호 발송 확인용
 		var emailCode = 0; // 인증 번호
 
 		var intro = $("<h2>").text("당신의 펫을 추가해보세요").css({
@@ -486,6 +483,11 @@ img:hover{
 					}).open();
 		}
 
+		
+		
+		var isUsable = false;
+		var sendCode = false; // 인증 번호 발송 확인용
+		var isCorrectCode = false // 인증 번호 체크용
 		$("#idCheck").click(function() {
 
 			var userId = $("#userJoin_Form input[name='userId']");
@@ -495,79 +497,190 @@ img:hover{
 				userId.focus();
 			} else { // 중복 버튼 기능이 활성화 되야 된다면..
 				$.ajax({
-						url : "<%=request.getContextPath()%>/idCheck.me",
-						type:"post",
-						data:{userId:userId.val()},
-						success:function(data){
-							if(data =="fail"){
-								alert("아이디가 중복됩니다.");
-								userId.focus();
-							}else{
-								alert("사용 가능한 아이디입니다.");
-								userId.attr("readonly","true"); // 더 이상 바꿀 수 없도록
-								isUsable = true; // 사용가능하다는 의미로 flag 값을 변경
-							}
-						},
-						error:function(data){
-							console.log("서버 통신 안됨");
+					url : "<%=request.getContextPath()%>/idCheck.me",
+					type : "post",
+					data : {userId : userId.val()},
+					success : function(data) {
+						if (data == "fail") {
+							alert("아이디가 중복됩니다.");
+							userId.focus();
+						} else {
+							alert("사용 가능한 아이디입니다.");
+							userId.attr("readonly", "true"); // 더 이상 바꿀 수 없도록
+							isUsable = true; // 사용가능하다는 의미로 flag 값을 변경
 						}
-					});
-				}
-			});
-			
-			// 인증번호 만들기
-			function makeRandom(){
-				var code="";
-				for(var i=0;i<6;i++)
-				{
-					code += Math.floor(Math.random() * 10)+"";
-				}
-				return code;
-			};
-			
-			// 이메일 인증번호 전송
-			$("#emailCheck").click(function(){
-				var userId = $("input[name=userId]").val();
-				var userEmail = $("input[name=userEmail]").val();
-				var userName = $("input[name=userName]").val();
-				emailCode = makeRandom();
-		 		var template_params = {
-						   "userEmail": userEmail,
-						   "reply_to": "reply_to_value",
-						   "pettrase": "펫트라슈",
-						   "userName": userName,
-						   "code":emailCode
-						}
+					},
+					error : function(data) {
+						console.log("서버 통신 안됨");
+					}
+				});
+			}
+		});
 
-						var service_id = "Patrasche";
-						var template_id = "template_loLSxR35";
+		// 인증번호 만들기
+		function makeRandom() {
+			var code = "";
+			for (var i = 0; i < 6; i++) {
+				code += Math.floor(Math.random() * 10) + "";
+			}
+			return code;
+		};
+
+		// 이메일 인증번호 전송
+		$("#emailCheck").click(
+				function() {
+					var userId = $("input[name=userId]").val();
+					var userEmail = $("input[name=userEmail]").val();
+					var userName = $("input[name=userName]").val();
+					emailCode = makeRandom();
+					var template_params = {
+						"userEmail" : userEmail,
+						"reply_to" : "reply_to_value",
+						"pettrase" : "펫트라슈",
+						"userName" : userName,
+						"code" : emailCode
+					}
+
+					var service_id = "Patrasche";
+					var template_id = "template_loLSxR35";
 					//	emailjs.send(service_id, template_id, template_params); 
-						
-						
-				alert(userId + "님에게 " +userEmail+"로 인증번호"+ emailCode + "가 발송되었습니다.");
-				// alert(userId + "님에게 인증번호가 발송되었습니다."); 
-				if(!sendCode)
-				{
-					var cDiv = $("<div>").attr({"id":"d_join"});
-					cDiv.append($("<label>").attr({"class":"l_join"}));
-					cDiv.append($("<input>").attr({"type":"text","id":"emailCode","required":true,"placeholder":"인증번호 입력"}));
-					cDiv.append($("<label>").attr({"class":"l_join","name":"chkCode"}));
-					$("#codeInput").append(cDiv)
-					sendCode=true;
-				}
-			});
-			
-			// 인증번호 입력. 동적으로 생성한 태그에 이벤트 적용
-			$(document).on("focusout","#emailCode",function(){ 
-				if(emailCode == ($("#emailCode").val())){
-					$("label[name=chkCode]").css({"color":"lightgreen","text-align":"center"}).text("일치!");
-					$("#emailCode").attr({"readonly":true});
-				}else{
-					$("label[name=chkCode]").css({"color":"red","text-align":"center"}).text("불일치!");
-				}
-			});
 
-		</script>
+					alert(userId + "님에게 " + userEmail + "로 인증번호" + emailCode
+							+ "가 발송되었습니다.");
+					// alert(userId + "님에게 인증번호가 발송되었습니다."); 
+					if (!sendCode) {
+						var cDiv = $("<div>").attr({
+							"id" : "d_join"
+						});
+						cDiv.append($("<label>").attr({
+							"class" : "l_join"
+						}));
+						cDiv.append($("<input>").attr({
+							"type" : "text",
+							"id" : "emailCode",
+							"required" : true,
+							"placeholder" : "인증번호 입력"
+						}));
+						cDiv.append($("<label>").attr({
+							"class" : "l_join",
+							"name" : "chkCode"
+						}));
+						$("#codeInput").append(cDiv)
+						sendCode = true;
+					}
+				});
+
+		// 인증번호 입력. 동적으로 생성한 태그에 이벤트 적용
+		$(document).on("focusout", "#emailCode", function() {
+			if (emailCode == ($("#emailCode").val())) {
+				$("label[name=chkCode]").css({
+					"color" : "lightgreen",
+					"text-align" : "center"
+				}).text("일치!");
+				$("#emailCode").attr({
+					"readonly" : true
+				});
+				isCorrectCode= true;
+			} else {
+				$("label[name=chkCode]").css({
+					"color" : "red",
+					"text-align" : "center"
+				}).text("불일치!");
+				isCorrectCode=false;
+			}
+		});
+		
+
+		
+		// 제약조건 & 정규식
+		
+		var userIdCheck = RegExp(/[^a-zA-Z0-9]$/);
+	
+		$('input[name=userId]').keyup(function(){
+			if(userIdCheck.test($('input[name=userId]').val())){
+				console.log("영어 아님 "+$('input[name=userId]').val());
+				$('input[name=userId]').val($('input[name=userId]').val().replace(/[^a-z0-9]/gi,''));
+			}
+		});
+		
+		function validate() {
+	        var idcheck = document.getElementById('userId');
+	        var namecheck = document.getElementById('userName');
+	        var emailcheck = document.getElementById('userEmail');
+	        var phonecheck = document.getElementById('userPhone');
+			var pwdcheck = document.getElementById("userPwd");
+	        // 아이디 검사
+	        if(!chk(/^[a-zA-Z0-9]{6,12}$/, idcheck, "아이디는 영어대소문자 숫자만 6~12자 입력가능합니다."))
+	               return false;
+	        
+	        // 아이디 중복 검사
+			if(!isUsable){
+				alert("아이디 중복검사를 해야합니다.");
+				return false;
+			}
+	        
+	        if(!chk(/^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]|.*[0-9]).{6,12}$/,pwdcheck,"비밀번호는 특수문자를 하나 포함한 영어,숫자  6~12자 입력가능합니다.")){
+				$("input[name=userPwd]").attr("readonly",false).css("background","white").val("");
+				$("#userPwdCheck").attr("readonly",false).css("background","white").val("");
+				$("label[name=pwdResult]").css({"color":"lightgreen","text-align":"center"}).text("");
+	        	return false;
+	       
+	        }
+	        
+	        // 이름 검사
+	        // 2글자 이상,6글자 이하 한글만
+	        if(!chk(/^[가-힝]{2,6}$/, namecheck, "이름은 한글로 2~6글자 입력해야합니다."))
+	               return false;
+	        
+	        // 이메일 검사
+	        // 4글자 이상(\w = [a-zA-Z0-9_], [\w-\.]) @가 나오고
+	        // 1글자 이상(주소). 글자 가 1~3번 반복됨
+	        if(!chk(/^[\w]{4,}@[\w]+(\.[\w-]+){1,3}$/, emailcheck, "이메일 형식에 어긋납니다."))
+	               return false;
+
+	        // 인증메일 발송 여부 검사
+			if(!sendCode){
+				alert("이메일 인증번호를 받아야합니다.");
+				return false;
+			}
+	        
+	        // 인증 번호 검사
+			if(!isCorrectCode){
+				alert("이메일 인증번호가 다릅니다.");
+				return false;
+			}
+			
+			// 휴대폰 검사
+			// 8~11자리 번호만 입력
+			if(!chk(/^[0-9]{8,11}$/,phonecheck,"휴대폰은 '-'없이 8~11자리 숫자만 입력해주세요."))
+					return false;
+
+	        
+	        function chk(re, e, msg) {
+	            if (re.test(e.value)) {
+	                    return true;
+	            }
+	            alert(msg);
+	            e.value = "";
+	            e.focus();
+	            return false;
+	    	 }
+		}
+
+        
+		$("#userPwdCheck").focusout(function(){
+			var userPwd = $("input[name=userPwd]").val();
+			if(userPwd!=""){
+			
+				if($("#userPwdCheck").val()==userPwd){
+					$("input[name=userPwd]").attr("readonly","true").css("background","lightgray");
+					$("#userPwdCheck").attr("readonly","true").css("background","lightgray");
+					$("label[name=pwdResult]").css({"color":"lightgreen","text-align":"center"}).text("일치!");
+				}
+			}
+		});
+
+	</script>
 
 	<br>
 	<br>

@@ -142,7 +142,7 @@ public class UserJoinServlet extends HttpServlet {
 						}
 					}
 				}
-				}
+				
 			}
 
 			// 유저 부분

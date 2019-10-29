@@ -172,7 +172,7 @@ img:hover{
 		</div>
 		</td>
 		<td rowspan="4"  style="padding-left:70px;padding-top:30px;">
-			<img src="#" width ="200" height="200" >
+			<img src="<%=request.getContextPath()%>/join_uploadFiles/<%=user.getUserImage()%>" width ="200" height="200" >
 		</td>
 		</tr>
 		<tr>
@@ -223,7 +223,7 @@ img:hover{
 		<td>
 		<div id="d_join" >
 			 <label class="l_join">펫시터 등급: </label>
-			 <input type="text" name="grade"  value="등급입력" readonly> 
+			 <input type="text" name="grade"  value="----" readonly> 
 		</div>
 		</td>
 		</tr>
@@ -237,7 +237,7 @@ img:hover{
 		<td>
 		<div id="d_join" >
 			 <label class="l_join">신고 누적: </label>
-			 <input type="text" name="reported"  value="신고누적" readonly> 
+			 <input type="text" name="reported"  value="<%=user.getReported()%>" readonly> 
 		</div>
 		</td>
 		</tr>
@@ -296,7 +296,7 @@ img:hover{
 								name="petName" style="width: 120px" value="<%=pet.getPetName()%>">
 						</div>
 					</td>
-					<td rowspan="3"><img src="#" width="150" height="150"
+					<td rowspan="3"><img src="<%=request.getContextPath()%>/join_uploadFiles/<%=pet.getPetImage()%>" width="150" height="150"
 						style="margin-top: 20px">
  						<button type="button" class="pet_button minus" style="margin-bottom:100px;margin-left:25px;" onclick="minus()">-</button>
  					</td>
@@ -343,7 +343,7 @@ img:hover{
 	<%} %>
 	</form>
 	<!-- 팝업 될 레이어 --> 
-	<div id ="wrap" style="position:absolute"> 
+	<div id ="wrap"> 
         <div id = "container">  
            <div id="mask"></div>
             <div class="window">
@@ -362,7 +362,11 @@ img:hover{
     </div>
 
 	<script>
-	
+	$(function(){
+		$("textarea[name=msg]").focus(function(){
+			$("textarea[name=msg]").val("");
+		})
+	})
 	function wrapWindowByMask(){
 		 
         //화면의 높이와 너비를 구한다.
@@ -406,7 +410,7 @@ img:hover{
  
         });      
  
-    });
+    });	
 
 		$("#goBack").click(function(){
 			location.href =  '<%=request.getContextPath()%>/userSearch.li';

@@ -480,5 +480,79 @@ public class UserDao {
 	}
 
 
+	public int getUserCount(Connection conn) {
+		Statement stmt = null;
+		ResultSet rs  = null;
+		int listCount = 0;
+		
+		String query = prop.getProperty("getUserCount");
+
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(query);
+			
+			if(rs.next()) {
+				listCount=rs.getInt(1); // 쿼리에서의 count(*) resultSet 컬럼 값을 listCount에 담는다
+			}
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+			close(rs);
+		}
+		
+		return listCount;
+	}
+
+
+	public ArrayList<User> selectUserList(Connection conn, int currentPage, int limit) {
+
+		PreparedStatement pstmt = null;
+		ArrayList<User> list = new ArrayList<User>();
+		ResultSet rs = null;
+		
+		String query = prop.getProperty("selectUserList");
+		
+		// 쿼리문 실행시 조건절에 넣을 변수들(rownum에 대한 조건 시 필요)
+		int startRow = (currentPage-1)*limit +1; // ex) 2페이지면, 시작번호가 11번
+		int endRow = startRow + limit - 1;		// 11~20
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				User user = new User(rs.getString("userId"),
+						rs.getInt("userNo"),
+						rs.getString("userPwd"),
+						rs.getString("userName"),
+						rs.getString("userGender"),
+						rs.getString("userEmail"),
+						rs.getDate("userBirth"),
+						rs.getString("userPhone"),
+						rs.getString("userPostcode"),
+						rs.getString("userAddress"),
+						rs.getString("userImage"),
+						rs.getInt("reported"),
+						rs.getDate("joinDate"),
+						rs.getDate("latestDate"),
+						rs.getString("userStatus"),
+						rs.getDate("stopDate"));
+				list.add(user);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		return list;
+	}
+
+
 
 }
