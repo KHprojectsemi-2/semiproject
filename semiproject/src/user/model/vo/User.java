@@ -40,6 +40,24 @@ public class User implements Serializable{
 		this.userAddress = userAddress;
 		this.userImage = userImage;
 	}
+	
+	// 로그인 유저가 펫시터인지 확인할때 필요한 생성자
+		public User(String userId) {
+			super();
+			this.userId = userId;
+		}
+
+	public User(String userId, String userName, String userEmail, String userPhone, String userPostcode,
+			String userAddress, String userImage) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.userEmail = userEmail;
+		this.userPhone = userPhone;
+		this.userPostcode = userPostcode;
+		this.userAddress = userAddress;
+		this.userImage = userImage;
+	}
 
 	// 아이디 찾기할 때 필요한 생성자
 	public User(String userName, String userEmail, Date userBirth) {
@@ -67,7 +85,7 @@ public class User implements Serializable{
 
 	// 가입할 때 필요한 생성자
 	public User(String userId, String userPwd, String userName, String userGender, String userEmail, Date userBirth,
-			String userPhone,String userPostcode ,String userAddress) {
+			String userPhone,String userPostcode ,String userAddress,String userImage) {
 		super();
 		this.userId = userId;
 		this.userPwd = userPwd;
@@ -78,9 +96,9 @@ public class User implements Serializable{
 		this.userPhone = userPhone;
 		this.userPostcode = userPostcode;
 		this.userAddress = userAddress;
+		this.userImage = userImage;
 	}
 	
-
 	public User(String userId, int userNo, String userPwd, String userName, String userGender, String userEmail,
 			Date userBirth, String userPhone, String userPostcode, String userAddress, String userImage, int reported,
 			Date joinDate, Date latestDate, String userStatus, Date stopDate) {
@@ -101,27 +119,6 @@ public class User implements Serializable{
 		this.latestDate = latestDate;
 		this.userStatus = userStatus;
 		this.stopDate = stopDate;
-	}
-	
-	public User(String userId, int userNo, String userPwd, String userName, String userGender, String userEmail,
-			Date userBirth, String userPhone, String userPostcode, String userAddress, String userImage, int reported,
-			Date joinDate, Date latestDate, String userStatus) {
-		super();
-		this.userId = userId;
-		this.userNo = userNo;
-		this.userPwd = userPwd;
-		this.userName = userName;
-		this.userGender = userGender;
-		this.userEmail = userEmail;
-		this.userBirth = userBirth;
-		this.userPhone = userPhone;
-		this.userPostcode = userPostcode;
-		this.userAddress = userAddress;
-		this.userImage = userImage;
-		this.reported = reported;
-		this.joinDate = joinDate;
-		this.latestDate = latestDate;
-		this.userStatus = userStatus;
 	}
 
 	
@@ -255,6 +252,7 @@ public class User implements Serializable{
 		this.userStatus = userStatus;
 	}
 
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

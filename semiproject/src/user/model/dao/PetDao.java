@@ -46,10 +46,11 @@ public class PetDao {
 			pstmt.setString(1, pet.getUserId());
 			pstmt.setString(2, pet.getPetName());
 			pstmt.setString(3, pet.getPetWeight());
-			pstmt.setString(4, pet.getPetKind());
-			pstmt.setString(5, pet.getPetGender());
-			pstmt.setString(6, pet.getIsNeutral());
-			pstmt.setInt(7, pet.getPetAge());
+			pstmt.setString(4, pet.getPetImage());
+			pstmt.setString(5, pet.getPetKind());
+			pstmt.setString(6, pet.getPetGender());
+			pstmt.setString(7, pet.getIsNeutral());
+			pstmt.setInt(8, pet.getPetAge());
 
 			result = pstmt.executeUpdate();
 
@@ -93,6 +94,7 @@ public class PetDao {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
+			close(rs);
 		}
 
 		return pal;

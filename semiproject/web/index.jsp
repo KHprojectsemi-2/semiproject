@@ -85,12 +85,13 @@
 
 </head>
 <body>
+
 	<%@include file = "views/common/header.jsp" %>
 	<br><br>
+	
 	<input id = "loginUser" type = "hidden" value = "<%=loginUser%>">
 	<div id = "outer">
 		<div id = "mainImg">
-			<%-- <img alt="사진사진사진" src="<%=request.getContextPath()%>/mainViewImg/mainImg.jpg"> --%>
 			<div id = "intFont">
 				<p>
 					반려동물들을 위해<br>
@@ -146,6 +147,6 @@
 
 	<br><br><br>
 	<%@include file = "views/common/footer.jsp" %>
-
+	
 </body>
 </html>

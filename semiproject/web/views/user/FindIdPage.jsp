@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>FindIdPage</title>
+<title>leopet || FindId</title>
 <style>
 body {
 	margin: 0;
@@ -47,13 +47,13 @@ body {
 				class="row justify-content-center align-items-center">
 				<div id="login-column" class="col-md-6">
 					<div id="login-box" class="col-md-12">
-						<form id="login-form" class="form" method="post">
+						<form id="login-form" class="form" method="post" target="iframe1">
 							<h3 class="text-center text-info">아이디 찾기</h3>
 
 							<div class="form-group">
 								<label for="userName" class="text-info">NAME:</label><br>
 								<input type="text" name="userName" id="userName"
-									class="form-control">
+									class="form-control" required>
 							</div>
 							<div class="form-group">
 								<label for="userEmail" class="text-info">BIRTH:</label><br>
@@ -78,10 +78,10 @@ body {
 							<div class="form-group">
 								<label for="userEmail" class="text-info">EMAIL:</label><br>
 								<input type="text" name="userEmail" id="userEmail"
-									class="form-control">
+									class="form-control" required>
 							</div>
 							<div class="form-group" style="display:block; margin-top:40px">
-								<input type="button" name="submit" class="btn btn-info btn-md" value="아이디 찾기">
+								<input type="submit" name="submit" class="btn btn-info btn-md" value="아이디 찾기">
 								<div style="display:block; text-align:right; margin-top:10px" >
 									<a href="<%=root %>/views/user/LoginPage.jsp" class="text-info" >로그인 화면으로</a>
 								</div>
@@ -96,40 +96,7 @@ body {
 			</div>
 		</div>
 	</div>
-	<script>
-	$(function(){
-		var offset = $("#userEmail").offset();
-		$("#userName").focus();
-		$('html,body').animate({scrollTop : offset.top-300},400);
-		
-		$("input[name=submit]").click(function(){
-			var userName = $("input[name=userName]").val();
-			var userEmail = $("input[name=userEmail]").val();
-			var year = $("select[name=birth_year]").val();
-			var month =  $("select[name=birth_month]").val();
-			var day = $("select[name=birth_day]").val();
-			
-			$.ajax({
-				url:"<%=request.getContextPath()%>/findId.me",
-				type:"post",
-				data:{userName:userName,userEmail:userEmail,year:year,month:month,day:day},
-				success:function(data){
-					if(data != null){
-						var rdiv = $("<div>").attr({"class":"result"})
-						rdiv.append($("h3").attr({"align":"center"}).css({"margin-top":"10px"}).text(userName + "님의 아이디는 "+data+"입니다."))
-						$("#login-form").append(rdiv);
-					}else{
-						alert("해당되는 아이디가 없습니다.");
-					}
-				},
-				error:function(data){
-					alert("해당되는 아이디가 없습니다.");
-				}
-			});
-			
-		});
-	});
-	</script>
+<iframe name="iframe1" style="display:none;"></iframe>
 	<br>
 	<br>
 	<br>
@@ -149,4 +116,49 @@ body {
 	<br>
 	<%@include file="../common/footer.jsp"%>
 </body>
+	<script>
+	var flag = false;
+	$(function(){
+		var offset = $("#userEmail").offset();
+		$("#userName").focus();
+		$('html,body').animate({scrollTop : offset.top-300},400);
+	});
+	
+	jQuery('#login-form').submit(
+		    function(){
+		    	var userName = $("input[name=userName]").val();
+				var userEmail = $("input[name=userEmail]").val();
+				var year = $("select[name=birth_year]").val();
+				var month =  $("select[name=birth_month]").val();
+				var day = $("select[name=birth_day]").val();
+				alert(year +" "+month+" "+day+" ");
+				$.ajax({
+					url:"<%=request.getContextPath()%>/findId.me",
+					type:"post",
+					data:{userName:userName,userEmail:userEmail,year:year,month:month,day:day},
+					success:function(data){
+						if(data != null){
+							if(!flag){
+									var rdiv = $("<div>").attr({"class":"result"});
+									rdiv.append($("h3").attr({"align":"center"}).css({"margin-top":"10px"}).text(userName + "님의 아이디는 "+data+"입니다."))
+									$("#login-form").append(rdiv);
+									flag= true;
+							}else{
+								$("h3").text(userName + "님의 아이디는 "+data+"입니다.");
+							}
+						}else{
+							alert("해당되는 아이디가 없습니다.");
+						}
+					},
+					error:function(data){
+						alert("해당되는 아이디가 없습니다.");
+					}
+				});
+				
+		    });
+	
+/* 	$("input[name=submit]").click(function(){
+	
+	}); */
+	</script>
 </html>

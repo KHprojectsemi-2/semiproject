@@ -42,21 +42,9 @@ public class PetSitterDao {
 		System.out.println("다오다오다오 id : " + p.getUserId());
 		System.out.println("다오다오다오 resume : " + p.getChkResume());
 		
+		System.out.println("다오 : " + p);
+		
 		try {
-//			pstmt = conn.prepareStatement(query);
-//			pstmt.setString(1, p.getUserId());
-//			pstmt.setInt(2, p.getGrade());
-//			pstmt.setString(3, p.getResidence());
-//			pstmt.setString(4, p.getJob());
-//			pstmt.setString(5, p.getWithFam());
-//			pstmt.setString(6, p.getWithPet());
-//			pstmt.setString(7, p.getCanLarge());
-//			pstmt.setString(8, p.getCanMedic());
-//			pstmt.setString(9, p.getCanOld());
-//			pstmt.setString(10, p.getCanSick());
-//			pstmt.setString(11, p.getIsLicense());
-//			pstmt.setString(12, p.getChkResume());
-			
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, p.getUserId());
 			pstmt.setString(2, p.getResidence());
@@ -69,9 +57,10 @@ public class PetSitterDao {
 			pstmt.setString(9, p.getCanSick());
 			pstmt.setString(10, p.getIsLicense());
 			
+			System.out.println("다오다오 안나와?????? 나오렴");
 			
 			result = pstmt.executeUpdate();
-			
+			System.out.println("dao" +p);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -82,6 +71,7 @@ public class PetSitterDao {
 	}
 
 	public ArrayList<PetSitter> selectList(Connection conn) {
+		System.out.println("펫시터 리스트 다오");
 		// Statement로 한 번 해보기!
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -93,14 +83,24 @@ public class PetSitterDao {
 		try {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(query);
-			
 			arr = new ArrayList<PetSitter>();	// ArrayList는 기본 생성자로 항상 객체 만들어서 초기화하자
 			
 			while(rs.next()) {
-				PetSitter p = new PetSitter(rs.getString("userId"),
-											rs.getString("residence"),
-											rs.getString("isLicense")
-										
+				PetSitter p = new PetSitter(rs.getString("USERID"),
+											rs.getInt("PETSITTERNO"),
+											rs.getInt("GRADE"),
+											rs.getString("RESIDENCE"),
+											rs.getString("JOB"),
+											rs.getString("WITHFAM"),
+											rs.getString("WITHPET"),
+											rs.getString("CANLARGE"),
+											rs.getString("CANMEDIC"),
+											rs.getString("CANOLD"),
+											rs.getString("CANSICK"),
+											rs.getString("ISLICENSE"),
+											rs.getDate("APPLYDATE"),
+											rs.getString("CHKRESUME")
+											
 						);
 				arr.add(p);
 			}
@@ -113,4 +113,88 @@ public class PetSitterDao {
 		return arr;
 	}
 
+	// 펫시터 지원서 클릭해서 조회
+	public PetSitter selectPetSitter(Connection conn, int pNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		PetSitter petSitter = null;
+		
+		System.out.println("지원서 확인 다오");
+		String query = prop.getProperty("selectPetSitter");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, pNo);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				petSitter = new PetSitter(rs.getString("USERID"),
+									rs.getInt("PETSITTERNO"),
+									rs.getInt("GRADE"),
+									rs.getString("RESIDENCE"),
+									rs.getString("JOB"),
+									rs.getString("WITHFAM"),
+									rs.getString("WITHPET"),
+									rs.getString("CANLARGE"),
+									rs.getString("CANMEDIC"),
+									rs.getString("CANOLD"),
+									rs.getString("CANSICK"),
+									rs.getString("ISLICENSE"),
+									rs.getDate("APPLYDATE"),
+									rs.getString("CHKRESUME")
+						);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		
+		return petSitter;
+	}
+
+	/**
+	 * 지원서 승인 dao
+	 * @param conn
+	 * @param p
+	 * @return
+	 */
+	public int approvePetSitter(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		System.out.println("지원서 승인 다오");
+		int result = 0;
+		
+		String query = prop.getProperty("applyPetSitter");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
