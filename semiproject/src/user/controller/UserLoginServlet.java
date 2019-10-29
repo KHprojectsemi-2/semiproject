@@ -53,8 +53,9 @@ public class UserLoginServlet extends HttpServlet {
 		
 		response.setContentType("text/html;charset=utf-8");
 
-		// null이 아니면 제재를 먹은 상태
+		
 		if(loginUser!=null) {
+			// null이 아니면 제재를 먹은 상태
 			if(loginUser.getStopDate()!=null){
 				 userReport = dao.selectReport(loginUser);
 				 // 아직 제재중일 때

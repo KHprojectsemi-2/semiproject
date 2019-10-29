@@ -188,9 +188,7 @@ body {
 	        console.log(userEmail);
 	        console.log(userName);
 	 
-
-	       // User user= new User(userID,userName,userEmail);
-	       // request.setAttribute("kakaoUser",user);
+	        // 주소창에 정보 담아 보내기
 	       location.replace("JoinFormPage.jsp?&kakao_email="+userEmail+"&kakao_name="+userName);
 
 	       },

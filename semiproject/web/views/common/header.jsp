@@ -3,7 +3,7 @@
 <%
    String root = request.getContextPath();
    User loginUser = (User) session.getAttribute("loginUser");
-   out.print(loginUser);
+   //out.print(loginUser);
 %>
 <!doctype html>
 <html lang="ko">
