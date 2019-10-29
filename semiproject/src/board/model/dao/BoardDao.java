@@ -270,6 +270,7 @@ public class BoardDao {
 		} finally {
 			close(pstmt);
 		}
+		System.out.println("createFAQ : "+result);
 		
 		return result;
 	}

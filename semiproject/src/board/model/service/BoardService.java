@@ -111,6 +111,7 @@ public class BoardService {
 		}
 		
 		close(conn);
+		System.out.println("service FAQ : "+result);
 		
 		return result;
 	}

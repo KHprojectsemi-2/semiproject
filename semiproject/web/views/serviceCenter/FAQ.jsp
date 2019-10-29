@@ -193,8 +193,8 @@
 			var show = ("#sc_List .show");	//#sc_List중에 클래스가 show인 객체 (현재 보여지고있는 객체)
 
 			$("#content td").click(function() {		
-				//var hide = $(this).parents().next("tr");	// 숨겨져있는 객체
-				var hide = $(this).parents().find("td.ans");
+				var hide = $(this).parents().next("tr");	// 숨겨져있는 객체
+				//var hide = $(this).parents().find("td.ans");
 				//alert(hide);
 				//$(hide).slideToggle();
 				if ($(hide).hasClass('hide')) {

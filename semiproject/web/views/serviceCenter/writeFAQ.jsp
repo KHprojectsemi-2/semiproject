@@ -63,7 +63,7 @@ button {
 <body>
 	<%@include file="../common/header.jsp"%>
 	<br><br>
-
+	<form  action="<%=request.getContextPath()%>/createFAQ.bo" method = "post">
 	<div id="outer">
 		<div id = "question_Area" style="padding: 30px;">
 			<div class="form-group">
@@ -71,16 +71,17 @@ button {
 			</div>
 			<div class="form-group">
 				<label>내용</label>
-				<textarea id = "content" name="content" class="form-control" rows="20" placeholder="내용을 입력하세요" style = "resize : none;"></textarea>
+				<textarea id = "content" name="content" class="form-control" rows="20" placeholder="내용을 입력하세요(최대 1000글자)" style = "resize : none;"></textarea>
 			</div>
 			<div id="btnArea" class = "text-right">
 				<input type="button" onclick="Previous();" class="btn btn-info btn-md" value="이전으로"/> 
-				<input type="submit" onclick="submitContent();" class="btn btn-info btn-md" value="작성하기"/>
+				<input type="submit" onclick="submitContent();"id = "ab" class="btn btn-info btn-md" value="작성하기"/>
 			</div>
 		
 		</div>
 		
 	</div>
+	</form>
 
 	<script>
 	function Previous(){
@@ -94,6 +95,7 @@ button {
 		var check = confirm("작성하시겠습니까?");
 		var title = $("#title").val();
 		var content = $("#content").val();
+		alert(content);
 		
 			if(check == true){
 				if(title.trim().length == 0){
@@ -102,9 +104,12 @@ button {
 				}else if(content.trim().length == 0){
 					alert("내용을 작성해주세요");
 					$("#content").focus();
+				}else if(content.length > 1000){
+					alert("최대 1000글자까지 작성 가능합니다.");
+					$("#content").focus();
 				}else{
 					alert("작성되었습니다.");
-					location.href = "<%=request.getContextPath()%>/createFAQ.bo?title="+title+"&content="+content;
+					$("#ab").submit();
 				}
 			}
 		
