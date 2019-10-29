@@ -45,7 +45,12 @@ public class User implements Serializable{
 		this.userAddress = userAddress;
 		this.userImage = userImage;
 	}
-
+	
+	// 로그인 유저가 펫시터인지 확인할때 필요한 생성자
+		public User(String userId) {
+			super();
+			this.userId = userId;
+		}
 
 
 	// 로그인할 때 필요한 생성자

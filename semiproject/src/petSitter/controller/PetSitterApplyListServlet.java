@@ -33,7 +33,8 @@ public class PetSitterApplyListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<PetSitter> pArr = new PetSitterService().selectList();
-		
+		System.out.println(pArr);
+		System.out.println("리스트 리스트");
 		RequestDispatcher view = null;
 		if(pArr != null) {	// 값이 제대로 넘어왔다면
 			view = request.getRequestDispatcher("views/petSitter/petSitterApplyList.jsp");

@@ -127,12 +127,26 @@ footer {
 										href="<%=root%>/index.html"></a></li>
 									<li class="nav-item"><a href="<%=root%>/index.jsp"
 										class="nav-link">소개</a></li>
-									<li class="nav-item"><a
-										href="<%=root%>/views/diary/insertDiary.jsp" class="nav-link">돌봄일지</a>
+									<li class="nav-item dropdown"><a
+										class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+										role="button" data-toggle="dropdown" aria-haspopup="true"
+										aria-expanded="false"> 돌봄일지 </a>
+										<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+																					
+											<a class="dropdown-item diaryCheck" href="<%=root%>/views/diary/insertDiary.jsp">돌봄일지 작성</a>
+											<a class="dropdown-item" href="<%=root%>/list.dr">돌봄일지 리스트</a>
+											<a class="dropdown-item" href="<%=request.getContextPath()%>/views/diary/realDiary.jsp">돌봄일지 열람</a>
+										</div>
 									</li>
-									<li class="nav-item"><a
-										href="<%=root%>/views/petSitter/petSitterApply.jsp"
-										class="nav-link">펫 시터 지원</a></li>
+									<li class="nav-item">
+										<%if (loginUser==null) { %> 
+										<a href="<%=root%>/views/user/LoginPage.jsp" class="nav-link">펫 시터 지원</a>
+										<%}else if(loginUser.getUserId().equals("admin")){ %> 
+											  <a href="<%=request.getContextPath()%>/applyList.ps" class="nav-link">관리자 펫 시터 지원</a>
+										 <%} else{%> 
+										 <a href="<%=root%>/views/petSitter/petSitterApply.jsp" class="nav-link">펫 시터 지원</a>
+										 <%} %>
+									</li>
 									<li class="nav-item dropdown"><a
 										class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 										role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -161,6 +175,10 @@ footer {
     	function logout(){
 			location.href = '<%=request.getContextPath()%>/logout.me';
 		}
+    	var no = $("#abcd").val();
+    	$(".diaryCheck").click(function(){
+    		
+    	});
 	</script>
 </body>
 </html>
