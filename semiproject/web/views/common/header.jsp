@@ -70,7 +70,7 @@ footer {
 
                   </div>
                </div>
-               <div class="col-8 col-md-8 col-xl-6">
+               <div class="col-8 col-md-8 col-xl-6" >
                   <div class="sub_header_social_icon float-right">
 
                      <!-- <a href="#"><i class="flaticon-phone"></i>+02 213 - 256 (365)</a> -->
@@ -78,28 +78,29 @@ footer {
                         if (loginUser != null) {
                      %>
                      <ul>
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown" style="align:left">
                            <button onclick="logout()"
                               class="btn_1 d-none d-md-inline-block" data-toggle="dropdown"
-                              aria-haspopup="true" aria-expanded="false">로그아웃</button>
-                           <div class="dropdown-menu" aria-labelledby="navbarDropdown"
-                              style="padding: 12px 1px; width: 100%">
-                              <a class="dropdown-item" href="#"
-                                 style="padding: 12px 1px; width: 100%" style="align:left">마이페이지</a>
-                              <a class="dropdown-item" href="#" style="padding: 12px 1px;">내
-                                 매칭 현황</a> <a class="dropdown-item" href="#"
-                                 style="padding: 12px 1px;">내 문의 내역</a>
+                              aria-haspopup="true" aria-expanded="false" style = "width : 122px; height : 50px; !important">로그아웃</button>
+                           <div class="dropdown-menu" aria-labelledby="" style="text-align:center;min-width:3rem;" >
+                              <a class="dropdown-item" href="<%=root %>/select.me?userId=<%=loginUser.getUserId() %>"
+                               style="padding: 12px 1px; margin-left:0px;">마이페이지</a>
+                              <a class="dropdown-item" href="#" style="padding: 12px 1px; margin-left:0px;">내 매칭 현황</a> 
+                              <a class="dropdown-item" href="#" style="padding: 12px 1px; margin-left:0px;">내 문의 내역</a>
+                           <%if(loginUser.getUserId().equals("admin")){ %>
+                              <a class="dropdown-item" href="<%=root%>/userSearch.li" style="padding: 12px 1px;margin-left:0px;">회원 조회</a>
+                              <!-- UserSearchServlet ㄱㄱ -->
+                           <%}%>
                            </div>
 
                         </li>
                      </ul>
 
-
                      <%
                         } else {
                      %>
                      <a href="<%=root%>/views/user/LoginPage.jsp"
-                        class="btn_1 d-none d-md-inline-block">로그인</a>
+                        class="btn_1 d-none d-md-inline-block" style = "width : 122px; height : 50px; text-align : center; !important">로그인</a>
                      <%
                         }
                      %>
@@ -120,14 +121,14 @@ footer {
                         <i class="ti-menu"></i>
                      </button>
 
-							<div class="collapse navbar-collapse justify-content-center"
-								id="navbarSupportedContent">
-								<ul class="navbar-nav">
-									<li class="nav-item active"><a class="nav-link active"
-										href="<%=root%>/index.html"></a></li>
-									<li class="nav-item"><a href="<%=root%>/index.jsp"
-										class="nav-link">소개</a></li>
-									<li class="nav-item dropdown"><a
+                     <div class="collapse navbar-collapse justify-content-center"
+                        id="navbarSupportedContent">
+                        <ul class="navbar-nav">
+                           <li class="nav-item active"><a class="nav-link active"
+                              href="<%=root%>/index.html"></a></li>
+                           <li class="nav-item"><a href="<%=root%>/index.jsp"
+                              class="nav-link">소개</a></li>
+<li class="nav-item dropdown"><a
 										class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 										role="button" data-toggle="dropdown" aria-haspopup="true"
 										aria-expanded="false"> 돌봄일지 </a>
@@ -160,25 +161,30 @@ footer {
 									<li class="nav-item"><a	href="<%=root%>/views/bbs/bbsList.jsp" class="nav-link">커뮤니티</a>
 									
 									</li>
-									<li class="nav-item"><a
-										href="<%=root%>/views/serviceCenter/FAQ.jsp" class="nav-link">고객센터</a>
-									</li>
-								</ul>
-							</div>
-						</nav>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
-	<script>
-    	function logout(){
-			location.href = '<%=request.getContextPath()%>/logout.me';
-		}
-    	var no = $("#abcd").val();
-    	$(".diaryCheck").click(function(){
-    		
-    	});
-	</script>
+                           <li class="nav-item"><a   href="<%=root%>/views/bbs/bbsList.jsp" class="nav-link">커뮤니티</a>
+                           
+                           </li>
+                           <li class="nav-item">
+                          	 <%if(loginUser == null){ %>
+                          		<a href="<%=root%>/FAQList.bo" class="nav-link">고객센터</a>
+                          	 <%}else if(loginUser.getUserId().equals("admin")){ %>
+                          		<a href="<%=root%>/AdminFAQList.bo" class="nav-link">고객센터 관리</a>
+                        	 <%}else{ %>
+                        	 	<a href="<%=root%>/FAQList.bo" class="nav-link">고객센터</a>
+                        	 <%} %>
+                           </li>
+                        </ul>
+                     </div>
+                  </nav>
+               </div>
+            </div>
+         </div>
+      </div>
+   </header>
+   <script>
+       function logout(){
+         location.href = '<%=request.getContextPath()%>/logout.me';
+      }
+   </script>
 </body>
 </html>

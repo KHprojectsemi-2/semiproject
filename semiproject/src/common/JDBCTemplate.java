@@ -26,11 +26,12 @@ public class JDBCTemplate {
          String password = prop.getProperty("password");
          
          //1. 클래스 객체 등록, Driver 등록
+        
          Class.forName(driver);
          
          //2. DBMS와 연결
          conn = DriverManager.getConnection(url, user, password);
-         
+
          conn.setAutoCommit(false);   //commit, rollback작업을 제어하기위한 메소드
          //기본값은 true, false일경우 작업제어를 우리가 할수 있게된다.
          
@@ -43,7 +44,7 @@ public class JDBCTemplate {
       } catch (IOException e) {
          e.printStackTrace();
       }
-      
+     
       return conn;   // 연결한 정보를 사용하기 위해서 연결한 정보를 사용하기 위한 장소로 반환
    }
    

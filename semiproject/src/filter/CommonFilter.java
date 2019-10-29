@@ -36,7 +36,7 @@ public class CommonFilter implements Filter {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=utf-8");
 		
-		System.out.println("필터 실행되니?");
+		
 		chain.doFilter(request, response);
 	}
 

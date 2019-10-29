@@ -37,10 +37,11 @@ public class UpdateUserServlet extends HttpServlet {
 		String userName = request.getParameter("userName");
 		String userPhone = request.getParameter("usetPhone");
 		String userEmail = request.getParameter("userEmail");
+		String userPostcode = request.getParameter("userPostcode");
 		String userAddress = request.getParameter("userAddress");
 		String userImage = request.getParameter("userImage");
 		
-		int result = new UserService().updateUser(new User(userId, userName, userPhone, userEmail, userAddress, userImage));
+		int result = new UserService().updateUser(new User(userId, userName, userEmail, userPhone, userPostcode, userAddress, userImage));
 		
 		String page="";
 		
