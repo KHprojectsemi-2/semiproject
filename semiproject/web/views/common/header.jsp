@@ -72,7 +72,6 @@ footer {
                </div>
                <div class="col-8 col-md-8 col-xl-6" >
                   <div class="sub_header_social_icon float-right">
-
                      <!-- <a href="#"><i class="flaticon-phone"></i>+02 213 - 256 (365)</a> -->
                      <%
                         if (loginUser != null) {
@@ -152,7 +151,7 @@ footer {
                           		<a href="<%=root%>/AdminFAQList.bo" class="nav-link">고객센터 관리</a>
                         	 <%}else{ %>
                         	 	<a href="<%=root%>/FAQList.bo" class="nav-link">고객센터</a>
-                        	 <%} %>
+                        	 <%}%>
                            </li>
                         </ul>
                      </div>
@@ -162,9 +161,12 @@ footer {
          </div>
       </div>
    </header>
+   
+               
    <script>
        function logout(){
-         location.href = '<%=request.getContextPath()%>/logout.me';
+    	  
+        location.href = '<%=request.getContextPath()%>/logout.me';
       }
    </script>
 </body>

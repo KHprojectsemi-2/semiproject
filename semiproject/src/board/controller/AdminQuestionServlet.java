@@ -70,7 +70,7 @@ public class AdminQuestionServlet extends HttpServlet {
  			request.setAttribute("list", qlist);
  			request.setAttribute("pi", pi);
  		}else {
- 			request.setAttribute("msg", "관리자게시판조회 실패!");
+ 			request.setAttribute("msg", "관리자 문의하기 게시판조회 실패!");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
  		}
  		view.forward(request, response);

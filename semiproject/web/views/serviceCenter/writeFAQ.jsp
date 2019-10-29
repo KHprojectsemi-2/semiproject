@@ -71,7 +71,7 @@ button {
 			</div>
 			<div class="form-group">
 				<label>내용</label>
-				<textarea id = "content" name="content" class="form-control" rows="20" placeholder="내용을 입력하세요"></textarea>
+				<textarea id = "content" name="content" class="form-control" rows="20" placeholder="내용을 입력하세요" style = "resize : none;"></textarea>
 			</div>
 			<div id="btnArea" class = "text-right">
 				<input type="button" onclick="Previous();" class="btn btn-info btn-md" value="이전으로"/> 
@@ -85,7 +85,6 @@ button {
 	<script>
 	function Previous(){
 		var check = confirm("이전으로 돌아가면 작성된 내용이 사라집니다. 진행하시겠습니까?");
-		
 			if(check == true){
 				location.href = '<%=request.getContextPath()%>/AdminFAQList.bo';
 			}
