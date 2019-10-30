@@ -54,11 +54,13 @@
 		margin-left : auto;
 		text-align : center;
 		width : 1200px;
-		border : 1px solid black;
 		
 	}
-	#sc_List th, td{
-		border : 1px solid black;	
+	#sc_List td{
+		border-top : 1px solid black;
+	}
+	 #sc_List th{
+		font-size : 20px;
 	}
 	
 	#content{
@@ -118,7 +120,7 @@
 					<tr id = "content_Answer" class = "hide">
 						<td colspan="3">
 							<div>
-								<textarea id = "con_answer" name="content" rows="5" cols="150" readonly><%=b.getContent() %></textarea>
+								<textarea id = "con_answer" name="content" rows="5" cols="120" readonly><%=b.getContent() %></textarea>
 							</div>
 						</td>
 						<td>
