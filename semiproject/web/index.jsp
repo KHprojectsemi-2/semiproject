@@ -137,7 +137,13 @@
 			</div>
 		</div>
 		<br>
-
+                     <%
+                        if (loginUser != null) {
+                     %>
+                     <input type="hidden" id="abc" value = <%=loginUser.getUserId()%>>
+                     <%
+                        }
+                     %>
 		<div id = "petCare">
 			<div id = "homecare" class = "care" onclick = "homecare();">
 				<div class = "changecare">
@@ -216,15 +222,16 @@
 		}
 	}		
 	
-	function homecare(){
+	 function homecare(){
 		var user = $("#loginUser").val();
+		console.log(user);
 		if(user == 'null'){
 			alert("로그인이 필요합니다.");
 			location.href = "<%=request.getContextPath()%>/views/user/LoginPage.jsp";
 		}else{
-			var sitterid = <%=loginUser.getUserId()%>
+			var sitterid = $("#abc").val();
 			location.href = "<%=request.getContextPath()%>/select.pe?sitterid="+sitterid;
-		}	
+		}
 	}
 	
 	function sitterhomecare(){
@@ -233,10 +240,10 @@
 			alert("로그인이 필요합니다.");
 			location.href = "<%=request.getContextPath()%>/views/user/LoginPage.jsp";
 		}else{
-			var userid = <%=loginUser.getUserId()%>
+			var userid = $("#abc").val();
 			location.href = "<%=request.getContextPath()%>/select.hm?userid="+userid;
 		}	
-	}
+	} 
 	
 	</script>
 
