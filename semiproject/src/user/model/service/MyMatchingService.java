@@ -38,6 +38,10 @@ public class MyMatchingService {
 		Connection conn = getConnection();
 		
 		ArrayList<Matching> yList2 = mmd.yetMatchingView2(conn,userId);
+		if(yList2 == null) {
+			System.out.println("service null확인");
+			return yList2;
+		}
 		
 		close(conn);
 		
@@ -106,6 +110,38 @@ public class MyMatchingService {
 				
 		close(conn);
 		return nList8;
+	}
+	public ArrayList<Matching> viewEndMatching(String userId) {
+		Connection conn = getConnection();
+		
+		ArrayList<Matching> eList1 = mmd.endMatchingView1(conn, userId);
+				
+		close(conn);
+		return eList1;
+	}
+	public ArrayList<Matching> viewEndMatching2(String userId) {
+		Connection conn = getConnection();
+		
+		ArrayList<Matching> eList2 = mmd.endMatchingView2(conn, userId);
+				
+		close(conn);
+		return eList2;
+	}
+	public ArrayList<Matching> viewEndMatching3(String userId) {
+		Connection conn = getConnection();
+		
+		ArrayList<Matching> eList3 = mmd.endMatchingView3(conn, userId);
+				
+		close(conn);
+		return eList3;
+	}
+	public ArrayList<Matching> viewEndMatching4(String userId) {
+		Connection conn = getConnection();
+		
+		ArrayList<Matching> eList4 = mmd.endMatchingView4(conn, userId);
+				
+		close(conn);
+		return eList4;
 	}
 
 	

@@ -85,8 +85,10 @@ footer {
                            <div class="dropdown-menu" aria-labelledby="" style="text-align:center;min-width:3rem;" >
                               <a class="dropdown-item" href="<%=root %>/select.me?userId=<%=loginUser.getUserId() %>"
                                style="padding: 12px 1px; margin-left:0px;">마이페이지</a>
-                              <a class="dropdown-item" href="#" style="padding: 12px 1px; margin-left:0px;">내 매칭 현황</a> 
-                              <a class="dropdown-item" href="#" style="padding: 12px 1px; margin-left:0px;">내 문의 내역</a>
+                              <a class="dropdown-item" href="<%=root %>/myrequest.ma?userId=<%=loginUser.getUserId() %>" 
+                              style="padding: 12px 1px; margin-left:0px;">내 매칭 현황</a> 
+                              <a class="dropdown-item" href="<%=root %>/report.my?userId=<%=loginUser.getUserId() %>" 
+                              style="padding: 12px 1px; margin-left:0px;">내 문의 내역</a>
                            <%if(loginUser.getUserId().equals("admin")){ %>
                               <a class="dropdown-item" href="<%=root%>/userSearch.li" style="padding: 12px 1px;margin-left:0px;">회원 조회</a>
                               <!-- UserSearchServlet ㄱㄱ -->
