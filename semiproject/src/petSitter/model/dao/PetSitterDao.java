@@ -37,7 +37,8 @@ public class PetSitterDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		System.out.println("petSitter dao()222");
-		String query = prop.getProperty("applyPetSitter");
+//		String query = prop.getProperty("applyPetSitter");
+		String query = "INSERT INTO PETSITTER VALUES(?, SEQ_PETSITTERNO.NEXTVAL, DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, DEFAULT, DEFAULT)";
 		
 		System.out.println("다오다오다오 id : " + p.getUserId());
 		System.out.println("다오다오다오 resume : " + p.getChkResume());

@@ -1,4 +1,11 @@
+/bbs/
 /board/
-/petSitter/
-/user/
 /common/
+/diary/
+/filter/
+/image/
+/joinAttach/
+/matching/
+/petSitter/
+/sql/
+/user/

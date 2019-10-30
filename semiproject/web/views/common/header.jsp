@@ -128,7 +128,7 @@ footer {
                               href="<%=root%>/index.html"></a></li>
                            <li class="nav-item"><a href="<%=root%>/index.jsp"
                               class="nav-link">소개</a></li>
-<li class="nav-item dropdown"><a
+								<li class="nav-item dropdown"><a
 										class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 										role="button" data-toggle="dropdown" aria-haspopup="true"
 										aria-expanded="false"> 돌봄일지 </a>
@@ -136,7 +136,6 @@ footer {
 																					
 											<a class="dropdown-item diaryCheck" href="<%=root%>/views/diary/insertDiary.jsp">돌봄일지 작성</a>
 											<a class="dropdown-item" href="<%=root%>/list.dr">돌봄일지 리스트</a>
-											<a class="dropdown-item" href="<%=request.getContextPath()%>/views/diary/realDiary.jsp">돌봄일지 열람</a>
 										</div>
 									</li>
 									<li class="nav-item">

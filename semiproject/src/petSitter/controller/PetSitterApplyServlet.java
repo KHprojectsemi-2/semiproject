@@ -39,7 +39,6 @@ public class PetSitterApplyServlet extends HttpServlet {
 		
 		// 선택된 radio value 값 변수에 저장시켜줘
 		String userId = request.getParameter("id");
-//		int grade = Integer.valueOf(request.getParameter("grade"));
 		String residence = request.getParameter("residence");
 		String job = request.getParameter("job");
 		String withFam = request.getParameter("family");
@@ -49,11 +48,9 @@ public class PetSitterApplyServlet extends HttpServlet {
 		String canOld = request.getParameter("old");
 		String canSick = request.getParameter("patient");
 		String isLicense = request.getParameter("certificate");
-//		String chkResume = request.getParameter("chkResume");
 
 //		// jsp에서 선택한 값 잘 넘어옴!!!!!!!!!!!
 		System.out.println("id : " + userId);
-//		out.println("grade : " + grade);
 		System.out.println(residence);
 		System.out.println(job);
 		System.out.println(withFam);
@@ -63,39 +60,18 @@ public class PetSitterApplyServlet extends HttpServlet {
 		System.out.println(canOld);
 		System.out.println(canSick);
 		System.out.println(isLicense);
-//		out.println(chkResume);
 		
 		HttpSession session = request.getSession(); // request객체가 session 객체를 만드는 메소드를 지니고 있다.
 		
 		PetSitter p = new PetSitter(userId, residence, job, withFam, withPet, canLarge, canMedic, canOld, canSick, isLicense);
-		
-//		PetSitter p = new PetSitter(userId, petSitterNo, residence, job, withFam, withPet, canLarge, canMedic, canOld, canSick, isLicense);
-		
-//		PetSitter p = new PetSitter();
-//		p.setUserId(userId);
-//		p.setResidence(residence);
-//		p.setJob(job);
-//		p.setWithFam(withFam);
-//		p.setWithPet(withPet);
-//		p.setCanLarge(canLarge);
-//		p.setCanMedic(canMedic);
-//		p.setCanOld(canOld);
-//		p.setCanSick(canSick);
-//		p.setIsLicense(isLicense);
-		
-	
 		
 		// insert이기 때문에 int 값으로 받아줌
 		int result = new PetSitterService().applyPetSitter(p);
 		System.out.println("result : " + result);
 		
 		// 4. 받은 결과에 따라 성공/실패에 따른 페이지 내보내기
-		String page = "";	// 반환할 jsp의 경로(화면에 보여줄 view)를 저장할 String
-		
 		if(result > 0) {	// 성공했을 때
-//			page = "/index.jsp";
 			System.out.println("리스트 불러와");
-//			response.sendRedirect("applyList.ps");
 			response.sendRedirect("index.jsp");
 		}else {	// 실패했을 때
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
