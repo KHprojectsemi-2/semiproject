@@ -109,8 +109,8 @@ body {
 	    // 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 없으면 공백으로 들어감.
 	    var userInputId = getCookie("userInputId");
 	    $("input[name='userId']").val(userInputId); 
-	     
-	    if($("input[name='userId']").val() != ""){ // 그 전에 ID를 저장해서 처음 페이지 로딩 시, 입력 칸에 저장된 ID가 표시된 상태라면,
+		 // 그 전에 ID를 저장해서 처음 페이지 로딩 시, 입력 칸에 저장된 ID가 표시된 상태라면,
+	    if($("input[name='userId']").val() != ""){ 
 	        $("#idSaveCheck").attr("checked", true); // ID 저장하기를 체크 상태로 두기.
 	    }
 	     
@@ -167,27 +167,20 @@ body {
 		 
 		// 계속 자동 로그인될 시 https://accounts.kakao.com/weblogin/account/info에서 로그아웃 하고 하자
 		
-	    // 사용할 앱의 JavaScript 키를 설정해 주세요.
-	    Kakao.init('136a80c05b6c9ad29ee92431790b3c33');  //여기서 아까 발급받은 키 중 javascript키를 사용해준다.
-	    // 카카오 로그인 버튼을 생성합니다.
+	    // 자바 스크립트 키 설정
+	    Kakao.init('136a80c05b6c9ad29ee92431790b3c33');  
+	    // 카카오 로그인 버튼 생성
 	    Kakao.Auth.createLoginButton({
 	     container: '#kakao-login-btn',
 	     success: function(authObj) {
 	      
-	      // 로그인 성공시, API를 호출합니다.
+	      // 로그인 성공시, API를 호출
 	      Kakao.API.request({
 	       url: '/v1/user/me',
 	       success: function(res) {
-	        console.log(res);
-
 	        var userID = res.id;      //유저의 카카오톡 고유 id
 	        var userEmail = res.kaccount_email;   //유저의 이메일
 	        var userName = res.properties.nickname; //유저가 등록한 별명
-	        
-	        console.log(userID);
-	        console.log(userEmail);
-	        console.log(userName);
-	 
 	        // 주소창에 정보 담아 보내기
 	       location.replace("JoinFormPage.jsp?&kakao_email="+userEmail+"&kakao_name="+userName);
 

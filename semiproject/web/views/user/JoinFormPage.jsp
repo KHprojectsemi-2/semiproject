@@ -543,11 +543,11 @@ img:hover{
 
 					var service_id = "Patrasche";
 					var template_id = "template_loLSxR35";
-					//	emailjs.send(service_id, template_id, template_params); 
+						emailjs.send(service_id, template_id, template_params); 
 
-					alert(userId + "님에게 " + userEmail + "로 인증번호" + emailCode
-							+ "가 발송되었습니다.");
-					// alert(userId + "님에게 인증번호가 발송되었습니다."); 
+/* 					alert(userId + "님에게 " + userEmail + "로 인증번호" + emailCode
+							+ "가 발송되었습니다."); */
+					 alert(userId + "님에게 인증번호가 발송되었습니다."); 
 					if (!sendCode) {
 						var cDiv = $("<div>").attr({
 							"id" : "d_join"

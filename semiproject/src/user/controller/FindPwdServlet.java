@@ -55,6 +55,7 @@ public class FindPwdServlet extends HttpServlet {
 
 	}
 
+	// 길이 만큼 랜덤 패스워드 생성하여 리턴
 	public String randomPassword(int length) {
 		int index=0;
 		char[] charSet = new char[] {
@@ -72,6 +73,7 @@ public class FindPwdServlet extends HttpServlet {
 		}
 		return sb.toString();
 	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

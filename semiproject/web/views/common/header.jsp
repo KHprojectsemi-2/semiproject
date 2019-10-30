@@ -5,6 +5,7 @@
    User loginUser = (User) session.getAttribute("loginUser");
    //out.print(loginUser);
 %>
+
 <!doctype html>
 <html lang="ko">
 <head>
@@ -131,11 +132,9 @@ footer {
 										class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 										role="button" data-toggle="dropdown" aria-haspopup="true"
 										aria-expanded="false"> 돌봄일지 </a>
-										<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-																					
+										<div class="dropdown-menu" aria-labelledby="navbarDropdown">											
 											<a class="dropdown-item diaryCheck" href="<%=root%>/views/diary/insertDiary.jsp">돌봄일지 작성</a>
 											<a class="dropdown-item" href="<%=root%>/list.dr">돌봄일지 리스트</a>
-											<a class="dropdown-item" href="<%=request.getContextPath()%>/views/diary/realDiary.jsp">돌봄일지 열람</a>
 										</div>
 									</li>
 									<li class="nav-item">
@@ -177,8 +176,7 @@ footer {
          </div>
       </div>
    </header>
-   
-               
+                 
    <script>
        function logout(){
     	  
