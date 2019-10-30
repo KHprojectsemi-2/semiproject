@@ -10,11 +10,12 @@ public class Pet {
 	private String petGender;
 	private String isNeutral;
 	private int petAge;
+	private String petMatch;
 	public Pet() {
 		super();
 	}
 	public Pet(int petNo, String userId, String petName, String petWeight, String petImage, String petKind,
-			String petGender, String isNeutral, int petAge) {
+			String petGender, String isNeutral, int petAge, String petMatch) {
 		super();
 		this.petNo = petNo;
 		this.userId = userId;
@@ -25,6 +26,7 @@ public class Pet {
 		this.petGender = petGender;
 		this.isNeutral = isNeutral;
 		this.petAge = petAge;
+		this.petMatch = petMatch;
 	}
 	public int getPetNo() {
 		return petNo;
@@ -80,12 +82,20 @@ public class Pet {
 	public void setPetAge(int petAge) {
 		this.petAge = petAge;
 	}
+	public String getPetMatch() {
+		return petMatch;
+	}
+	public void setPetMatch(String petMatch) {
+		this.petMatch = petMatch;
+	}
 	@Override
 	public String toString() {
 		return "Pet [petNo=" + petNo + ", userId=" + userId + ", petName=" + petName + ", petWeight=" + petWeight
 				+ ", petImage=" + petImage + ", petKind=" + petKind + ", petGender=" + petGender + ", isNeutral="
-				+ isNeutral + ", petAge=" + petAge + "]";
+				+ isNeutral + ", petAge=" + petAge + ", petMatch=" + petMatch + "]";
 	}
+	
+	
 	
 	
 }

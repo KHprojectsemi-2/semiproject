@@ -133,16 +133,31 @@ footer {
 									<li class="nav-item"><a
 										href="<%=root%>/views/petSitter/petSitterApply.jsp"
 										class="nav-link">펫 시터 지원</a></li>
+										
+									<%if(loginUser != null) {%>
 									<li class="nav-item dropdown"><a
 										class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 										role="button" data-toggle="dropdown" aria-haspopup="true"
 										aria-expanded="false"> 펫 시터 예약 </a>
 										<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 											<a class="dropdown-item"
-												href="<%=root%>/views/petsitterreservation/petSitterSearch.jsp">방문
-												펫 시터 예약</a> <a class="dropdown-item" href="single-blog.html">가정집
+												href="#" onclick="moveInvite();">방문
+												펫 시터 예약</a> <a class="dropdown-item" href="#" onclick="moveHome();">가정집
 												펫시터 예약</a>
 										</div></li>
+									<%}else{ %>
+									<li class="nav-item dropdown"><a
+										class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+										role="button" data-toggle="dropdown" aria-haspopup="true"
+										aria-expanded="false"> 펫 시터 예약 </a>
+										<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+											<a class="dropdown-item"
+												href="<%=root%>/views/user/LoginPage.jsp">방문
+												펫 시터 예약</a> <a class="dropdown-item" href="<%=root%>/views/user/LoginPage.jsp">가정집
+												펫시터 예약</a>
+										</div></li>
+									<%} %>	
+										
 									<li class="nav-item"><a	href="<%=root%>/views/bbs/bbsList.jsp" class="nav-link">커뮤니티</a>
 									
 									</li>
@@ -160,6 +175,23 @@ footer {
 	<script>
     	function logout(){
 			location.href = '<%=request.getContextPath()%>/logout.me';
+		}
+    	
+	</script>
+	<script>
+	function moveInvite(){
+		<%if(loginUser != null){%>
+			var sitterid = "<%=loginUser.getUserId()%>";
+    		location.href="<%=root%>/select.pe?sitterid="+sitterid;
+    	<%}%>
+	}
+	</script>
+	<script>
+		function moveHome(){
+		<%if(loginUser != null){%>	
+			var userid = "<%=loginUser.getUserId()%>";		
+			location.href='<%=root%>/select.hm?userid='+userid;
+		<%}%>
 		}
 	</script>
 </body>

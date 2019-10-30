@@ -7,18 +7,24 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
+
+import matching.model.vo.Matching;
+import matching.model.vo.PetSitterMatchingJoin;
+
+import java.sql.Statement;
 import static common.JDBCTemplate.*;
+
 import petSitter.model.vo.PetSitter;
 
 public class PetSitterDao {
 	Properties prop = new Properties();
 	
-	public PetSitterDao() {
+
+	public PetSitterDao(){
 		String fileName = PetSitterDao.class.getResource("/sql/petSitter/petSitter-query.properties").getPath();
-		System.out.println(fileName);
+		
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {
@@ -27,7 +33,7 @@ public class PetSitterDao {
 			e.printStackTrace();
 		}
 	}
-
+	
 	/*
 	 *  펫시터 지원서 작성 dao
 	 */
@@ -112,5 +118,12 @@ public class PetSitterDao {
 		}
 		return arr;
 	}
+
+
+
+
+
+
+
 
 }

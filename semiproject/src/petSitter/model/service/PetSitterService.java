@@ -3,6 +3,8 @@ package petSitter.model.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import matching.model.vo.Matching;
+import matching.model.vo.PetSitterMatchingJoin;
 import petSitter.model.dao.PetSitterDao;
 import petSitter.model.vo.PetSitter;
 
@@ -12,9 +14,10 @@ public class PetSitterService {
 	
 	// 기본 생성자
 	public PetSitterService() {
-		
-	}
 
+			
+	}
+	
 	/**
 	 * 펫시터 지원서 작성
 	 * @param p
@@ -48,6 +51,8 @@ public class PetSitterService {
 		
 		return pArr;
 	}
+
+
 
 }
 
