@@ -1,5 +1,16 @@
+<%@page import="petSitter.model.vo.PetSitter"%>
+<%@page import="matching.model.vo.Matching"%>
+<%@page import="diary.model.vo.Diary"%>
+<%@page import="user.model.vo.Pet"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	Pet pet = new Pet();   
+	PetSitter ps = new PetSitter();
+	Matching mc = new Matching();
+	/* int pNum =(int)(request.getAttribute("num")); */
+	Diary d = (Diary)request.getAttribute("matchNo");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,13 +20,6 @@
 	form{
 		  margin: 50px 50px 50px 500px;
 	}
-	/* #submit{
-		margin : 50px 50px 50px 300px;
-	} */
-	
-/* 	#contentImgArea{
-		border:1px solid red;
-	} */
 	
 </style>
 </head>
@@ -23,40 +27,37 @@
 
 <body>
 <%@include file = "../common/header.jsp" %>
-	<form action="<%=request.getContextPath()%>/insertDiary.id" method="post">
-	<h1>돌봄일지</h1>
+	<form <%-- action="<%=request.getContextPath()%>/insertDiary.id" --%> method="post" encType="multipart/form-data">
+	<input type="hidden" name="userId" value="<%=loginUser.getUserId()%>"> 
+	<input type="hidden" name="matching" value="<%=mc.getMatch_No()%>"> 
+	<h1>돌봄일지 작성</h1>
+	
+<%-- 	<%if(loginUser.equals(ps.getUserId()) && ps.getChkResume().equals('Y')){ %>
+		console.log(<%=loginUser.getUserId()%>);
+	<%} %> --%>
+	
+	
 	<hr>
-	<h4 class="text-info">방문 날짜</h4>
-	<h4 class="text-info">반려 동물 정보</h4>
+	<h4 class="text-info">방문 날짜&nbsp;&nbsp;&nbsp;&nbsp;<input type="date" name="applyDate"></h4>
+	<h4 class="text-info">반려 동물 정보&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="text" >
+	</h4>
+<%--  	<%=pet.getPetName() %>
+	<%=pet.getPetWeight() %>  --%>
 	<hr>
 	<h4 class="text-info">돌봄 리스트</h4>
- 	<input type="checkbox" name="list1" id="isToilet" value="배변확인">
+  	<input type="checkbox" name="list1" id="isToilet" value="y">
 	<label>배변 확인</label><br>
-	<input type="checkbox" name="list2" id="isWalk" value="산책확인">
+	<input type="checkbox" name="list2" id="isWalk" value="y">
 	<label>산책 확인</label><br>
-	<input type="checkbox" name="list3" id="isMedic" value="투약확인">
+	<input type="checkbox" name="list3" id="isMedic" value="y">
 	<label>투약 확인</label><br>
-	<input type="checkbox" name="list4" id="chkNeeds" value="요청사항확인">
+	<input type="checkbox" name="list4" id="chkNeeds" value="y">
 	<label>요청사항 확인</label><br> 
-	
-<!-- 	<label for="isToilet">배변 확인</label>
-	<input type="text" id="isToilet" name="isToilet"><br>
-	<label for="isWalk">산책 확인</label>
-	<input type="text" id="isToilet" name="isWalk"><br>
-	<label for="isMedic">투약 확인</label>
-	<input type="text" id="isToilet" name="isMedic"><br>
-	<label for="chkNeeds">요청사항 확인</label>
-	<input type="text" id="isToilet" name="chkNeeds"> -->
-	
 	<hr>
 	
-	
-	
-	
-	
 	<h4 class="text-info">돌봄 후기</h4>
-	<textarea cols="45" rows="6" style="resize:none" name="review" id="review">
-    </textarea><br>
+	<textarea cols="90" rows="10" style="resize:none" name="review" id="review"></textarea><br>
     <hr>
     <h4 class="text-info">돌봄 사진</h4>
     <div id="contentImgArea">
@@ -70,17 +71,6 @@
 	
 	<script>
 	
-/* 	function(){
-		$(document).ready(function() {
-	        $('#isToilet').val('원하는 값');
-	    });
-	} */
-	
-	$(document).ready(function(){
-		if($('#isToilet').prop('checked')){
-			$('#isToilet').val('test value');
-		}
-	});
 		// 각각의 영역에 파일을 첨부 했을 경우 미리 보기가 가능하도록 하는 부분(함수)
 		function LoadImg(value, num){
 			if(value.files[0] != undefined){	
@@ -99,17 +89,24 @@
 			}
 		}
 		
-/* 		function(){
-			if($("input:checkbox[id='isToilet']").is(":checked") == true){
-				$("input:checkbox[id='isToilet']").value("안 쌈");
-			}
-		} */
 		
 
 	</script>
 	
     <br><br>
-    <input type="submit" class="btn btn-info btn-md" id="submit" value="일지 등록">
+<!--     <input type="submit" class="btn btn-info btn-md" id="submit" value="일지 등록"> -->
+	<input type="button" onclick="fn();" class="btn btn-info btn-md" id="fnSubmit" value="일지 등록">
+	</div>
+	
+	<script>
+		function fn(){
+			location.href='<%=request.getContextPath()%>/views/diary/diaryList.jsp';
+		}	
+		
+	</script>
+    
+    
+    
 </form>
 <br><br><br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br><br><br>

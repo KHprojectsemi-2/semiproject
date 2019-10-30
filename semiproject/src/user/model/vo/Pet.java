@@ -16,12 +16,13 @@ public class Pet {
 		super();
 	}
 	
-	public Pet(String userId, String petName, String petWeight, String petKind, String petGender, String isNeutral,
+	public Pet(String userId, String petName, String petWeight, String petImage, String petKind, String petGender, String isNeutral,
 			int petAge) {
 		super();
 		this.userId = userId;
 		this.petName = petName;
 		this.petWeight = petWeight;
+		this.petImage = petImage;
 		this.petKind = petKind;
 		this.petGender = petGender;
 		this.isNeutral = isNeutral;

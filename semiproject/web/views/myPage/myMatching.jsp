@@ -50,6 +50,7 @@ th, td{
 	<label id="mLabel">신청한 매칭</label>
 		<table>
 			<tr>
+
 				<th width="100px">내 입장</th>
 				<th width="100px">견주</th>
 				<th width="100px">방문 유형</th>
@@ -453,7 +454,6 @@ th, td{
 			<%} %>
 			<%} %>
 		</table>
-		
 	</div>
 	
 	<div class="btn" align="center">

@@ -17,9 +17,7 @@
 <meta charset="UTF-8">
 <title>FAQ</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
- -->
+
 <style>
 	#FAQ_Outer{
 		width : 1200px;
@@ -27,7 +25,7 @@
 		margin-right : auto;
 		margin-left : auto;
 	}
-	
+	 
 	#Menu_List {
 		width: 1200px;
 		text-align: center;
@@ -71,12 +69,13 @@
 	
 	.hide {
 		display:none;
-	}  
-/* 
-    #content_Answer {
-   		width : 1000px;
-		height : 250px;
-   	}   */
+	}
+	#con_answer{
+		resize: none;
+		text-align : center;
+		padding : 20px;
+		line-height: 200%;
+	}
    	
 </style>
 </head>
@@ -98,29 +97,24 @@
 			 		<th width = "100px">No.</th>
 			 		<th width = "550px">내용</th>
 			 		<th width = "250px">등록날짜</th>
-			 		<th width = "200px">작성자</th>			 		
+			 		<th width = "200px">작성자</th>	 		
 				</tr>
-				<%for(Board b : list){ %>
-					<tr id= "content">
-						<td>
-							<input type = "hidden" value = "<%=b.getBoardNo()%>">
-							<%=b.getBoardNo() %>
-						</td>
-						<td><%=b.getTitle() %></td>
-						<td><%=b.getCreateDate() %></td>
-						<td><%=b.getUserId() %></td>
-					</tr>
-					<tr id = "content_Answer" class = "hide">
-						<td colspan="4">
-							<div>
-								<br><br><br><br>					
-								<p><%=b.getContent() %></p>
-								<br><br><br><br>
-								
-							</div>
-						</td>
-					</tr>
-				<%} %>	
+			<%for(Board b : list){ %>
+				<tr id= "content">
+					<td>
+						<input type = "hidden" value = "<%=b.getBoardNo()%>">
+						<%=b.getBoardNo() %>
+					</td>
+					<td><%=b.getTitle() %></td>
+					<td><%=b.getCreateDate() %></td>
+					<td><%=b.getUserId() %></td>
+				</tr>
+				<tr id = "content_Answer" class = "hide">
+					<td class = "ans" colspan="4">
+						<textarea id = "con_answer"  name="content" rows="5" cols="150" readonly><%=b.getContent() %></textarea>
+					</td>
+				</tr>
+			<%} %>	
 			 </table>
 		 </div>
 	</div>
@@ -162,11 +156,11 @@
 			<button onclick = "location.href = '<%=request.getContextPath()%>/FAQList.bo?currentPage=<%=maxPage%>'"> >> </button>
 		<%} %>	
 		
+		<br><br><br><br><br>
+	<%@include file = "../common/footer.jsp" %>
+		
 	</div>	
 
-	<br><br><br><br><br>
-	<%@include file = "../common/footer.jsp" %>
-	
 	<script>
 	
 		$("#FAQ").click(function(){
@@ -200,7 +194,9 @@
 
 			$("#content td").click(function() {		
 				var hide = $(this).parents().next("tr");	// 숨겨져있는 객체
-
+				//var hide = $(this).parents().find("td.ans");
+				//alert(hide);
+				//$(hide).slideToggle();
 				if ($(hide).hasClass('hide')) {
 					$(show).removeClass('show').addClass('hide');	// 열려있는게 닫히고
 					$(hide).addClass('show').removeClass('hide');	// 클릭한게 열린다

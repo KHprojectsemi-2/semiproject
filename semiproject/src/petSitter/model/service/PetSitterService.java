@@ -40,6 +40,7 @@ public class PetSitterService {
 
 	// 펫시터 지원 목록 조회용 리스트
 	public ArrayList<PetSitter> selectList() {
+		System.out.println("펫시터 리스트 서비스");
 		Connection conn = getConnection();
 		
 		ArrayList<PetSitter> pArr = new PetSitterDao().selectList(conn);
@@ -47,6 +48,36 @@ public class PetSitterService {
 		close(conn);
 		
 		return pArr;
+	}
+
+	// 지원서 확인
+	public PetSitter selectPetSitter(int pNo) {
+		Connection conn = getConnection();
+		System.out.println("지원서 확인 서비스");
+		
+		PetSitter petSitter = new PetSitterDao().selectPetSitter(conn, pNo);
+		
+		close(conn);
+		
+		return petSitter;
+	}
+
+	// 지원서 승인
+	public int approvePetSitter(String userId) {
+		Connection conn = getConnection();
+		
+		System.out.println("지원서 승인 서비스");
+		int result = new PetSitterDao().approvePetSitter(conn, userId);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+		
 	}
 
 }

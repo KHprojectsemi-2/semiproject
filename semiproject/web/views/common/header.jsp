@@ -3,7 +3,7 @@
 <%
    String root = request.getContextPath();
    User loginUser = (User) session.getAttribute("loginUser");
-   out.print(loginUser);
+   //out.print(loginUser);
 %>
 <!doctype html>
 <html lang="ko">
@@ -72,7 +72,6 @@ footer {
                </div>
                <div class="col-8 col-md-8 col-xl-6" >
                   <div class="sub_header_social_icon float-right">
-
                      <!-- <a href="#"><i class="flaticon-phone"></i>+02 213 - 256 (365)</a> -->
                      <%
                         if (loginUser != null) {
@@ -130,24 +129,39 @@ footer {
                               href="<%=root%>/index.html"></a></li>
                            <li class="nav-item"><a href="<%=root%>/index.jsp"
                               class="nav-link">소개</a></li>
-                           <li class="nav-item"><a
-                              href="<%=root%>/views/diary/diaryView.jsp" class="nav-link">돌봄일지</a>
-                           </li>
-                           <li class="nav-item"><a
-                              href="<%=root%>/views/petSitter/petSitterApply.jsp"
-                              class="nav-link">펫 시터 지원</a></li>
-                           <li class="nav-item dropdown"><a
-                              class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                              role="button" data-toggle="dropdown" aria-haspopup="true"
-                              aria-expanded="false"> 펫 시터 예약 </a>
-                              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                 <a class="dropdown-item" href="<%=root%>/views/petsitterreservation/petSitterSearch.jsp">방문펫 시터 예약</a> 
-                                    <a class="dropdown-item" href="single-blog.html">가정집 펫시터 예약</a>
-                              </div>
-                           </li>
-                           <li class="nav-item"><a   href="<%=root%>/views/bbs/bbsList.jsp" class="nav-link">커뮤니티</a>
-                           
-                           </li>
+<li class="nav-item dropdown"><a
+										class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+										role="button" data-toggle="dropdown" aria-haspopup="true"
+										aria-expanded="false"> 돌봄일지 </a>
+										<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+																					
+											<a class="dropdown-item diaryCheck" href="<%=root%>/views/diary/insertDiary.jsp">돌봄일지 작성</a>
+											<a class="dropdown-item" href="<%=root%>/list.dr">돌봄일지 리스트</a>
+											<a class="dropdown-item" href="<%=request.getContextPath()%>/views/diary/realDiary.jsp">돌봄일지 열람</a>
+										</div>
+									</li>
+									<li class="nav-item">
+										<%if (loginUser==null) { %> 
+										<a href="<%=root%>/views/user/LoginPage.jsp" class="nav-link">펫 시터 지원</a>
+										<%}else if(loginUser.getUserId().equals("admin")){ %> 
+											  <a href="<%=request.getContextPath()%>/applyList.ps" class="nav-link">관리자 펫 시터 지원</a>
+										 <%} else{%> 
+										 <a href="<%=root%>/views/petSitter/petSitterApply.jsp" class="nav-link">펫 시터 지원</a>
+										 <%} %>
+									</li>
+									<li class="nav-item dropdown"><a
+										class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+										role="button" data-toggle="dropdown" aria-haspopup="true"
+										aria-expanded="false"> 펫 시터 예약 </a>
+										<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+											<a class="dropdown-item"
+												href="<%=root%>/views/petsitterreservation/petSitterSearch.jsp">방문
+												펫 시터 예약</a> <a class="dropdown-item" href="single-blog.html">가정집
+												펫시터 예약</a>
+										</div></li>
+									<li class="nav-item"><a	href="<%=root%>/views/bbs/bbsList.jsp" class="nav-link">커뮤니티</a>
+									
+									</li>
                            <li class="nav-item">
                           	 <%if(loginUser == null){ %>
                           		<a href="<%=root%>/FAQList.bo" class="nav-link">고객센터</a>
@@ -155,7 +169,7 @@ footer {
                           		<a href="<%=root%>/AdminFAQList.bo" class="nav-link">고객센터 관리</a>
                         	 <%}else{ %>
                         	 	<a href="<%=root%>/FAQList.bo" class="nav-link">고객센터</a>
-                        	 <%} %>
+                        	 <%}%>
                            </li>
                         </ul>
                      </div>
@@ -165,9 +179,12 @@ footer {
          </div>
       </div>
    </header>
+   
+               
    <script>
        function logout(){
-         location.href = '<%=request.getContextPath()%>/logout.me';
+    	  
+        location.href = '<%=request.getContextPath()%>/logout.me';
       }
    </script>
 </body>

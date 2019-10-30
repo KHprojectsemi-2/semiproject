@@ -34,9 +34,11 @@ public class FindIdServlet extends HttpServlet {
 		String userName = request.getParameter("userName");
 		String userEmail = request.getParameter("userEmail");
 		int year = Integer.valueOf(request.getParameter("year"));
-		int month = (Integer.valueOf(request.getParameter("month"))) - 1;
+		int month = Integer.valueOf(request.getParameter("month"))-1;
 		int day = Integer.valueOf(request.getParameter("day"));
 		GregorianCalendar date = new GregorianCalendar(year,month,day);
+		
+		System.out.println(date.toString());
 		Date userBirth = new Date(date.getTimeInMillis());
 		
 		User user = new User(userName,userEmail,userBirth);

@@ -111,6 +111,7 @@ public class BoardService {
 		}
 		
 		close(conn);
+		System.out.println("service FAQ : "+result);
 		
 		return result;
 	}
@@ -146,6 +147,134 @@ public class BoardService {
 		close(conn);
 		
 		return listCount;
+	}
+
+	public QuestionBoard selectQBoard(int bNo) {
+		Connection conn = getConnection();
+		
+		QuestionBoard b = new BoardDao().selectQBoard(conn, bNo);
+		
+		close(conn);
+		
+		return b;
+	}
+
+	public int deleteQBoard(int qbn) {
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().deleteQBoard(conn, qbn);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int insertReQBoard(QuestionBoard qb) {
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().insertReQBoard(conn, qb);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int getRListCount() {
+		Connection conn = getConnection();
+		int listCount = new BoardDao().getRListCount(conn);
+		
+		close(conn);
+		
+		return listCount;
+	}
+
+	public ArrayList<ReportBoard> reportList(int currentPage, int limit) {
+		Connection conn = getConnection();
+		
+		ArrayList<ReportBoard> rlist = new BoardDao().reportList(conn, currentPage, limit);
+		close(conn);
+		
+		return rlist;
+	}
+
+	public ReportBoard selectRBoard(int rbn) {
+		Connection conn = getConnection();
+		
+		ReportBoard rb = new BoardDao().selectRBoard(conn, rbn);
+		
+		close(conn);
+		
+		return rb;
+	}
+
+	public User selectRepUser(String repUser) {
+		Connection conn = getConnection();
+		
+		User user = new BoardDao().selectRepUser(conn, repUser);
+		
+		close(conn);
+		
+		return user;
+	}
+
+	public int reportUser(String repUserId) {
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().reportUser(conn, repUserId);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int repStatus(int rbn) {
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().repStatus(conn, rbn);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int deleterBoard(int rbn) {
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().deleteRBoard(conn, rbn);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
 	}
 
 }
