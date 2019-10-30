@@ -1,14 +1,10 @@
-/image/
-/matching/
+/bbs/
 /board/
 /common/
 /diary/
 /filter/
+/image/
+/matching/
 /petSitter/
-/user/
-<<<<<<< HEAD
 /sql/
-/petSitter/
-=======
->>>>>>> refs/remotes/origin/master
-/bbs/
+/user/
