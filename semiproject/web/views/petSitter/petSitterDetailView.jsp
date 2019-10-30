@@ -44,10 +44,6 @@
 	    border-bottom: 1px solid #ccc;
 	}
 		
-		
-		
-		
-		
 </style>
 </head>
 <!-- 관리자가 펫시터 지원서 승인 유무 결정하는 페이지 -->
@@ -109,10 +105,15 @@
 					<th>자격증 보유 여부</th>
 					<td><%=p.getIsLicense() %></td>
 				</tr>
+				<tr>
+					<th>승인 여부</th>
+					<td><%=p.getChkResume() %></td>
+				</tr>
 			</table><br><br>
 			<div align="center">
+			<%if(p.getChkResume().equals("N")){ %>
 				<button type="button" onclick="approve();" class="btn btn-info btn-md">승인</button>
-				<!-- <button id="cancel" class="btn btn-info btn-md">승인 취소</button> -->
+			<%}%>	
 			</div>
 			</div>
 			

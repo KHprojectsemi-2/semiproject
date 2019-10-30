@@ -12,6 +12,7 @@ public class PetSitter implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 8781128373138778399L;
+
 	   private String userId;
 	   private int petSitterNo;
 	   private int grade;
@@ -31,7 +32,16 @@ public class PetSitter implements Serializable{
 	      
 	   }
 	   
-	   public PetSitter(String userId, int petSitterNo, int grade, String residence, String job, String withFam,
+	   
+	   
+	   public PetSitter(String userId) {
+		super();
+		this.userId = userId;
+	}
+
+
+
+	public PetSitter(String userId, int petSitterNo, int grade, String residence, String job, String withFam,
 	         String withPet, String canLarge, String canMedic, String canOld, String canSick, String isLicense,
 	         Date applyDate, String chkResume) {
 	      super();
@@ -51,6 +61,8 @@ public class PetSitter implements Serializable{
 	      this.chkResume = chkResume;
 	   }
 
+	   
+
 	   public PetSitter(String userId, String residence, String job, String withFam, String withPet,
 	         String canLarge, String canMedic, String canOld, String canSick, String isLicense) {
 	      super();
@@ -66,6 +78,8 @@ public class PetSitter implements Serializable{
 	      this.isLicense = isLicense;
 	   }
 	   
+
+
 
 	   public PetSitter(String userId, int petSitterNo, int grade, String residence, String job, String withFam,
 	         String withPet, String canLarge, String canMedic, String canOld, String canSick, String isLicense,
@@ -85,6 +99,7 @@ public class PetSitter implements Serializable{
 	      this.isLicense = isLicense;
 	      this.applyDate = applyDate;
 	   }
+
 
 
 	   public PetSitter(String userId, int petSitterNo, String residence, String job, String withFam, String withPet,
@@ -231,3 +246,4 @@ public class PetSitter implements Serializable{
 	   
 
 }
+

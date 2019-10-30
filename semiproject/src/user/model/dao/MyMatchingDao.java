@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import petSitter.model.vo.PetSitter;
-import user.model.vo.Matching;
+import matching.model.vo.Matching;
 
 public class MyMatchingDao {
 	Properties prop = new Properties();
@@ -46,11 +46,18 @@ public class MyMatchingDao {
 			rs=pstmt.executeQuery();
 			yList1 = new ArrayList<Matching>();
 			while(rs.next()) {
-			Matching m = new Matching (rs.getString("sitterId"),
+			Matching m = new Matching (rs.getInt("matchno"),
+										rs.getString("sitterId"),
 										rs.getString("userId"),
 										rs.getString("isHome"),
-									    rs.getDate("caredatd"),
-									    rs.getString("regstatus"));
+									    rs.getDate("careDate"),
+									    rs.getInt("price"),
+									    rs.getString("wantToSay"),
+									    rs.getString("special_Note"),
+									    rs.getString("thumbnail"),
+									    rs.getString("regStatus"),
+									    rs.getString("countPet"));
+			yList1.add(m);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -101,6 +108,24 @@ public class MyMatchingDao {
 		
 		try {
 			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			yList2 = new ArrayList<Matching>();
+			while(rs.next()) {
+			Matching m = new Matching (rs.getInt("matchno"),
+					rs.getString("sitterId"),
+					rs.getString("userId"),
+					rs.getString("isHome"),
+				    rs.getDate("careDate"),
+				    rs.getInt("price"),
+				    rs.getString("wantToSay"),
+				    rs.getString("special_Note"),
+				    rs.getString("thumbnail"),
+				    rs.getString("regStatus"),
+				    rs.getString("countPet"));
+				yList2.add(m);
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -119,6 +144,17 @@ public class MyMatchingDao {
 		
 		try {
 			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			nList1 = new ArrayList<Matching>();
+			while(rs.next()) {
+			Matching m = new Matching (rs.getString("sitterId"),
+										rs.getString("userId"),
+										rs.getString("isHome"),
+									    rs.getDate("careDate"),
+									    rs.getString("regStatus"));
+				nList1.add(m);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -137,6 +173,17 @@ public class MyMatchingDao {
 		
 		try {
 			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			nList2 = new ArrayList<Matching>();
+			while(rs.next()) {
+			Matching m = new Matching (rs.getString("sitterId"),
+										rs.getString("userId"),
+										rs.getString("isHome"),
+									    rs.getDate("careDate"),
+									    rs.getString("regStatus"));
+				nList2.add(m);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -155,6 +202,17 @@ public class MyMatchingDao {
 		
 		try {
 			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			nList3 = new ArrayList<Matching>();
+			while(rs.next()) {
+			Matching m = new Matching (rs.getString("sitterId"),
+										rs.getString("userId"),
+										rs.getString("isHome"),
+									    rs.getDate("careDate"),
+									    rs.getString("regStatus"));
+				nList3.add(m);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -173,6 +231,17 @@ public class MyMatchingDao {
 		
 		try {
 			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			nList4 = new ArrayList<Matching>();
+			while(rs.next()) {
+			Matching m = new Matching (rs.getString("sitterId"),
+										rs.getString("userId"),
+										rs.getString("isHome"),
+									    rs.getDate("careDate"),
+									    rs.getString("regStatus"));
+				nList4.add(m);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -191,6 +260,17 @@ public class MyMatchingDao {
 		
 		try {
 			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			nList5 = new ArrayList<Matching>();
+			while(rs.next()) {
+			Matching m = new Matching (rs.getString("sitterId"),
+										rs.getString("userId"),
+										rs.getString("isHome"),
+									    rs.getDate("careDate"),
+									    rs.getString("regStatus"));
+				nList5.add(m);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -209,6 +289,17 @@ public class MyMatchingDao {
 		
 		try {
 			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			nList6 = new ArrayList<Matching>();
+			while(rs.next()) {
+			Matching m = new Matching (rs.getString("sitterId"),
+										rs.getString("userId"),
+										rs.getString("isHome"),
+									    rs.getDate("careDate"),
+									    rs.getString("regStatus"));
+				nList6.add(m);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -227,6 +318,17 @@ public class MyMatchingDao {
 		
 		try {
 			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			nList7 = new ArrayList<Matching>();
+			while(rs.next()) {
+			Matching m = new Matching (rs.getString("sitterId"),
+										rs.getString("userId"),
+										rs.getString("isHome"),
+									    rs.getDate("careDate"),
+									    rs.getString("regStatus"));
+				nList7.add(m);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -245,6 +347,17 @@ public class MyMatchingDao {
 		
 		try {
 			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			nList8 = new ArrayList<Matching>();
+			while(rs.next()) {
+			Matching m = new Matching (rs.getString("sitterId"),
+										rs.getString("userId"),
+										rs.getString("isHome"),
+									    rs.getDate("careDate"),
+									    rs.getString("regStatus"));
+				nList8.add(m);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -252,6 +365,122 @@ public class MyMatchingDao {
 			close(rs);
 		}
 		return nList8;
+	}
+
+	public ArrayList<Matching> endMatchingView1(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Matching> eList1 = null;
+		
+		String query = prop.getProperty("e1Matching");
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			eList1 = new ArrayList<Matching>();
+			while(rs.next()) {
+			Matching m = new Matching (rs.getString("sitterId"),
+										rs.getString("userId"),
+										rs.getString("isHome"),
+									    rs.getDate("careDate"),
+									    rs.getString("regStatus"));
+				eList1.add(m);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		return eList1;
+	}
+
+	public ArrayList<Matching> endMatchingView2(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Matching> eList2 = null;
+		
+		String query = prop.getProperty("e2Matching");
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			eList2 = new ArrayList<Matching>();
+			while(rs.next()) {
+			Matching m = new Matching (rs.getString("sitterId"),
+										rs.getString("userId"),
+										rs.getString("isHome"),
+									    rs.getDate("careDate"),
+									    rs.getString("regStatus"));
+				eList2.add(m);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		return eList2;
+	}
+
+	public ArrayList<Matching> endMatchingView3(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Matching> eList3 = null;
+		
+		String query = prop.getProperty("e3Matching");
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			eList3 = new ArrayList<Matching>();
+			while(rs.next()) {
+			Matching m = new Matching (rs.getString("sitterId"),
+										rs.getString("userId"),
+										rs.getString("isHome"),
+									    rs.getDate("careDate"),
+									    rs.getString("regStatus"));
+				eList3.add(m);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		return eList3;
+	}
+
+	public ArrayList<Matching> endMatchingView4(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Matching> eList4 = null;
+		
+		String query = prop.getProperty("e4Matching");
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			eList4 = new ArrayList<Matching>();
+			while(rs.next()) {
+			Matching m = new Matching (rs.getString("sitterId"),
+										rs.getString("userId"),
+										rs.getString("isHome"),
+									    rs.getDate("careDate"),
+									    rs.getString("regStatus"));
+				eList4.add(m);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		return eList4;
 	}
 	
 

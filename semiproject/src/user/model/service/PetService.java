@@ -1,9 +1,11 @@
 package user.model.service;
 
+
 import static common.JDBCTemplate.close;
 import static common.JDBCTemplate.commit;
 import static common.JDBCTemplate.getConnection;
 import static common.JDBCTemplate.rollback;
+
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -13,10 +15,44 @@ import user.model.vo.Pet;
 
 public class PetService {
 
-	
-	//기본생성자
-	public PetService() {
+
+	public ArrayList<Pet> selecthPet(String userId) {
+		Connection conn = getConnection();
 		
+		ArrayList<Pet> pList = new PetDao().selecthPet(conn,userId);
+		
+		close(conn);
+		return pList;
+	}
+
+	public int updatePet(int petno1) {
+		Connection conn = getConnection();
+		
+		int result = new PetDao().updatePet(conn,petno1);
+		
+		if(result>0){
+			commit(conn);
+		}else{
+			rollback(conn);
+		}
+		return result;
+	}
+
+	public ArrayList<Pet> selectcarePet(String userId) {
+		Connection conn = getConnection();
+		
+		ArrayList<Pet> pList = new PetDao().selectcarePet(conn,userId);
+		
+		return pList;
+	}
+
+	public ArrayList<Pet> selectNotMatchingPet(String userId) {
+		Connection conn = getConnection();
+		
+		ArrayList<Pet> pList = new PetDao().selectNotMatchingPet(conn,userId);
+		
+		return pList;
+
 	}
 	
 	public int insertPet(Pet pet) {
@@ -44,6 +80,7 @@ public class PetService {
 		close(conn);
 	    
 		return pal;
+
 	}
 
 }

@@ -35,7 +35,7 @@ public class ReportedUserServlet extends HttpServlet {
 		
 		int repPoint = new BoardService().reportUser(repUserId);
 		int repStatus = new BoardService().repStatus(rbn);
-		
+	
 		 if(repPoint > 0 && repStatus > 0) {
 			 response.sendRedirect("adminRBoard.bo");
 		 }else{ 

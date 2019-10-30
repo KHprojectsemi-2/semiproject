@@ -64,7 +64,8 @@ public class BoardListServlet extends HttpServlet {
 		 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		 		
 		 		ArrayList<Board> list = bService.selectList(currentPage, limit);
-		 		
+		 		System.out.println(list);
+		 		System.out.println(pi);
 		 		RequestDispatcher view = null;
 		 		if(list != null) {
 		 			view = request.getRequestDispatcher("views/serviceCenter/FAQ.jsp");

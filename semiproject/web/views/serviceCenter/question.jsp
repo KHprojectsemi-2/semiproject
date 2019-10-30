@@ -76,14 +76,15 @@ button {
 				
 					<div class="form-group">
 						<label>카테고리</label> <select id = "category" name = "category" class="form-control" style = "height : 40px;">
-							<option value="카테고리1" selected>카테고리1</option>
-							<option value="카테고리2">카테고리2</option>
-							<option value="카테고리3">카테고리3</option>
-							<option value="카테고리4">카테고리4</option>
+							<option value="펫시터 지원 자격" selected>펫시터 지원 자격</option>
+							<option value="커뮤니티관련">커뮤니티관련</option>
+							<option value="정보수정관련">정보수정관련</option>
+							<option value="매칭관련">매칭관련</option>
+							<option value="돌봄일지관련">돌봄일지관련</option>
 							<option value="기타">기타</option>
 						</select>
-	
 					</div>
+					
 					<div class="form-group">
 						<label>제목</label> <input id = "title" type="text" name="title" class="form-control" style = "height : 40px;">
 					</div>

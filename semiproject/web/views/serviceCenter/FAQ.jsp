@@ -52,11 +52,13 @@
 		margin-left : auto;
 		text-align : center;
 		width : 1200px;
-		border : 1px solid black;
 		
 	}
-	#sc_List th, td{
-		border : 1px solid black;	
+	#sc_List td{
+		border-top : 1px solid black;
+	}
+	 #sc_List th{
+		font-size : 20px;
 	}
 	
 	#content{
@@ -194,9 +196,7 @@
 
 			$("#content td").click(function() {		
 				var hide = $(this).parents().next("tr");	// 숨겨져있는 객체
-				//var hide = $(this).parents().find("td.ans");
-				//alert(hide);
-				//$(hide).slideToggle();
+				
 				if ($(hide).hasClass('hide')) {
 					$(show).removeClass('show').addClass('hide');	// 열려있는게 닫히고
 					$(hide).addClass('show').removeClass('hide');	// 클릭한게 열린다
