@@ -12,223 +12,238 @@ public class PetSitter implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 8781128373138778399L;
-	private String userId;
-	private int petSitterNo;
-	private int grade;
-	private String residence;
-	private String job;
-	private String withFam;
-	private String withPet;
-	private String canLarge;
-	private String canMedic;
-	private String canOld;
-	private String canSick;
-	private String isLicense;
-	private Date applyDate;
-	private String chkResume;
-	
-	public PetSitter() {
-		
-	}
-	
-	public PetSitter(String userId, int petSitterNo, int grade, String residence, String job, String withFam,
-			String withPet, String canLarge, String canMedic, String canOld, String canSick, String isLicense,
-			Date applyDate, String chkResume) {
+
+	   private String userId;
+	   private int petSitterNo;
+	   private int grade;
+	   private String residence;
+	   private String job;
+	   private String withFam;
+	   private String withPet;
+	   private String canLarge;
+	   private String canMedic;
+	   private String canOld;
+	   private String canSick;
+	   private String isLicense;
+	   private Date applyDate;
+	   private String chkResume;
+	   
+	   public PetSitter() {
+	      
+	   }
+	   
+	   
+	   
+	   public PetSitter(String userId) {
 		super();
 		this.userId = userId;
-		this.petSitterNo = petSitterNo;
-		this.grade = grade;
-		this.residence = residence;
-		this.job = job;
-		this.withFam = withFam;
-		this.withPet = withPet;
-		this.canLarge = canLarge;
-		this.canMedic = canMedic;
-		this.canOld = canOld;
-		this.canSick = canSick;
-		this.isLicense = isLicense;
-		this.applyDate = applyDate;
-		this.chkResume = chkResume;
 	}
 
-	public PetSitter(String userId, String residence, String job, String withFam, String withPet,
-			String canLarge, String canMedic, String canOld, String canSick, String isLicense) {
-		super();
-		this.userId = userId;
-		this.residence = residence;
-		this.job = job;
-		this.withFam = withFam;
-		this.withPet = withPet;
-		this.canLarge = canLarge;
-		this.canMedic = canMedic;
-		this.canOld = canOld;
-		this.canSick = canSick;
-		this.isLicense = isLicense;
-	}
-	
+
 
 	public PetSitter(String userId, int petSitterNo, int grade, String residence, String job, String withFam,
-			String withPet, String canLarge, String canMedic, String canOld, String canSick, String isLicense,
-			Date applyDate) {
-		super();
-		this.userId = userId;
-		this.petSitterNo = petSitterNo;
-		this.grade = grade;
-		this.residence = residence;
-		this.job = job;
-		this.withFam = withFam;
-		this.withPet = withPet;
-		this.canLarge = canLarge;
-		this.canMedic = canMedic;
-		this.canOld = canOld;
-		this.canSick = canSick;
-		this.isLicense = isLicense;
-		this.applyDate = applyDate;
-	}
+	         String withPet, String canLarge, String canMedic, String canOld, String canSick, String isLicense,
+	         Date applyDate, String chkResume) {
+	      super();
+	      this.userId = userId;
+	      this.petSitterNo = petSitterNo;
+	      this.grade = grade;
+	      this.residence = residence;
+	      this.job = job;
+	      this.withFam = withFam;
+	      this.withPet = withPet;
+	      this.canLarge = canLarge;
+	      this.canMedic = canMedic;
+	      this.canOld = canOld;
+	      this.canSick = canSick;
+	      this.isLicense = isLicense;
+	      this.applyDate = applyDate;
+	      this.chkResume = chkResume;
+	   }
+
+	   
+
+	   public PetSitter(String userId, String residence, String job, String withFam, String withPet,
+	         String canLarge, String canMedic, String canOld, String canSick, String isLicense) {
+	      super();
+	      this.userId = userId;
+	      this.residence = residence;
+	      this.job = job;
+	      this.withFam = withFam;
+	      this.withPet = withPet;
+	      this.canLarge = canLarge;
+	      this.canMedic = canMedic;
+	      this.canOld = canOld;
+	      this.canSick = canSick;
+	      this.isLicense = isLicense;
+	   }
+	   
 
 
-	public PetSitter(String userId, int petSitterNo, String residence, String job, String withFam, String withPet,
-			String canLarge, String canMedic, String canOld, String canSick, String isLicense, Date applyDate) {
-		super();
-		this.userId = userId;
-		this.petSitterNo = petSitterNo;
-		this.residence = residence;
-		this.job = job;
-		this.withFam = withFam;
-		this.withPet = withPet;
-		this.canLarge = canLarge;
-		this.canMedic = canMedic;
-		this.canOld = canOld;
-		this.canSick = canSick;
-		this.isLicense = isLicense;
-		this.applyDate = applyDate;
-	}
 
-	public String getUserId() {
-		return userId;
-	}
+	   public PetSitter(String userId, int petSitterNo, int grade, String residence, String job, String withFam,
+	         String withPet, String canLarge, String canMedic, String canOld, String canSick, String isLicense,
+	         Date applyDate) {
+	      super();
+	      this.userId = userId;
+	      this.petSitterNo = petSitterNo;
+	      this.grade = grade;
+	      this.residence = residence;
+	      this.job = job;
+	      this.withFam = withFam;
+	      this.withPet = withPet;
+	      this.canLarge = canLarge;
+	      this.canMedic = canMedic;
+	      this.canOld = canOld;
+	      this.canSick = canSick;
+	      this.isLicense = isLicense;
+	      this.applyDate = applyDate;
+	   }
 
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
 
-	public int getPetSitterNo() {
-		return petSitterNo;
-	}
 
-	public void setPetSitterNo(int petSitterNo) {
-		this.petSitterNo = petSitterNo;
-	}
+	   public PetSitter(String userId, int petSitterNo, String residence, String job, String withFam, String withPet,
+	         String canLarge, String canMedic, String canOld, String canSick, String isLicense, Date applyDate) {
+	      super();
+	      this.userId = userId;
+	      this.petSitterNo = petSitterNo;
+	      this.residence = residence;
+	      this.job = job;
+	      this.withFam = withFam;
+	      this.withPet = withPet;
+	      this.canLarge = canLarge;
+	      this.canMedic = canMedic;
+	      this.canOld = canOld;
+	      this.canSick = canSick;
+	      this.isLicense = isLicense;
+	      this.applyDate = applyDate;
+	   }
 
-	public int getGrade() {
-		return grade;
-	}
+	   public String getUserId() {
+	      return userId;
+	   }
 
-	public void setGrade(int grade) {
-		this.grade = grade;
-	}
+	   public void setUserId(String userId) {
+	      this.userId = userId;
+	   }
 
-	public String getResidence() {
-		return residence;
-	}
+	   public int getPetSitterNo() {
+	      return petSitterNo;
+	   }
 
-	public void setResidence(String residence) {
-		this.residence = residence;
-	}
+	   public void setPetSitterNo(int petSitterNo) {
+	      this.petSitterNo = petSitterNo;
+	   }
 
-	public String getJob() {
-		return job;
-	}
+	   public int getGrade() {
+	      return grade;
+	   }
 
-	public void setJob(String job) {
-		this.job = job;
-	}
+	   public void setGrade(int grade) {
+	      this.grade = grade;
+	   }
 
-	public String getWithFam() {
-		return withFam;
-	}
+	   public String getResidence() {
+	      return residence;
+	   }
 
-	public void setWithFam(String withFam) {
-		this.withFam = withFam;
-	}
+	   public void setResidence(String residence) {
+	      this.residence = residence;
+	   }
 
-	public String getWithPet() {
-		return withPet;
-	}
+	   public String getJob() {
+	      return job;
+	   }
 
-	public void setWithPet(String withPet) {
-		this.withPet = withPet;
-	}
+	   public void setJob(String job) {
+	      this.job = job;
+	   }
 
-	public String getCanLarge() {
-		return canLarge;
-	}
+	   public String getWithFam() {
+	      return withFam;
+	   }
 
-	public void setCanLarge(String canLarge) {
-		this.canLarge = canLarge;
-	}
+	   public void setWithFam(String withFam) {
+	      this.withFam = withFam;
+	   }
 
-	public String getCanMedic() {
-		return canMedic;
-	}
+	   public String getWithPet() {
+	      return withPet;
+	   }
 
-	public void setCanMedic(String canMedic) {
-		this.canMedic = canMedic;
-	}
+	   public void setWithPet(String withPet) {
+	      this.withPet = withPet;
+	   }
 
-	public String getCanOld() {
-		return canOld;
-	}
+	   public String getCanLarge() {
+	      return canLarge;
+	   }
 
-	public void setCanOld(String canOld) {
-		this.canOld = canOld;
-	}
+	   public void setCanLarge(String canLarge) {
+	      this.canLarge = canLarge;
+	   }
 
-	public String getCanSick() {
-		return canSick;
-	}
+	   public String getCanMedic() {
+	      return canMedic;
+	   }
 
-	public void setCanSick(String canSick) {
-		this.canSick = canSick;
-	}
+	   public void setCanMedic(String canMedic) {
+	      this.canMedic = canMedic;
+	   }
 
-	public String getIsLicense() {
-		return isLicense;
-	}
+	   public String getCanOld() {
+	      return canOld;
+	   }
 
-	public void setIsLicense(String isLicense) {
-		this.isLicense = isLicense;
-	}
+	   public void setCanOld(String canOld) {
+	      this.canOld = canOld;
+	   }
 
-	public Date getApplyDate() {
-		return applyDate;
-	}
+	   public String getCanSick() {
+	      return canSick;
+	   }
 
-	public void setApplyDate(Date applyDate) {
-		this.applyDate = applyDate;
-	}
+	   public void setCanSick(String canSick) {
+	      this.canSick = canSick;
+	   }
 
-	public String getChkResume() {
-		return chkResume;
-	}
+	   public String getIsLicense() {
+	      return isLicense;
+	   }
 
-	public void setChkResume(String chkResume) {
-		this.chkResume = chkResume;
-	}
+	   public void setIsLicense(String isLicense) {
+	      this.isLicense = isLicense;
+	   }
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+	   public Date getApplyDate() {
+	      return applyDate;
+	   }
 
-	@Override
-	public String toString() {
-		return "PetSitter [userId=" + userId + ", petSitterNo=" + petSitterNo + ", grade=" + grade + ", residence="
-				+ residence + ", job=" + job + ", withFam=" + withFam + ", withPet=" + withPet + ", canLarge="
-				+ canLarge + ", canMedic=" + canMedic + ", canOld=" + canOld + ", canSick=" + canSick + ", isLicense="
-				+ isLicense + ", applyDate=" + applyDate + ", chkResume=" + chkResume + "]";
-	}
+	   public void setApplyDate(Date applyDate) {
+	      this.applyDate = applyDate;
+	   }
 
-	
-	
+	   public String getChkResume() {
+	      return chkResume;
+	   }
+
+	   public void setChkResume(String chkResume) {
+	      this.chkResume = chkResume;
+	   }
+
+	   public static long getSerialversionuid() {
+	      return serialVersionUID;
+	   }
+
+	   @Override
+	   public String toString() {
+	      return "PetSitter [userId=" + userId + ", petSitterNo=" + petSitterNo + ", grade=" + grade + ", residence="
+	            + residence + ", job=" + job + ", withFam=" + withFam + ", withPet=" + withPet + ", canLarge="
+	            + canLarge + ", canMedic=" + canMedic + ", canOld=" + canOld + ", canSick=" + canSick + ", isLicense="
+	            + isLicense + ", applyDate=" + applyDate + ", chkResume=" + chkResume + "]";
+	   }
+
+	   
 
 }
+

@@ -181,7 +181,8 @@ public class BoardDao {
 									 rs.getInt("REPORTED"),
 									 rs.getDate("JOINDATE"),
 									 rs.getDate("LATESTDATE"),
-									 rs.getString("USERSTATUS"));
+									 rs.getString("USERSTATUS"),
+									 rs.getDate("stopdate"));
 			}
 			
 			
@@ -269,6 +270,7 @@ public class BoardDao {
 		} finally {
 			close(pstmt);
 		}
+		System.out.println("createFAQ : "+result);
 		
 		return result;
 	}
@@ -366,6 +368,303 @@ public class BoardDao {
 		}
 		
 		return listCount;
+	}
+
+	public QuestionBoard selectQBoard(Connection conn, int bNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		QuestionBoard qb = null;
+		
+		String query = prop.getProperty("selectQuestion");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, bNo);
+			
+			qb = new QuestionBoard();
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				qb = new QuestionBoard(rs.getInt("boardno"),
+									   rs.getString("userid"),
+									   rs.getString("boardtype"),
+									   rs.getString("title"),
+									   rs.getString("content"),
+									   rs.getDate("create_date"),
+									   rs.getString("boardstatus"),
+									   rs.getString("re_content"),
+									   rs.getString("category"),
+									   rs.getString("re_boardstatus"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+			close(rs);
+		}
+		
+		return qb;
+	}
+
+	public int deleteQBoard(Connection conn, int qbn) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteQBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, qbn);	
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int insertReQBoard(Connection conn, QuestionBoard qb) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertRecontent");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, qb.getReContent());
+			pstmt.setInt(2, qb.getBoardNo());
+			
+			result = pstmt.executeUpdate();
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int getRListCount(Connection conn) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		int listCount = 0;
+		
+		String query = prop.getProperty("getRListCount");
+		
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(query);
+			
+			if(rs.next()) {
+				listCount=rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rs);
+		}
+		
+		return listCount;
+	}
+
+	public ArrayList<ReportBoard> reportList(Connection conn, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		ArrayList<ReportBoard> list = null;
+		
+		String query = prop.getProperty("selectRList");
+			
+		int startRow = (currentPage - 1) * limit + 1;
+		int endRow = startRow + limit - 1;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rs = pstmt.executeQuery();
+			
+			list = new ArrayList<ReportBoard>();
+			
+			while(rs.next()) {		
+				ReportBoard rb = new ReportBoard(rs.getInt("boardno"),
+												 rs.getString("userid"),
+												 rs.getString("boardtype"),
+												 rs.getString("title"),
+												 rs.getString("content"),
+												 rs.getDate("create_date"),
+												 rs.getString("boardstatus"),
+												 rs.getString("repuser"),
+												 rs.getString("reptype"),
+												 rs.getString("repstatus"));
+						  
+				list.add(rb);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+
+		return list;
+	}
+
+	public ReportBoard selectRBoard(Connection conn, int rbn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ReportBoard rb = null;
+		
+		String query = prop.getProperty("selectReport");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, rbn);
+			
+			rb = new ReportBoard();
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				rb = new ReportBoard(rs.getInt("boardno"),
+									 rs.getString("userid"),
+									 rs.getString("boardtype"),
+									 rs.getString("title"),
+									 rs.getString("content"),
+									 rs.getDate("create_date"),
+									 rs.getString("boardstatus"),
+									 rs.getString("repuser"),
+									 rs.getString("reptype"),
+									 rs.getString("repstatus"));	
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+			close(rs);
+		}
+		
+		return rb;
+	}
+
+	public User selectRepUser(Connection conn, String repUser) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		User user = null;
+		
+		String query = prop.getProperty("selectRepUser");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, repUser);
+			
+			user = new User();
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				user = new User(rs.getString("userId"),
+								rs.getInt("userno"),
+								rs.getString("userpwd"),
+								rs.getString("userName"),
+								rs.getString("usergender"),
+								rs.getString("useremail"),
+								rs.getDate("userbirth"),
+								rs.getString("userphone"),
+								rs.getString("userpostcode"),
+								rs.getString("useraddress"),
+								rs.getString("userimage"),
+								rs.getInt("reported"),
+								rs.getDate("joindate"),
+								rs.getDate("latestdate"),
+								rs.getString("userstatus"),
+								rs.getDate("stopdate"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+			close(rs);
+		}
+		
+		return user;
+	}
+
+	public int reportUser(Connection conn, String repUserId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("reportUser");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, repUserId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int repStatus(Connection conn, int rbn) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("repStatus");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, rbn);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteRBoard(Connection conn, int rbn) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteRBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, rbn);	
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 	
 

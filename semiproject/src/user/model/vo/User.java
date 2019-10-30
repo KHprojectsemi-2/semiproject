@@ -26,7 +26,6 @@ public class User implements Serializable{
 	private String userStatus;
 	private Date stopDate;
 	
-	
 	public User() {
 		super();
 	}
@@ -119,6 +118,16 @@ public class User implements Serializable{
 		this.joinDate = joinDate;
 		this.latestDate = latestDate;
 		this.userStatus = userStatus;
+		this.stopDate = stopDate;
+	}
+
+	
+	
+	public Date getStopDate() {
+		return stopDate;
+	}
+
+	public void setStopDate(Date stopDate) {
 		this.stopDate = stopDate;
 	}
 
@@ -243,20 +252,10 @@ public class User implements Serializable{
 		this.userStatus = userStatus;
 	}
 
-	public Date getStopDate() {
-		return stopDate;
-	}
-
-	public void setStopDate(Date stopDate) {
-		this.stopDate = stopDate;
-	}
 	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-	
-
 
 	@Override
 	public String toString() {
@@ -264,8 +263,10 @@ public class User implements Serializable{
 				+ ", userGender=" + userGender + ", userEmail=" + userEmail + ", userBirth=" + userBirth
 				+ ", userPhone=" + userPhone + ", userPostcode=" + userPostcode + ", userAddress=" + userAddress
 				+ ", userImage=" + userImage + ", reported=" + reported + ", joinDate=" + joinDate + ", latestDate="
-				+ latestDate + ", userStatus=" + userStatus + "]";
+				+ latestDate + ", userStatus=" + userStatus + ", stopDate=" + stopDate + "]";
 	}
+
+	
 
 
 	

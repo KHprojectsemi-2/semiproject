@@ -106,7 +106,7 @@ button {
 					</div>
 					<div class="form-group">
 						<label>내용</label>
-						<textarea id = "content" name="content" class="form-control" rows="20" placeholder="내용을 입력하세요"></textarea>
+						<textarea id = "content" style = "resize: none;" name="content" class="form-control" rows="20" placeholder="내용을 입력하세요"></textarea>
 					</div>
 					<div id="btnArea" class = "text-right">
 						<input type="button" onclick="Previous();" class="btn btn-info btn-md" value="이전으로"/> 
@@ -141,7 +141,7 @@ button {
 					alert("존재하지않는 아이디입니다. 다시입력해주세요.");
 					repUserTag.focus();
 				}else if(data == "same"){
-					alert("동일한 아이디입니다!!")
+					alert("로그인되어있는 아이디입니다!!")
 					repUserTag.focus();
 				}else{
 					alert("확인되었습니다");

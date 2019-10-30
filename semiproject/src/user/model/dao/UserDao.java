@@ -180,8 +180,7 @@ public class UserDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = prop.getProperty("updateLoginDate");
-		
+		String query = prop.getProperty("updateLoginDate");	
 		try {
 				pstmt = conn.prepareStatement(query);
 				pstmt.setString(1, user.getUserId());

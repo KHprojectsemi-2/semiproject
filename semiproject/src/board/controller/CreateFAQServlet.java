@@ -36,12 +36,16 @@ public class CreateFAQServlet extends HttpServlet {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		
+		System.out.println("servlet content : "+content);
+		
 		Board b = new Board();
 		b.setTitle(title);
 		b.setContent(content);
 		b.setUserId(loginUser.getUserId());
 		
 		int result = new BoardService().createFAQ(b);
+		
+		System.out.println("servlet result : "+result);
 		
 		if(result > 0) {
 			response.sendRedirect("AdminFAQList.bo?currentPage=1");

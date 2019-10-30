@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class JoinAttach {
 
+
 	private int fileNo;
 	private String category;
 	private String originName;
@@ -85,4 +86,5 @@ public class JoinAttach {
 	
 	
 	
+
 }

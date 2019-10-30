@@ -8,6 +8,7 @@ import com.oreilly.servlet.multipart.FileRenamePolicy;
 
 public class MyFileRenamePolicy implements FileRenamePolicy{
 
+
 	@Override
 	public File rename(File originFile) {
 		long currentTime = System.currentTimeMillis(); // 현재 시간을 밀리세컨 단위의 long형으로 반환
@@ -33,3 +34,4 @@ public class MyFileRenamePolicy implements FileRenamePolicy{
 	}
 
 }
+

@@ -6,8 +6,8 @@
 ArrayList<Pet> pal = (ArrayList<Pet>)request.getAttribute("pal");
 
 
-
 %>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- 우편번호 관련 -->
 
 
 <!DOCTYPE html>
