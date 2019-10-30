@@ -188,11 +188,12 @@ CREATE TABLE JOINATTACH(
     status   VARCHAR2(1) DEFAULT 'Y' NOT NULL
 );
 
+
 CREATE TABLE PETSITTER (
 	userId	VARCHAR2(12)		NOT NULL,
     petSitterNo NUMBER NULL,
 	grade	NUMBER		NULL,
-	residence	VARCHAR2(10)		NOT NULL,
+	residence	VARCHAR2(20)		NOT NULL,
 	job	VARCHAR2(15)		NOT NULL,
 	withFam	VARCHAR(1)	DEFAULT 'N'	NOT NULL,
 	withPet	VARCHAR(1)	DEFAULT 'N'	NOT NULL,
@@ -401,11 +402,6 @@ FROM REPORT_BOARD
 WHERE BOARDSTATUS='Y'
 ORDER BY CREATE_DATE DESC) A;
 
-
-
------------------------------------------- 입력 --------------------
-
-
 -- 관리자 입력
 INSERT INTO SUSER VALUES('admin',0,'admin','관리자',DEFAULT,'admin@or.kr',TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD'),'YYYYMMDDHH24MISS'),'01011112222','10240','서울시 서울구 서울동',NULL,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT);
 
@@ -463,39 +459,82 @@ INSERT INTO REPORT VALUES(SEQ_REPORTNO.NEXTVAL,'stillstop','권지용씨는 큰 
 -- 펫 입력 14마리
 INSERT INTO PET VALUES(SEQ_PETNO.NEXTVAL,'dkdldb','또또','중형','dogimg1.jpg','시바','M','Y',3,DEFAULT);
 INSERT INTO PET VALUES(SEQ_PETNO.NEXTVAL,'wjdgodls33','구구','소형','dogimg2.jpg','포메라니안','W','Y',2,DEFAULT);
-INSERT INTO PET VALUES(SEQ_PETNO.NEXTVAL,'godofdog1','순이','소형','dogimg3.jpg','포메라니안','W','Y',1,DEFAULT);
+INSERT INTO PET VALUES(SEQ_PETNO.NEXTVAL,'godofdog1','순이','소형','dogimg3.jpg','포메라니안','W','Y',1,'Y');
 INSERT INTO PET VALUES(SEQ_PETNO.NEXTVAL,'sooooji11','초코','소형','dogimg4.jpg','포메라니안','M','Y',1,DEFAULT);
-INSERT INTO PET VALUES(SEQ_PETNO.NEXTVAL,'godofdog1','티티','대형','dogimg5.jpg','샤모에드','M','Y',4,DEFAULT);
-INSERT INTO PET VALUES(SEQ_PETNO.NEXTVAL,'animalfarm','바비','소형','dogimg6.jpg','푸들','W','Y',2,DEFAULT);
+INSERT INTO PET VALUES(SEQ_PETNO.NEXTVAL,'godofdog1','티티','대형','dogimg5.jpg','샤모에드','M','Y',4,'Y');
+INSERT INTO PET VALUES(SEQ_PETNO.NEXTVAL,'animalfarm','바비','소형','dogimg6.jpg','푸들','W','Y',2,'Y');
 INSERT INTO PET VALUES(SEQ_PETNO.NEXTVAL,'animalfarm','쪼꼬미','소형','dogimg7.jpg','포메라니안','M','Y',5,DEFAULT);
-INSERT INTO PET VALUES(SEQ_PETNO.NEXTVAL,'dongsukma','추추','소형','dogimg8.jpg','포메라니안','W','Y',3,DEFAULT);
-INSERT INTO PET VALUES(SEQ_PETNO.NEXTVAL,'haveheart','절미','소형','dogimg9.jpg','진돗개','M','Y',1,DEFAULT);
-INSERT INTO PET VALUES(SEQ_PETNO.NEXTVAL,'parknarae','똘이','대형','dogimg10.png','진돗개','W','Y',2,DEFAULT);
+INSERT INTO PET VALUES(SEQ_PETNO.NEXTVAL,'dongsukma','추추','소형','dogimg8.jpg','포메라니안','W','Y',3,'Y');
+INSERT INTO PET VALUES(SEQ_PETNO.NEXTVAL,'haveheart','절미','소형','dogimg9.jpg','진돗개','M','Y',1,'Y');
+INSERT INTO PET VALUES(SEQ_PETNO.NEXTVAL,'parknarae','똘이','대형','dogimg10.png','진돗개','W','Y',2,'Y');
 INSERT INTO PET VALUES(SEQ_PETNO.NEXTVAL,'gain5544','나리','소형','dogimg11.jpg','치와와','M','Y',4,DEFAULT);
 INSERT INTO PET VALUES(SEQ_PETNO.NEXTVAL,'seojoonpark','바나','대형','dogimg12.png','리트리버','M','Y',5,DEFAULT);
 INSERT INTO PET VALUES(SEQ_PETNO.NEXTVAL,'movewook','프레','소형','dogimg13.jpg','말티즈','W','Y',5,DEFAULT);
 INSERT INTO PET VALUES(SEQ_PETNO.NEXTVAL,'stillstop','소바','소형','dogimg14.jpg','말티푸','W','Y',5,DEFAULT);
 
 
-
+insert into petsitter values('dkdldb',SEQ_PETSITTERNO.NEXTVAL, 3.8, '빌라', '직장인', 'Y','Y','Y','Y','Y','N','Y','2019-09-01', 'Y');
+insert into petsitter values('godofdog1',SEQ_PETSITTERNO.NEXTVAL, 4.9, '아파트', '취업준비생', 'Y','Y','N','Y','Y','N','Y','2019-09-03', 'Y');
+insert into petsitter values('wjdgodls33',SEQ_PETSITTERNO.NEXTVAL, 3.8, '단독주택', '주부', 'Y','Y','N','Y','Y','Y','N','2019-09-15', 'Y');
+insert into petsitter values('sooooji11',SEQ_PETSITTERNO.NEXTVAL, 3.7, '단독주택', '취업준비생', 'Y','Y','Y','N','Y','Y','N','2019-10-01', 'Y');
+insert into petsitter values('handyeahjean',SEQ_PETSITTERNO.NEXTVAL,4.6, '빌라', '직장인', 'Y','N','Y','Y','Y','Y','Y','2019-10-09', 'Y');
+insert into petsitter values('animalfarm',SEQ_PETSITTERNO.NEXTVAL, 4.8, '빌라', '직장인', 'N','Y','Y','Y','Y','Y','N','2019-10-21', 'Y');
+insert into petsitter values('gain5544',SEQ_PETSITTERNO.NEXTVAL, 4.0, '단독주택', '주부', 'Y','Y','N','Y','Y','N','Y','2019-10-19', default);
+insert into petsitter values('dongsukma',SEQ_PETSITTERNO.NEXTVAL, 4.5, '빌라', '기타', 'N','Y','Y','Y','Y','Y','Y','2019-09-18', default);
+insert into petsitter values('seojoonpark',SEQ_PETSITTERNO.NEXTVAL, 3.9, '아파트', '직장인', 'Y','N','Y','Y','Y','N','Y','2019-10-28', default);
 
 ------------- 방문 매칭 -----------
-insert into matching values(SEQ_MATCHNO.nextval,'dkdldb',null,'Y',null,32000,'강형욱급 케어 합니다','아프리카TV로 실시간 방송합니다.','matimg1','1','N',null);
-insert into matching values(SEQ_MATCHNO.nextval,'godofdog1',null,'Y',null,36000,'우리 애보다 더 잘봐드립니다.','돌봄일지 잘쓰겠습니다.','matimg2','1','N',null);
-insert into matching values(SEQ_MATCHNO.nextval,'wjdgodls33',null,'Y',null,41000,'안녕하세요. 강형욱입니다.','특급 케어 하겠습니다.','matimg3','1','N',null);
-insert into matching values(SEQ_MATCHNO.nextval,'sooooji11',null,'Y',null,32000,'충성! 열심히 하겠습니다.','전과8범 범죄자 출신입니다.','matimg4','1','N',null);
-insert into matching values(SEQ_MATCHNO.nextval,'animalfarm',null,'Y',null,35000,'동물농장 출신 펫시터입니다.','개 8마리 키우고 있는 펫시터입니다.','matimg6','1','N',null);
+insert into matching values(SEQ_MATCHNO.nextval,'dkdldb',null,'Y',null,32000,'강형욱급 케어 합니다','아프리카TV로 실시간 방송합니다.','matimg1.jpg','1','N',null);
+insert into matching values(SEQ_MATCHNO.nextval,'godofdog1',null,'Y',null,36000,'우리 애보다 더 잘봐드립니다.','돌봄일지 잘쓰겠습니다.','matimg2.jpg','1','N',null);
+insert into matching values(SEQ_MATCHNO.nextval,'wjdgodls33',null,'Y',null,41000,'안녕하세요. 강형욱입니다.','특급 케어 하겠습니다.','matimg3.jpg','1','N',null);
+insert into matching values(SEQ_MATCHNO.nextval,'sooooji11',null,'Y',null,32000,'충성! 열심히 하겠습니다.','전과8범 범죄자 출신입니다.','matimg4.jpg','1','N',null);
+insert into matching values(SEQ_MATCHNO.nextval,'animalfarm',null,'Y',null,35000,'동물농장 출신 펫시터입니다.','개 8마리 키우고 있는 펫시터입니다.','matimg6.jpg','1','N',null);
 -- 관리자 삭제 ( 방문 )
-insert into matching values(SEQ_MATCHNO.nextval,'handyeahjean',null,'Y',null,35000,'전과 9범 범죄자 출신입니다.','펫트라슈 펫시터 1위입니다.','matimg5','5','N',null);
+insert into matching values(SEQ_MATCHNO.nextval,'handyeahjean',null,'Y',null,35000,'전과 9범 범죄자 출신입니다.','펫트라슈 펫시터 1위입니다.','matimg5.jpg','5','N',null);
 
 
 ------------- 가정집 매칭 ----------
 -- 돌봄일지용
-insert into matching values(SEQ_MATCHNO.nextval,'wjdgodls33','animalfarm','N','2019-10-11',35000,'우리 강아지 잘부탁드립니다','분노조절장애가 있는 강아지입니다.','matimg6','3','N',1);
+insert into matching values(SEQ_MATCHNO.nextval,'wjdgodls33','animalfarm','N','2019-10-11',35000,'우리 강아지 잘부탁드립니다','분노조절장애가 있는 강아지입니다.','matimg6.jpg','3','N',1);
 -- 결제미완료 ( 결제진행용 )
-insert into matching values(SEQ_MATCHNO.nextval,'handyeahjean','haveheart','N','2019-10-13',37000,'투약이 가능한 펫시터분을 찾습니다.','강아지가 많이 아픕니다.','matimg7','2','N',1);
+insert into matching values(SEQ_MATCHNO.nextval,'handyeahjean','haveheart','N','2019-10-13',37000,'투약이 가능한 펫시터분을 찾습니다.','강아지가 많이 아픕니다.','matimg7.jpg','2','N',1);
 -- 나머지 reg=1 ( 글만등록된거 )
-insert into matching values(SEQ_MATCHNO.nextval,null,'dongsukma','N','2019-10-15',36000,'노령견이 가능한 펫시터분을 찾습니다.','강아지가 21살입니다.','matimg8','1','N',1);
-insert into matching values(SEQ_MATCHNO.nextval,null,'parknarae','N','2019-10-17',40000,'털이 매우 잘빠지는 강아지입니다.','털이 많이 빠지는 강아지입니다.','matimg9','1','N',1);
+insert into matching values(SEQ_MATCHNO.nextval,null,'dongsukma','N','2019-10-15',36000,'노령견 케어가능한분 찾습니다..','강아지가 21살입니다.','matimg11.jpg','1','N',1);
+insert into matching values(SEQ_MATCHNO.nextval,null,'parknarae','N','2019-10-17',40000,'털이 매우 잘빠지는 강아지입니다.','털이 많이 빠지는 강아지입니다.','matimg9.jpg','1','N',1);
 -- 관리자삭제 (가정집)
-insert into matching values(SEQ_MATCHNO.nextval,null,'godofdog1','N','2019-10-19',75000,'자격증 있는분 모십니다.','사람 죽인 경험있는 강아지입니다.','matimg10','5','N',2);
+insert into matching values(SEQ_MATCHNO.nextval,null,'godofdog1','N','2019-10-19',75000,'자격증 있는분 모십니다.','사람 죽인 경험있는 강아지입니다.','matimg10.jpg','5','N',2);
+
+
+--FAQ게시판
+INSERT INTO BOARD VALUES(SEQ_BOARDNO.nextval, 'admin', 1, '펫트라슈', '파트라슈 + 펫ㅋ', SYSDATE, DEFAULT);
+INSERT INTO BOARD VALUES(SEQ_BOARDNO.nextval, 'admin', 1, '돌봄일지란?', '사용자가 원하는 케어를 사전에 등록해놓으면 펫시터가 진행후 작성하는 일지입니다.', SYSDATE, DEFAULT);
+INSERT INTO BOARD VALUES(SEQ_BOARDNO.nextval, 'admin', 1, '가정집펫시터 등록', '맡기고자하는 반려동물이있으면 펫시터가 등록해놓은 글을 확인후 원하는 펫시터를 선택하시면 매칭이 진행됩니다.', SYSDATE, DEFAULT);
+INSERT INTO BOARD VALUES(SEQ_BOARDNO.nextval, 'admin', 1, '방문펫시터 등록', '방문펫시터 등록을 진행하면 근처에사는 펫시터가 보고 매칭이 진행됩니다.', SYSDATE, DEFAULT);
+INSERT INTO BOARD VALUES(SEQ_BOARDNO.nextval, 'admin', 1, '결제취소?', '3일전까지는 패널티없이 전액 환불이되고 그 이후로는 페널티가 부여됩니다.', SYSDATE, DEFAULT);
+INSERT INTO BOARD VALUES(SEQ_BOARDNO.nextval, 'admin', 1, '펫시터지원에 자격증이 필수인가요?', '지원에있어 필수는 아니지만 전문적인지식이 필요하므로 자격증소지를 우대하고있습니다.', SYSDATE, DEFAULT);
+INSERT INTO BOARD VALUES(SEQ_BOARDNO.nextval, 'admin', 1, '펫시터자격증?', '국가에서 지원하는 반려동물관련 자격증을 의미합니다.', SYSDATE, DEFAULT);
+INSERT INTO BOARD VALUES(SEQ_BOARDNO.nextval, 'admin', 1, '펫시터 이용가격은 어떻게 되나요?', '반려견의 종과 맡기는 마리수에 달라지겠지만 평균적으로 마리당 30000원 내외로 생각하시면 됩니다.', SYSDATE, DEFAULT);
+INSERT INTO BOARD VALUES(SEQ_BOARDNO.nextval, 'admin', 1, '당일예약이 가능한가요?', '당일예약은 스케쥴관계상 불가하고 늦어도 2~3일전에는 예약하는것을 추천드립니다.', SYSDATE, DEFAULT);
+INSERT INTO BOARD VALUES(SEQ_BOARDNO.nextval, 'admin', 1, '가정집 펫시터?', '일이 생겨 반려견을 맡겨야되는 상황에 등록되어있는 펫시터의 집에 반려견을 맡기는시스템입니다', SYSDATE, DEFAULT);
+INSERT INTO BOARD VALUES(SEQ_BOARDNO.nextval, 'admin', 1, '방문 펫시터?', '등록된 펫시터가 직접 집으로 찾아가 반려견을 돌봐줍니다.', SYSDATE, DEFAULT);
+
+--문의하기 게시판
+INSERT INTO QUESTION_BOARD VALUES(SEQ_QBOARDNO.nextval, 'dkdldb', 2, '펫시터 지원할 때 어떤 자격이 필요한가요?', '제가 펫시터를 지원하고 싶은데 어떤 자격이 필요한지 모르겠어요! 자격증 같은게 없어도 지원은 되는건가요??', sysdate, default, '따로 자격은 필요없고 건강한 신체와 건강한 마음 마지막으로 반려동물을 진심으로 사랑하고 아껴줄 수 있는 마음이 필요합니다.', '펫시터 지원 자격', 'Y');
+INSERT INTO QUESTION_BOARD VALUES(SEQ_QBOARDNO.nextval, 'ehdrjs123', 2, '커뮤니티는 따로 없나요??', '커뮤니티 페이지로 가고싶은데 안가져서요', sysdate, default, default, '커뮤니티관련', default);
+INSERT INTO QUESTION_BOARD VALUES(SEQ_QBOARDNO.nextval, 'sooooji11', 2, '정보수정 말인데요', '제가 이사해서 주소를 바꿔야하는데 안바꿔져요 무엇때문인가요?', sysdate, default, '죄송합니다 고객님 정보수정관련 부분은 현재 미완성입니다. 최대한 빠르게 완성하도록 하여 불편함 없도록 하겠습니다. 감사합니다.', '정보수정관련', 'Y');
+INSERT INTO QUESTION_BOARD VALUES(SEQ_QBOARDNO.nextval, 'godboy', 2, '매칭하려고 하는데요', '매칭을 하고 싶은데 어떤식으로 이루어 지는 건가요?', sysdate, default, default, '매칭관련', default);
+INSERT INTO QUESTION_BOARD VALUES(SEQ_QBOARDNO.nextval, 'gain5544', 2, '펫시터 지원 할 때', '펫시터 지원 할 때 따로 교육같은것도 들어야 하나요? 들어야 한다면 어떤 기관에서 들어야 할까요?', sysdate, default, default, '펫시터 지원 자격', default);
+INSERT INTO QUESTION_BOARD VALUES(SEQ_QBOARDNO.nextval, 'handyeahjean', 2, '돌봄일지는 언제까지 작성해야 하나요?', '돌봄일지를 작성하려고 하는데 지금 다른 일이 바빠서 당장 작성이 어렵습니다. 언제까지 작성을 해야 할까요?', sysdate, default, '돌봄일지는 매칭이 완료되기 전까지 작성을 해주셔야 합니다. 돌봄일지 작성하는 것 까지가 매칭에 포함됩니다.', '돌봄일지관련', 'Y');
+
+-- 신고하기 게시판
+INSERT INTO REPORT_BOARD VALUES(SEQ_RBOARDNO.NEXTVAL, 'dkdldb', 3, 'CSS너무어려워요', '적용시킬라하면 안되고 이상한데 잡히고해서 짜증나서 신고합니다ㅡㅡ', SYSDATE, DEFAULT, 'godofdog1', '견주', DEFAULT);
+INSERT INTO REPORT_BOARD VALUES(SEQ_RBOARDNO.NEXTVAL, 'sooooji11', 3, '집에 물건이 사라졌어요', '케어 후에 물건들이 사라져있어요!', SYSDATE, DEFAULT, 'finishstop', '견주', DEFAULT);
+INSERT INTO REPORT_BOARD VALUES(SEQ_RBOARDNO.NEXTVAL, 'yoona330', 3, '견주가 갑질을해요', '갑을관계가 아닌데 이래라저래라하네요', SYSDATE, DEFAULT, 'tngus123', '견주', DEFAULT);
+INSERT INTO REPORT_BOARD VALUES(SEQ_RBOARDNO.NEXTVAL, 'handyeahjean', 3, '펫시터가 일을안했어요', '맡겨놓은 일은하나도 안하고 갔네요', SYSDATE, DEFAULT, 'yoona330', '펫시터', DEFAULT);
+INSERT INTO REPORT_BOARD VALUES(SEQ_RBOARDNO.NEXTVAL, 'wjdgodls33', 3, '견주가 다른일까지시켜요', '가정부가아닌데 집청소까지 하라네요..', SYSDATE, DEFAULT, 'dongsukma', '견주', DEFAULT);
+INSERT INTO REPORT_BOARD VALUES(SEQ_RBOARDNO.NEXTVAL, 'parknarae', 3, '개 상태가 이상해요', '펫시터 이용후에 상태가 이상해서 확인해봤더니 폭행흔적이있네요', SYSDATE, DEFAULT, 'stillstop', '펫시터', DEFAULT);
+
+
+commit;
+
+

@@ -120,7 +120,7 @@ hr.new5 {
     	<div class="card" style="max-width: 1000px">
         	<div class="row no-gutters">
             	<div class="col-md-3" style="background: #868e96;">
-                	<img src="/examples/images/sample.svg" class="card-img-top h-100" width="300px">
+                	<img src="<%=request.getContextPath()%>/join_uploadFiles/<%=mList.get(i).getThumbnail()%>" class="card-img-top h-100" width="300px">
             	</div>
             <div class="col-md-7" align="center">
                 <div class="card-body leftalign" style="width:700px">
