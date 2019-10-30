@@ -4,7 +4,6 @@
 	ArrayList<MatchingUserJoin> mList = (ArrayList<MatchingUserJoin>)request.getAttribute("mList");
 	ArrayList<Pet> pList = (ArrayList<Pet>)request.getAttribute("pList");
 	Matching mt = (Matching)request.getAttribute("mt");
-	out.print("mt:"+mt);
 %>
 <!DOCTYPE html>
 <html>

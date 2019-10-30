@@ -1,15 +1,12 @@
 
 package user.model.vo;
 
-import java.sql.Date;
 import java.io.Serializable;
+import java.sql.Date;
 
 public class User implements Serializable{
 	
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 7465705402501207204L;
 	
 	private String userId;
@@ -20,21 +17,19 @@ public class User implements Serializable{
 	private String userEmail;
 	private Date userBirth;
 	private String userPhone;
+	private String userPostcode;
 	private String userAddress;
 	private String userImage;
 	private int reported;
 	private Date joinDate;
 	private Date latestDate;
 	private String userStatus;
-	
+	private Date stopDate;
 	
 	public User() {
 		super();
 	}
-	
 
-	
-	
 	public User(String userId, String userName, String userEmail, String userPhone, String userAddress,
 			String userImage) {
 		super();
@@ -45,7 +40,40 @@ public class User implements Serializable{
 		this.userAddress = userAddress;
 		this.userImage = userImage;
 	}
+	
+	// 로그인 유저가 펫시터인지 확인할때 필요한 생성자
+		public User(String userId) {
+			super();
+			this.userId = userId;
+		}
 
+	public User(String userId, String userName, String userEmail, String userPhone, String userPostcode,
+			String userAddress, String userImage) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.userEmail = userEmail;
+		this.userPhone = userPhone;
+		this.userPostcode = userPostcode;
+		this.userAddress = userAddress;
+		this.userImage = userImage;
+	}
+
+	// 아이디 찾기할 때 필요한 생성자
+	public User(String userName, String userEmail, Date userBirth) {
+		super();
+		this.userName = userName;
+		this.userEmail = userEmail;
+		this.userBirth = userBirth;
+	}
+
+	// 비밀번호 찾기할 때 필요한 생성자
+	public User(String userId, String userName, String userEmail) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.userEmail = userEmail;
+	}
 
 
 	// 로그인할 때 필요한 생성자
@@ -57,7 +85,7 @@ public class User implements Serializable{
 
 	// 가입할 때 필요한 생성자
 	public User(String userId, String userPwd, String userName, String userGender, String userEmail, Date userBirth,
-			String userPhone, String userAddress) {
+			String userPhone,String userPostcode ,String userAddress,String userImage) {
 		super();
 		this.userId = userId;
 		this.userPwd = userPwd;
@@ -66,12 +94,14 @@ public class User implements Serializable{
 		this.userEmail = userEmail;
 		this.userBirth = userBirth;
 		this.userPhone = userPhone;
+		this.userPostcode = userPostcode;
 		this.userAddress = userAddress;
+		this.userImage = userImage;
 	}
 	
 	public User(String userId, int userNo, String userPwd, String userName, String userGender, String userEmail,
-			Date userBirth, String userPhone, String userAddress, String userImage, int reported, Date joinDate,
-			Date latestDate, String userStatus) {
+			Date userBirth, String userPhone, String userPostcode, String userAddress, String userImage, int reported,
+			Date joinDate, Date latestDate, String userStatus, Date stopDate) {
 		super();
 		this.userId = userId;
 		this.userNo = userNo;
@@ -81,12 +111,24 @@ public class User implements Serializable{
 		this.userEmail = userEmail;
 		this.userBirth = userBirth;
 		this.userPhone = userPhone;
+		this.userPostcode = userPostcode;
 		this.userAddress = userAddress;
 		this.userImage = userImage;
 		this.reported = reported;
 		this.joinDate = joinDate;
 		this.latestDate = latestDate;
 		this.userStatus = userStatus;
+		this.stopDate = stopDate;
+	}
+
+	
+	
+	public Date getStopDate() {
+		return stopDate;
+	}
+
+	public void setStopDate(Date stopDate) {
+		this.stopDate = stopDate;
 	}
 
 	public String getUserId() {
@@ -153,6 +195,15 @@ public class User implements Serializable{
 		this.userPhone = userPhone;
 	}
 
+
+	public String getUserPostcode() {
+		return userPostcode;
+	}
+
+	public void setUserPostcode(String userPostcode) {
+		this.userPostcode = userPostcode;
+	}
+	
 	public String getUserAddress() {
 		return userAddress;
 	}
@@ -201,6 +252,7 @@ public class User implements Serializable{
 		this.userStatus = userStatus;
 	}
 
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -209,10 +261,13 @@ public class User implements Serializable{
 	public String toString() {
 		return "User [userId=" + userId + ", userNo=" + userNo + ", userPwd=" + userPwd + ", userName=" + userName
 				+ ", userGender=" + userGender + ", userEmail=" + userEmail + ", userBirth=" + userBirth
-				+ ", userPhone=" + userPhone + ", userAddress=" + userAddress + ", userImage=" + userImage
-				+ ", reported=" + reported + ", joinDate=" + joinDate + ", latestDate=" + latestDate + ", userStatus="
-				+ userStatus + "]";
+				+ ", userPhone=" + userPhone + ", userPostcode=" + userPostcode + ", userAddress=" + userAddress
+				+ ", userImage=" + userImage + ", reported=" + reported + ", joinDate=" + joinDate + ", latestDate="
+				+ latestDate + ", userStatus=" + userStatus + ", stopDate=" + stopDate + "]";
 	}
+
+	
+
 
 	
 }

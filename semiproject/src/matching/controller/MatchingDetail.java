@@ -75,7 +75,13 @@ public class MatchingDetail extends HttpServlet {
 		System.out.println(caredate);
 		System.out.println(val);
 		request.setAttribute("psm", psm);
-		request.setAttribute("pList",pList);
+		if(pList==null){
+			pList = new ArrayList<Pet>();
+			request.setAttribute("pList",pList);
+		}else{
+			request.setAttribute("pList",pList);
+		}
+		
 		request.setAttribute("val",val);
 		
 		RequestDispatcher view = request.getRequestDispatcher("views/petsitterreservation/matchingDetail.jsp");

@@ -42,7 +42,7 @@ public class PetSitterSelect extends HttpServlet {
 		
 		System.out.println("sitterid:"+sitterid);
 		
-		ArrayList<Pet> pt = new PetService().selectPet(sitterid);
+		ArrayList<Pet> pt = new PetService().selecthPet(sitterid);
 		Matching mt = new MatchingService().isDuplicate(sitterid);
 		ArrayList<PetSitterMatchingJoin> psmList = new MatchingService().selectPetSitter();
 		
@@ -57,7 +57,6 @@ public class PetSitterSelect extends HttpServlet {
 		}
 		request.setAttribute("pt", pt);
 		
-		System.out.println("sel:"+mt);
 		
 		view.forward(request, response);
 		

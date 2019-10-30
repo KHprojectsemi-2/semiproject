@@ -5,7 +5,6 @@
 	ArrayList<PetSitterMatchingJoin> psmList = (ArrayList<PetSitterMatchingJoin>)request.getAttribute("psmList");
 	Matching mt = (Matching)request.getAttribute("mt");
 	ArrayList<Pet> pt = (ArrayList<Pet>)request.getAttribute("pt");
-	out.print(pt);
 %>    
 <!DOCTYPE html>
 <html>

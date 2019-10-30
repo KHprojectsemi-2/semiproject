@@ -196,7 +196,7 @@
     	<br>
     	<b>본인 정보를 수정하세요.</b>
     	<%}else{ %>
-    		<%if(pList == null) {%>
+    		<%if(pList.isEmpty()) {%>
     	<br>
    	 	<b>펫을 등록하세요.</b>
 			<%}else {%>

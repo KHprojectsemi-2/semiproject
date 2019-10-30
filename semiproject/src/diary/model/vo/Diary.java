@@ -3,6 +3,12 @@ package diary.model.vo;
 import java.io.Serializable;
 
 public class Diary implements Serializable{
+	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1070792814614374130L;
 	private int diaryNo;
 	private int matchNo;
 	private String diaryContent;
@@ -35,6 +41,12 @@ public class Diary implements Serializable{
 		this.diaryStatus = diaryStatus;
 	}
 	
+
+	public Diary(int grade) {
+		super();
+		this.grade = grade;
+	}
+
 	public int getDiaryNo() {
 		return diaryNo;
 	}

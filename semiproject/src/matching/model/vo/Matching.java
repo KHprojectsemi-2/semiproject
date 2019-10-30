@@ -1,9 +1,8 @@
 package matching.model.vo;
-
 import java.io.Serializable;
 import java.sql.Date;
 
-public class Matching  implements Serializable{
+public class Matching implements Serializable{
 	/**
 	 * 
 	 */
@@ -44,6 +43,31 @@ public class Matching  implements Serializable{
 		this.sitter_Id = sitter_Id;
 	}
 	
+	
+	
+	public Matching(String sitter_Id, String user_Id, String isHome, Date careDate, String regStatus) {
+		super();
+		this.sitter_Id = sitter_Id;
+		this.user_Id = user_Id;
+		this.isHome = isHome;
+		this.careDate = careDate;
+		this.regStatus = regStatus;
+	}
+	public Matching(int match_No, String sitter_Id, String user_Id, String isHome, Date careDate, int price,
+			String wantToSay, String special_Note, String thumbnail, String regStatus, String countPet) {
+		super();
+		this.match_No = match_No;
+		this.sitter_Id = sitter_Id;
+		this.user_Id = user_Id;
+		this.isHome = isHome;
+		this.careDate = careDate;
+		this.price = price;
+		this.wantToSay = wantToSay;
+		this.special_Note = special_Note;
+		this.thumbnail = thumbnail;
+		this.regStatus = regStatus;
+		this.countPet = countPet;
+	}
 	public Matching(int match_No, String user_Id) {
 		super();
 		this.match_No = match_No;

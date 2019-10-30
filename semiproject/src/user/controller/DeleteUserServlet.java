@@ -14,7 +14,7 @@ import user.model.service.UserService;
 /**
  * Servlet implementation class DeleteUserServlet
  */
-@WebServlet("/delete.me")
+@WebServlet("/deletee.me")
 public class DeleteUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,13 +37,13 @@ public class DeleteUserServlet extends HttpServlet {
 		String page="";
 		if(result > 0) {
 			request.getSession().invalidate();
-			page = "views/common/successPage.jsp";
+			page = "index.jsp";
 			request.setAttribute("msg", "회원 탈퇴 성공");
 		}else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "회원 탈퇴 실패");
 		}
-		
+		System.out.println("되는거냐");
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request,response);
 		
