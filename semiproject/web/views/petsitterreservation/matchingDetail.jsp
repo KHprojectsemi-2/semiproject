@@ -5,7 +5,7 @@
 	PetSitterMatchingJoin psm = (PetSitterMatchingJoin)request.getAttribute("psm");
 	ArrayList<Pet> pList = (ArrayList<Pet>)request.getAttribute("pList");
 	ArrayList<String> val = (ArrayList<String>)request.getAttribute("val");
-	out.print(pList);
+	out.print(val);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -307,7 +307,7 @@ $("#datepicker").datepicker({
 	
 	var temp2 = [];
 	var str1 ="";
-	<%if(val == null){%>
+	<%if(val.isEmpty()){%>
 	
 	temp2 = [];
 	
@@ -332,7 +332,7 @@ $("#datepicker").datepicker({
 		var dates = date.getDate();
 		var year = date.getFullYear();
 		
-		for(i=0; i<disabledDays.length; i++){
+		for(i=0; i<temp2.length; i++){
 			if($.inArray(year+'-'+(month+1)+'-'+dates,temp2)!= -1){
 				return [false];
 			}

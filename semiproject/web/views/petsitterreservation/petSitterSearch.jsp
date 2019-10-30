@@ -604,10 +604,13 @@ $(function(){
 			var matchno = $(this).parent().parent().parent().children("input").val();
 			var userid = "<%=loginUser.getUserId()%>";
 			var sitterid =$(this).parent().children("input").val();
+			
+			console.log(matchno);
+			console.log(userid);
+			console.log(sitterid);
 		
 			location.href = "<%=request.getContextPath()%>/matchingdetail.pe?matchno="+matchno+"&userid="+userid+"&sitterid="+sitterid;
 	
-
 	});
 });
 </script>
