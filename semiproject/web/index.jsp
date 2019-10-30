@@ -143,7 +143,7 @@
 				<div class = "changecare">
 					<img src="<%=request.getContextPath()%>/mainViewImg/dogcare1.PNG" alt="" width="400px" height="300px">
 					<p>
-						방문펫시터
+						방문펫시터 예약하기
 					</p>
 				</div>
 				<div class="img-cover"></div>
@@ -153,7 +153,7 @@
 				<div class = "changecare">
 					<img src="<%=request.getContextPath()%>/mainViewImg/dog4.jpg" alt="" width="400px" height="300px">
 					<p>
-						가정집펫시터
+						가정집펫시터 예약하기
 					</p>
 				</div>
 				
@@ -216,14 +216,14 @@
 		}
 	}		
 	
-	<%-- function homecare(){
+	function homecare(){
 		var user = $("#loginUser").val();
 		if(user == 'null'){
 			alert("로그인이 필요합니다.");
 			location.href = "<%=request.getContextPath()%>/views/user/LoginPage.jsp";
 		}else{
-			var sitterId = <%=loginUser.getUserId()%>
-			location.href = "<%=request.getContextPath()%>/시터예약경로";
+			var sitterid = <%=loginUser.getUserId()%>
+			location.href = "<%=request.getContextPath()%>/select.pe?sitterid="+sitterid;
 		}	
 	}
 	
@@ -233,10 +233,10 @@
 			alert("로그인이 필요합니다.");
 			location.href = "<%=request.getContextPath()%>/views/user/LoginPage.jsp";
 		}else{
-			var sitterId = <%=loginUser.getUserId()%>
-			location.href = "<%=request.getContextPath()%>/시터예약경로";
+			var userid = <%=loginUser.getUserId()%>
+			location.href = "<%=request.getContextPath()%>/select.hm?userid="+userid;
 		}	
-	} --%>
+	}
 	
 	</script>
 
