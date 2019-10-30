@@ -116,9 +116,9 @@ body {
 
 							var service_id = "Patrasche";
 							var template_id = "semipet";
-						//	emailjs.send(service_id, template_id, template_params); 
+							emailjs.send(service_id, template_id, template_params); 
 
-					alert(userId + "님에게 "+userEmail+"로 임시비밀번호"+data+"가 발송되었습니다.");
+							alert(userId + "님에게 이메일로 임시비밀번호를 발송하였습니다.");
 					location.href='LoginPage.jsp';
 					}
 					else{

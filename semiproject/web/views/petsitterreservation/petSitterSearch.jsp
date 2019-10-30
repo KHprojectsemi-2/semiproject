@@ -410,7 +410,7 @@ hr.new5 {
 		var resume = $("#hiddenresume");
 		var request = '<%=request.getContextPath()%>';
 		
-		alert(request);
+
 		
 		$.ajax({
 			url:"<%=request.getContextPath()%>/petsittersearch.pe",
