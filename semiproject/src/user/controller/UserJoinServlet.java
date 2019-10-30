@@ -59,7 +59,7 @@ public class UserJoinServlet extends HttpServlet {
 			String root = request.getSession().getServletContext().getRealPath("/"); // 넘어오는 파일 경로
 
 			String savePath = root + "join_uploadFiles/";
-
+			System.out.println(savePath);
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8",
 					new MyFileRenamePolicy());
 

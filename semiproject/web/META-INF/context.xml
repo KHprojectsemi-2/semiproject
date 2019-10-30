@@ -16,7 +16,10 @@
   limitations under the License.
 --><!-- The contents of this file will be loaded for each web application -->
 
-	<Context workDir = "C:\Users\viole\git\semiproject\semiproject\web\WEB-INF\semiproject">
+
+<Context workDir = "C:\semiMj\semiproject.git\semiproject\web\WEB-INF\semiproject">
+
+
 
 
 

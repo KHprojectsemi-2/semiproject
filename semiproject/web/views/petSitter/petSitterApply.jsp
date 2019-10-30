@@ -50,45 +50,45 @@
 	    <label for="etc">기타</label>
 	    <hr>
 		<h4 class="text-info">가족 동거 유무</h4>
-		<input type="radio" id="yFamily" name="family" value="y" checked>
+		<input type="radio" id="yFamily" name="family" value="Y" checked>
 	    <label for="yFamily">예</label>&nbsp;&nbsp;
-	    <input type="radio" id="nFamily" name="family" value="n">
+	    <input type="radio" id="nFamily" name="family" value="N">
 	    <label for="nFamily">아니오</label>
 	    <hr>
 		<h4 class="text-info">반려 동물 유무</h4>
-		<input type="radio" id="yPet" name="pet" value="y" checked>
+		<input type="radio" id="yPet" name="pet" value="Y" checked>
 	    <label for="yPet">예</label>&nbsp;&nbsp;
-	    <input type="radio" id="nPet" name="pet" value="n">
+	    <input type="radio" id="nPet" name="pet" value="N">
 	    <label for="nPet">아니오</label>
 	    <hr>
 		<h4 class="text-info">대형견 가능 여부</h4>
-		<input type="radio" id="yBig" name="big" value="y" checked>
+		<input type="radio" id="yBig" name="big" value="Y" checked>
 	    <label for="yBig">예</label>&nbsp;&nbsp;
-	    <input type="radio" id="nSmall" name="big" value="n">
+	    <input type="radio" id="nSmall" name="big" value="N">
 	    <label for="nSmall">아니오</label>
 	    <hr>
 		<h4 class="text-info">투약 가능 여부</h4>
-		<input type="radio" id="yMedicine" name="medicine" value="y" checked>
+		<input type="radio" id="yMedicine" name="medicine" value="Y" checked>
 	    <label for="yMedicine">예</label>&nbsp;&nbsp;
-	    <input type="radio" id="nMedicine" name="medicine" value="n">
+	    <input type="radio" id="nMedicine" name="medicine" value="N">
 	    <label for="nMedicine">아니오</label>
 	    <hr>
 		<h4 class="text-info">노령견 케어 가능 여부</h4>
-		<input type="radio" id="yOld" name="old" value="y" checked>
+		<input type="radio" id="yOld" name="old" value="Y" checked>
 	    <label for="yOld">예</label>&nbsp;&nbsp;
-	    <input type="radio" id="nOld" name="old" value="n">
+	    <input type="radio" id="nOld" name="old" value="N">
 	    <label for="nOld">아니오</label>
 	    <hr>
 		<h4 class="text-info">환자견 케어 가능 여부</h4>
-		<input type="radio" id="yPatient" name="patient" value="y" checked>
+		<input type="radio" id="yPatient" name="patient" value="Y" checked>
 	    <label for="yPatient">예</label>&nbsp;&nbsp;
-	    <input type="radio" id="nPatient" name="patient" value="n">
+	    <input type="radio" id="nPatient" name="patient" value="N">
 	    <label for="nPatient">아니오</label>
 	    <hr>
 		<h4 class="text-info">반려동물 관련 자격증 보유 여부</h4>
-		<input type="radio" id="yCertificate" name="certificate" value="y" checked>
+		<input type="radio" id="yCertificate" name="certificate" value="Y" checked>
 	    <label for="yCertificate">예</label>&nbsp;&nbsp;
-	    <input type="radio" id="nCertificate" name="certificate" value="n">
+	    <input type="radio" id="nCertificate" name="certificate" value="N">
 	    <label for="nCertificate">아니오</label>
 	    <hr>
 	    <textarea cols="45" rows="3" style="resize:none" name="textarea">이제까지 본인에 의해 작성된 모든 정보는 사실임을 확인하였으며, 사실 내용과 다르게 기재하였을 경우 어떤 불이익도 감수 하겠습니다. *

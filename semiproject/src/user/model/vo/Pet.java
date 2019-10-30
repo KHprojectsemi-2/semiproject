@@ -11,6 +11,7 @@ public class Pet {
 	private String isNeutral;
 	private int petAge;
 	private String petMatch;
+
 	
 	public Pet() {
 		super();
@@ -32,6 +33,7 @@ public class Pet {
 	
 	public Pet(int petNo, String userId, String petName, String petWeight, String petImage, String petKind,
 			String petGender, String isNeutral, int petAge,String petMatch) {
+
 		super();
 		this.petNo = petNo;
 		this.userId = userId;
@@ -116,6 +118,8 @@ public class Pet {
 	}
 
 
+	
+	
 	
 	
 }

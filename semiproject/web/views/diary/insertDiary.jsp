@@ -38,10 +38,8 @@
 	
 	
 	<hr>
-	<h4 class="text-info">방문 날짜&nbsp;&nbsp;&nbsp;&nbsp;<input type="date" name="applyDate"></h4>
-	<h4 class="text-info">반려 동물 정보&nbsp;&nbsp;&nbsp;&nbsp;
-	<input type="text" >
-	</h4>
+	<h4 class="text-info">방문 날짜&nbsp;&nbsp; 2019/10/31</h4>
+	<h4 class="text-info">펫 번호&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 7</h4>
 <%--  	<%=pet.getPetName() %>
 	<%=pet.getPetWeight() %>  --%>
 	<hr>
@@ -57,7 +55,7 @@
 	<hr>
 	
 	<h4 class="text-info">돌봄 후기</h4>
-	<textarea cols="90" rows="10" style="resize:none" name="review" id="review"></textarea><br>
+	<textarea cols="90" rows="2" style="resize:none" name="review" id="review"></textarea><br>
     <hr>
     <h4 class="text-info">돌봄 사진</h4>
     <div id="contentImgArea">

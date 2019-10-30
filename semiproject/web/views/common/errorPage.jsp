@@ -12,6 +12,8 @@
 </head>
 <body>
 	<h1 align="center"><%= msg %></h1>
+
 	<a href="<%=request.getContextPath() %>/index.jsp" align="center"><h1>메인으로 돌아가기</h1></a>
+
 </body>
 </html>

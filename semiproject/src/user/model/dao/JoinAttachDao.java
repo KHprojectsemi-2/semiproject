@@ -17,6 +17,7 @@ import user.model.vo.User;
 
 public class JoinAttachDao {
 
+
 	private Properties prop = new Properties();
 
 	public JoinAttachDao() {
@@ -96,3 +97,4 @@ public class JoinAttachDao {
 	
 	}
 }
+

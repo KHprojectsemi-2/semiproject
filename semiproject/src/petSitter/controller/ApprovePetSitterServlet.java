@@ -1,6 +1,7 @@
 package petSitter.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import petSitter.model.service.PetSitterService;
+import petSitter.model.vo.PetSitter;
 
 /**
  * Servlet implementation class ApprovePetSitterServlet
@@ -41,8 +43,13 @@ public class ApprovePetSitterServlet extends HttpServlet {
 		String page = "";	// 반환할 jsp의 경로(화면에 보여줄 view)를 저장할 String
 		
 		if(result > 0) {
-			page = "views/common/successPage.jsp";
-			request.setAttribute("msg", "펫시터 승인 성공!");
+			ArrayList<PetSitter> pArr = new PetSitterService().selectList();
+			System.out.println(pArr);
+			System.out.println("리스트 리스트");
+			
+			page = "views/petSitter/petSitterApplyList.jsp";
+			request.setAttribute("arr", pArr);
+			
 		}else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "펫시터 승인 실패!");
