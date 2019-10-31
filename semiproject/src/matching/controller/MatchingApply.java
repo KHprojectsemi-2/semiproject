@@ -128,7 +128,7 @@ public class MatchingApply extends HttpServlet {
 			
 			
 			if(result>0){
-				response.sendRedirect("select.pe");
+				response.sendRedirect("index.jsp");
 			}else{
 				RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 				request.setAttribute("msg", "실패 ㅎ");

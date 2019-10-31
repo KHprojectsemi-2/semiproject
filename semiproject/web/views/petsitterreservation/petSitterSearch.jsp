@@ -194,10 +194,10 @@ hr.new5 {
                 		</li>
                 		<li>
                 			<input type="hidden" value="<%=psmList.get(i).getSitter_Id() %>" class="hsitterid">
-                			<%if(psmList.get(i).getGrade()==0) {%>
-                			<a><i class="fas fa-star checked" style="color:#f1c40f"></i>초보 펫시터입니다.</a></li>
-                			<%}else{ %>
+                			<%if(psmList.get(i).getGrade()!=0) {%>
                 			<a><i class="fas fa-star checked" style="color:#f1c40f"></i><%=psmList.get(i).getGrade() %>점</a></li>
+                			<%}else{ %>
+                			<a><i class="fas fa-star checked" style="color:#f1c40f"></i>초보 펫시터</a></li>
                 			<%} %>
                         <li>
                         	<input type="hidden" value="<%=psmList.get(i).getSitter_Id() %>" class="hsitterid">
@@ -211,7 +211,11 @@ hr.new5 {
                 		</li>
                 		<li>
                 			<input type="hidden" value="<%=psmList.get(i).getSitter_Id() %>" class="hsitterid">
+                			<%if(psmList.get(i).getGrade()!=0) {%>
                 			<a><i class="fas fa-star checked" style="color:#f1c40f"></i><%=psmList.get(i).getGrade() %>점</a></li>
+                			<%}else{ %>
+                			<a><i class="fas fa-star checked" style="color:#f1c40f"></i>초보 펫시터</a></li>
+                			<%} %>
                         <li>
                         	<input type="hidden" value="<%=psmList.get(i).getSitter_Id() %>" class="hsitterid">
                         	<a><i class="fas fa-search"></i>상세보기</a>
@@ -459,23 +463,25 @@ hr.new5 {
 					strDOM += "<p class='card-title'><i class='fas fa-bullhorn'></i>"   +data[key].wantToSay+"</p>";
 					strDOM += "<input type='hidden' value="+data[key].match_No+">";
 					strDOM += "<ul class = 'blog-info-link'>";
-                   	<%if(loginUser.getUserId().equals("admin")) {%>
-                   	strDOM += "<li><input type='hidden' class='hsitterid' value="+data[key].sitter_Id+"><a><i class='fas fa-dollar-sign'></i>"+data[key].price+"원</a></li>";
-                   	if(data[key].grade==0) {
-        			strDOM += "<a><i class='fas fa-star checked' style='color:#f1c40f'></i>초보 펫시터입니다.</a></li>"
-        			}else{
-                   	strDOM += "<li><input type='hidden' class='hsitterid' value="+data[key].sitter_Id+"><a><i class='fas fa-star checked' style='color:#f1c40f'></i>"+data[key].grade+"점</a></li>";
-                   	}
-                   	strDOM += "<li><input type='hidden' class='hsitterid' value="+data[key].sitter_Id+"><a><i class='fas fa-search'></i>상세보기</a></li>";
-               		<%}else{ %>
+					<%if(loginUser.getUserId().equals("admin")) {%>
+	               	strDOM += "<li><input type='hidden' class='hsitterid' value="+data[key].sitter_Id+"><a><i class='fas fa-dollar-sign'></i>"+data[key].price+"원</a></li>";
+	               	strDOM += "<li><input type='hidden' class='hsitterid' value="+data[key].sitter_Id+"><a><i class='fas fa-star checked' style='color:#f1c40f'></i>"+data[key].grade+"점</a></li>";
+	               	strDOM += "<li><input type='hidden' class='hsitterid' value="+data[key].sitter_Id+"><a><i class='fas fa-search'></i>상세보기</a></li>";
+	           		<%}else{ %>
 					<%if(!pt.isEmpty()) {%>
-					strDOM += "<li><input type='hidden' class='hsitterid' value="+data[key].sitter_Id+"><a><i class='fas fa-dollar-sign'></i>"+data[key].price+"원</a></li>";
-					strDOM += "<li><input type='hidden' class='hsitterid' value="+data[key].sitter_Id+"><a><i class='fas fa-star checked' style='color:#f1c40f'></i>"+data[key].grade+"점</a></li>";
+					if(data[key].grade==0) {
+		        	strDOM += "<li><input type='hidden' class='hsitterid' value="+data[key].sitter_Id+"><a><i class='fas fa-dollar-sign'></i>"+data[key].price+"원</a></li>";
+		        	strDOM += "<li><a><i class='fas fa-star checked' style='color:#f1c40f'></i>초보 펫시터</a></li>";
 					strDOM += "<li><input type='hidden' class='hsitterid' value="+data[key].sitter_Id+"><a><i class='fas fa-search'></i>상세보기</a></li>";
+		        	}else{
+		        	strDOM += "<li><input type='hidden' class='hsitterid' value="+data[key].sitter_Id+"><a><i class='fas fa-dollar-sign'></i>"+data[key].price+"원</a></li>";
+		            strDOM += "<li><input type='hidden' class='hsitterid' value="+data[key].sitter_Id+"><a><i class='fas fa-star checked' style='color:#f1c40f'></i>"+data[key].grade+"점</a></li>";
+		            strDOM += "<li><input type='hidden' class='hsitterid' value="+data[key].sitter_Id+"><a><i class='fas fa-search'></i>상세보기</a></li>";
+		            }
 					<%}else{ %>
-                 	strDOM += "<li><i class='fas fa-star checked' style='color:#f1c40f'></i>펫을 먼저 등록해주세요</li>";
-                 	<%} %>	
-                 	<%}%>
+	             	strDOM += "<li><i class='fas fa-star checked' style='color:#f1c40f'></i>펫을 먼저 등록해주세요</li>";
+	             	<%} %>	
+	             	<%} %>
 					strDOM += "</ul>";
 					strDOM += "<br>";
 					strDOM += '</div>';
@@ -561,13 +567,15 @@ $("#namesearchb").click(function(){
                	strDOM += "<li><input type='hidden' class='hsitterid' value="+data[key].sitter_Id+"><a><i class='fas fa-search'></i>상세보기</a></li>";
            		<%}else{ %>
 				<%if(!pt.isEmpty()) {%>
-				strDOM += "<li><input type='hidden' class='hsitterid' value="+data[key].sitter_Id+"><a>"+data[key].price+"원</a></li>";
 				if(data[key].grade==0) {
-    			strDOM += "<a><i class='fas fa-star checked' style='color:#f1c40f'></i>초보 펫시터입니다.</a></li>"
-    			}else{ 
-               	strDOM += "<li><input type='hidden' class='hsitterid' value="+data[key].sitter_Id+"><a><i class='fas fa-star checked' style='color:#f1c40f'></i>"+data[key].grade+"점</a></li>";
-               	}
+	        	strDOM += "<li><input type='hidden' class='hsitterid' value="+data[key].sitter_Id+"><a><i class='fas fa-dollar-sign'></i>"+data[key].price+"원</a></li>";
+	        	strDOM += "<li><a><i class='fas fa-star checked' style='color:#f1c40f'></i>초보 펫시터</a></li>";
 				strDOM += "<li><input type='hidden' class='hsitterid' value="+data[key].sitter_Id+"><a><i class='fas fa-search'></i>상세보기</a></li>";
+	        	}else{
+	        	strDOM += "<li><input type='hidden' class='hsitterid' value="+data[key].sitter_Id+"><a><i class='fas fa-dollar-sign'></i>"+data[key].price+"원</a></li>";
+	            strDOM += "<li><input type='hidden' class='hsitterid' value="+data[key].sitter_Id+"><a><i class='fas fa-star checked' style='color:#f1c40f'></i>"+data[key].grade+"점</a></li>";
+	            strDOM += "<li><input type='hidden' class='hsitterid' value="+data[key].sitter_Id+"><a><i class='fas fa-search'></i>상세보기</a></li>";
+	            }
 				<%}else{ %>
              	strDOM += "<li><i class='fas fa-star checked' style='color:#f1c40f'></i>펫을 먼저 등록해주세요</li>";
              	<%} %>	

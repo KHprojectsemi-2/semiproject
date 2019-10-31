@@ -131,7 +131,6 @@ body {
 				var year = $("select[name=birth_year]").val();
 				var month =  $("select[name=birth_month]").val();
 				var day = $("select[name=birth_day]").val();
-				alert(year +" "+month+" "+day+" ");
 				$.ajax({
 					url:"<%=request.getContextPath()%>/findId.me",
 					type:"post",

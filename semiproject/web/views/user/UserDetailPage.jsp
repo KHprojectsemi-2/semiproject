@@ -3,6 +3,7 @@
 <%
 	User user = (User)request.getAttribute("user");
 	ArrayList<Pet> petlist = (ArrayList<Pet>)request.getAttribute("petlist");
+	double grade = (Double)request.getAttribute("petSitterGrade");
 %>
 <!DOCTYPE html>
 <html>
@@ -223,7 +224,7 @@ img:hover{
 		<td>
 		<div id="d_join" >
 			 <label class="l_join">펫시터 등급: </label>
-			 <input type="text" name="grade"  value="----" readonly> 
+			 <input type="text" name="grade"  value="<%=grade %>" readonly> 
 		</div>
 		</td>
 		</tr>

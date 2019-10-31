@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import petSitter.model.service.PetSitterService;
 import user.model.service.PetService;
 import user.model.service.UserService;
 import user.model.vo.Pet;
@@ -54,6 +55,13 @@ public class UserDetailServlet extends HttpServlet {
 				request.setAttribute("petlist", petlist);
 			}
 			System.out.println(petlist);
+			
+			// 펫시터 등급도 확인해보자
+			double grade = new PetSitterService().checkPetSitterGrade(user.getUserId());
+			
+			// 펫시터가 아니면 0반환.
+			request.setAttribute("petSitterGrade", grade);
+		
 
 		}else {
 			view = request.getRequestDispatcher("views/common/errorPage.jsp");

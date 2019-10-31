@@ -141,9 +141,15 @@
     <img src="<%=request.getContextPath()%>/join_uploadFiles/<%=psm.getThumbnail()%>" style="width:300px;height:300px;" class="imgtg">
  
     <div class="checks">
+    <%if(psm.getGrade()!=0) {%>
     <div class="mt-10">
 		별점 : <i class="fas fa-star checked" style="color:#f1c40f"></i> <%=psm.getGrade()%>
 	</div>
+	<%}else{ %>
+	<div class="mt-10">
+		별점 : <i class="fas fa-star checked" style="color:#f1c40f"></i> 초보펫시터
+	</div>
+	<%} %>
 	<br>
 	<div class="custom-control custom-checkbox">
 		<%if(psm.getCanLarge().equals("Y")) {%>

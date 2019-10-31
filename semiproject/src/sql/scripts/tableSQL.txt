@@ -445,9 +445,9 @@ INSERT INTO SUSER VALUES('xodusxo',SEQ_USERNO.NEXTVAL,'xodus11','태연','W','xo
 
 
 -- 정지 풀리는 거 확인용 계정
-INSERT INTO SUSER VALUES('finishstop',SEQ_USERNO.NEXTVAL,'finishstop','김상민','M','finishstop@naver.com',TO_DATE(TO_CHAR(SYSDATE-10002, 'YYYYMMDD'),'YYYYMMDDHH24MISS'),'01022113424','11242','강원시 동해시 천곡동 261-18',NULL,DEFAULT,TO_DATE(TO_CHAR(SYSDATE-434, 'YYYYMMDD'),'YYYYMMDDHH24MISS'),DEFAULT,'S','19/10/10');
+INSERT INTO SUSER VALUES('finishstop',SEQ_USERNO.NEXTVAL,'finishstop','김상민','M','finishstop@naver.com',TO_DATE(TO_CHAR(SYSDATE-10002, 'YYYYMMDD'),'YYYYMMDDHH24MISS'),'01022113424','11242','강원시 동해시 천곡동 261-18',NULL,4,TO_DATE(TO_CHAR(SYSDATE-434, 'YYYYMMDD'),'YYYYMMDDHH24MISS'),DEFAULT,'S','19/10/10');
 -- 정지 상태 확인용
-INSERT INTO SUSER VALUES('stillstop',SEQ_USERNO.NEXTVAL,'stillstop','권지용','M','stillstop@naver.com',TO_DATE(TO_CHAR(SYSDATE-9879, 'YYYYMMDD'),'YYYYMMDDHH24MISS'),'01058554736','61046','광주 북구 호남고속도로 70 (장등동)',NULL,DEFAULT,TO_DATE(TO_CHAR(SYSDATE-188, 'YYYYMMDD'),'YYYYMMDDHH24MISS'),'19/9/12','S','19/11/20');
+INSERT INTO SUSER VALUES('stillstop',SEQ_USERNO.NEXTVAL,'stillstop','권지용','M','stillstop@naver.com',TO_DATE(TO_CHAR(SYSDATE-9879, 'YYYYMMDD'),'YYYYMMDDHH24MISS'),'01058554736','61046','광주 북구 호남고속도로 70 (장등동)',NULL,8,TO_DATE(TO_CHAR(SYSDATE-188, 'YYYYMMDD'),'YYYYMMDDHH24MISS'),'19/9/12','S','19/11/20');
 -- 탈퇴 확인 용
 INSERT INTO SUSER VALUES('moveanother',SEQ_USERNO.NEXTVAL,'moveanother','박민아','W','moveanother@gmail.com',TO_DATE(TO_CHAR(SYSDATE-10359, 'YYYYMMDD'),'YYYYMMDDHH24MISS'),'01085332324','63214','제주특별자치도 제주시 가령로 1 (이도이동)',NULL,DEFAULT,TO_DATE(TO_CHAR(SYSDATE-188, 'YYYYMMDD'),'YYYYMMDDHH24MISS'),'19/9/12','N',DEFAULT);
 
@@ -495,14 +495,14 @@ insert into matching values(SEQ_MATCHNO.nextval,'handyeahjean',null,'Y',null,350
 
 ------------- 가정집 매칭 ----------
 -- 돌봄일지용
-insert into matching values(SEQ_MATCHNO.nextval,'wjdgodls33','animalfarm','N','2019-10-11',35000,'우리 강아지 잘부탁드립니다','분노조절장애가 있는 강아지입니다.','matimg6.jpg','3','N',1);
+insert into matching values(SEQ_MATCHNO.nextval,'wjdgodls33','animalfarm','N','2019-11-11',35000,'우리 강아지 잘부탁드립니다','분노조절장애가 있는 강아지입니다.','matimg6.jpg','3','N',1);
 -- 결제미완료 ( 결제진행용 )
-insert into matching values(SEQ_MATCHNO.nextval,'handyeahjean','haveheart','N','2019-10-13',37000,'투약이 가능한 펫시터분을 찾습니다.','강아지가 많이 아픕니다.','matimg7.jpg','2','N',1);
+insert into matching values(SEQ_MATCHNO.nextval,'handyeahjean','haveheart','N','2019-11-13',37000,'투약이 가능한 펫시터분을 찾습니다.','강아지가 많이 아픕니다.','matimg7.jpg','2','N',1);
 -- 나머지 reg=1 ( 글만등록된거 )
-insert into matching values(SEQ_MATCHNO.nextval,null,'dongsukma','N','2019-10-15',36000,'노령견 케어가능한분 찾습니다..','강아지가 21살입니다.','matimg11.jpg','1','N',1);
-insert into matching values(SEQ_MATCHNO.nextval,null,'parknarae','N','2019-10-17',40000,'털이 매우 잘빠지는 강아지입니다.','털이 많이 빠지는 강아지입니다.','matimg9.jpg','1','N',1);
+insert into matching values(SEQ_MATCHNO.nextval,null,'dongsukma','N','2019-11-15',36000,'노령견 케어가능한분 찾습니다..','강아지가 21살입니다.','matimg11.jpg','1','N',1);
+insert into matching values(SEQ_MATCHNO.nextval,null,'parknarae','N','2019-11-17',40000,'털이 매우 잘빠지는 강아지입니다.','털이 많이 빠지는 강아지입니다.','matimg9.jpg','1','N',1);
 -- 관리자삭제 (가정집)
-insert into matching values(SEQ_MATCHNO.nextval,null,'godofdog1','N','2019-10-19',75000,'자격증 있는분 모십니다.','사람 죽인 경험있는 강아지입니다.','matimg10.jpg','5','N',2);
+insert into matching values(SEQ_MATCHNO.nextval,null,'godofdog1','N','2019-11-19',75000,'자격증 있는분 모십니다.','사람 죽인 경험있는 강아지입니다.','matimg10.jpg','5','N',2);
 
 
 --FAQ게시판

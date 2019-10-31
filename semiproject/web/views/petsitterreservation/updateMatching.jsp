@@ -138,7 +138,7 @@ button:hover {
 <%@include file = "../common/header.jsp" %>
 <form action="<%=request.getContextPath()%>/Updateprofile.ma" method="post">
   <div class="container">
-    <h1>매칭글 등록</h1>
+    <h1>방문 매칭 수정</h1>
     <p>견주님들이 보고 신청하기 때문에 상세히 적어주세요</p>
     <hr>
 

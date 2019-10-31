@@ -313,8 +313,6 @@ $(function(){
 				console.log(data);
 			
 				if(data != null){
-					
-					alert(userid);
 					location.href = "<%=request.getContextPath()%>/housematchingdetail.pe?userid="+userid;
 				}else{
 					alert("펫시터만 열람가능합니다.");

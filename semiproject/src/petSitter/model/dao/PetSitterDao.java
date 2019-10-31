@@ -38,7 +38,7 @@ public class PetSitterDao {
 		int result = 0;
 		System.out.println("petSitter dao()222");
 //		String query = prop.getProperty("applyPetSitter");
-		String query = "INSERT INTO PETSITTER VALUES(?, SEQ_PETSITTERNO.NEXTVAL, DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, DEFAULT, DEFAULT)";
+		String query = "INSERT INTO PETSITTER VALUES(?, SEQ_PETSITTERNO.NEXTVAL, 0.0, ?, ?, ?, ?, ?, ?, ?, ?, ?, DEFAULT, DEFAULT)";
 		
 		System.out.println("다오다오다오 id : " + p.getUserId());
 		System.out.println("다오다오다오 resume : " + p.getChkResume());
@@ -184,6 +184,34 @@ public class PetSitterDao {
 		}
 		
 		return result;
+	}
+	
+	
+	// 펫시터 등급
+	public double checkPetSitterGrade(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		double grade = 0;
+		
+		System.out.println("체크 등급 DAO");
+		String query = prop.getProperty("checkPetSitterGrade");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				grade = rs.getDouble("grade");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return grade;
 	}
 
 }

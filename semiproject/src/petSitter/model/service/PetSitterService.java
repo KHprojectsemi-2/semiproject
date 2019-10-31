@@ -82,6 +82,19 @@ public class PetSitterService {
 		return result;
 		
 	}
+	
+	// 펫시터 등급 
+	public double checkPetSitterGrade(String userId) {
+		Connection conn = getConnection();
+		
+		System.out.println("펫시터 등급 확인 서비스");
+		double result = new PetSitterDao().checkPetSitterGrade(conn, userId);
+
+		close(conn);
+		
+		return result;
+		
+	}
 
 }
 

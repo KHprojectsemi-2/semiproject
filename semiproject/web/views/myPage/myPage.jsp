@@ -139,7 +139,7 @@ img:hover{
                </div>
                 </td>
                <td rowspan="4">
-                  <img src="#" width="200" height="200">
+                  <img src="<%=request.getContextPath()%>/join_uploadFiles/<%=loginUser.getUserImage()%>" width="200" height="200">
                </td>
             </tr> 
             <tr>
@@ -216,7 +216,7 @@ img:hover{
                         <input type="text" name="petName" style="width: 120px;" value="<%=pal.get(i).getPetName() %>" readonly>
                      </div>
                   </td>
-                  <td rowspan="3"><img src="#" width="150" height="150" style="margin-top:20px">
+                  <td rowspan="3"><img src="<%=request.getContextPath()%>/join_uploadFiles/<%=pal.get(i).getPetImage()%>" width="150" height="150" style="margin-top:20px">
                   <button type="button"  id="pet_minus" class="pet_button" style="margin-bottom:100px;margin-left:25px;background-color:red;">-</button>
                   </td>
                </tr>
@@ -244,7 +244,7 @@ img:hover{
                   <td>
                      <div class="petConfirm_d">
                         <label class="petConfirm_l">무게 : </label>
-                        <input type="number" name="petWeight" value=<%=pal.get(i).getPetWeight() %> style="width:120px;"><label>kg</label>
+                        <input type="text" name="petWeight" value=<%=pal.get(i).getPetWeight() %> style="width:120px;"><label>kg</label>
                      </div>
                   </td>
                </tr>

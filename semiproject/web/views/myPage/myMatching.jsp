@@ -41,6 +41,11 @@ th, td{
 </style>
 <title>Insert title here</title>
 </head>
+<!-- jQuery -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+  <!-- iamport.payment.js -->
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 <body>
 	<%@ include file="../common/header.jsp" %>
 	
@@ -145,7 +150,7 @@ th, td{
 								X
 							</td>
 							<td>
-							<button type="button"  id="goPay" onclick="goPay()" class="goPay" style="align:center;">결제하기</button>
+							<button type="button"  id="goPay" onclick="goPay()" class="goPay" style="align:center;" disabled>결제하기</button>
 							<button type="button"  id="matching_cancle" onclick="matching_cancle()" class="matching_cancle" style="align:center;">취소하기</button>
 							</td>
 						</tr>
@@ -171,7 +176,7 @@ th, td{
 								X
 							</td>
 							<td>
-							<button type="button"  id="goPay" onclick="goPay()" class="goPay" style="align:center;">결제하기</button>
+							<button type="button"  id="goPay" onclick="goPay()" class="goPay" style="align:center;" disabled>결제하기</button>
 							<button type="button"  id="matching_cancle" onclick="matching_cancle()" class="matching_cancle" style="align:center;">취소하기</button>
 							</td>
 						</tr>
@@ -197,7 +202,7 @@ th, td{
 								O
 							</td>
 							<td>
-							<button type="button"  id="goPay" onclick="goPay()" class="goPay" style="align:center;">결제하기</button>
+							<button type="button"  id="goPay" onclick="goPay()" class="goPay" style="align:center;" disabled>결제하기</button>
 							<button type="button"  id="matching_cancle" onclick="matching_cancle()" class="matching_cancle" style="align:center;">취소하기</button>
 							</td>
 						</tr>
@@ -223,7 +228,7 @@ th, td{
 								O
 							</td>
 							<td>
-							<button type="button"  id="goPay" onclick="goPay()" class="goPay" style="align:center;">결제하기</button>
+							<button type="button"  id="goPay" onclick="goPay()" class="goPay" style="align:center;"disabled>결제하기</button>
 							<button type="button"  id="matching_cancle" onclick="matching_cancle()" class="matching_cancle" style="align:center;">취소하기</button>
 							</td>
 						</tr>
@@ -301,7 +306,7 @@ th, td{
 								O
 							</td>
 							<td>
-							<button type="button"  id="goPay" class="goPay" style="align:center;">결제하기</button>
+							<button type="button"  id="goPay" class="goPay" style="align:center;" disabled>결제하기</button>
 							<button type="button"  id="matching_cancle" onclick="matching_cancle()" class="matching_cancle" style="align:center;">취소하기</button>
 							</td>
 						</tr>
@@ -327,7 +332,7 @@ th, td{
 								O
 							</td>
 							<td>
-							<button type="button"  id="goPay" onclick="goPay()" class="goPay" style="align:center;">결제하기</button>
+							<button type="button"  id="goPay" onclick="goPay()" class="goPay" style="align:center;" disabled>결제하기</button>
 							<button type="button"  id="matching_cancle" onclick="matching_cancle()" class="matching_cancle" style="align:center;">취소하기</button>
 							</td>
 						</tr>
@@ -464,6 +469,7 @@ th, td{
 		location.href="<%=request.getContextPath()%>/index.jsp";
 	}
 	function goPay(){
+		console.log("버튼클릭");
 		$(function(){
 
 		      var IMP = window.IMP; // 생략가능
@@ -475,16 +481,14 @@ th, td{
 		          merchant_uid : 'merchant_' + new Date().getTime(),
 		          name : '펫트라슈',   // 이거는 상품명 들어와야되는데 그냥 조 이름으로 집어넣었고
 		          amount : 100,   //여기는 원래 입력된 가격들어와야되는데 일단 100원으로 고정하게할꺼
-		          buyer_email: <%=loginUser.getUserEmail()%>,
-		          buyer_name : <%=loginUser.getUserName()%>,   
-		          buyer_tel : <%=loginUser.getUserPhone()%>,   // 결제한 사람 번호
-		          buyer_addr : <%=loginUser.getUserAddress()%>   // 결제한 사람 주소
+		         buyer_email: "<%=loginUser.getUserEmail()%>",		
+		          buyer_name : '<%=loginUser.getUserName()%>',   
+		          buyer_tel : '<%=loginUser.getUserPhone()%>',   // 결제한 사람 번호
+		          buyer_addr : "<%=loginUser.getUserAddress()%>" 
 		      }, function(rsp) {
 		          if ( rsp.success ) {
 		            
 		              var msg = '결제가 완료되었습니다. 메인화면으로 이동합니다.';
-		             msg += '가격 : ';   //여기에 가격 받아서 변수명 넣어주면 됨
-
 		              alert(msg);
 		              location.href = '<%=request.getContextPath()%>/index.jsp';
 		          } else {
